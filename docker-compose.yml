@@ -1,0 +1,10 @@
+version: "2"
+services:
+    nagios4:
+        image: jasonrivers/nagios:latest
+        container_name: nagios4
+        ports:
+            - 8080:80
+        volumes:
+            - /vagrant/src:/opt/Custom-Nagios-Plugins/MercMadness
+            - /vagrant/plugins/vshell:/opt/Custom-Nagios-Plugins/vshell 
