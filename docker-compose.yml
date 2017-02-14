@@ -6,5 +6,5 @@ services:
         ports:
             - 8080:80
         volumes:
-            - /vagrant/src:/opt/Custom-Nagios-Plugins/MercMadness
+            - /vagrant/src:/opt/nagios/share/Merc
             - /vagrant/plugins/vshell:/opt/Custom-Nagios-Plugins/vshell 
