@@ -7,9 +7,9 @@ This project was created by the MercMadness team in a Software Engineering Pract
 ## Installation
 Add the following line to the opt/nagios/share/side.php file so that the link to our add on shows up in nagios.
 
-<li>
-    <a href="merc/test.php" target="<?php echo $link_target;?>">Dashboard</a>
-</li>
+    <li>
+         <a href="merc/test.php" target="<?php echo $link_target;?>">Dashboard</a>
+    </li>
 
 ## Praises
 "You suck" - Professor van Delden
