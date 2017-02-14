@@ -13,4 +13,5 @@ Add the following line to the opt/nagios/share/side.php file so that the link to
 
 ## Praises
 "You suck" - Professor van Delden
+
 "You guys are doing this for free?" - Dr. Aspen Olmsted
