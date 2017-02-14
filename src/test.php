@@ -10,7 +10,7 @@
 </head>
 
 <frameset cols="180,*" style="border: 0px;">
-	<frame src="../side.php" name="side" frameborder="0" style="">
+
 	<frame src="anotherTest.php" name = "main" frameborder ="0" style="">
 
 	<noframes>
