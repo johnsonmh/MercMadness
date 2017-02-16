@@ -1,2 +1,3 @@
 .vagrant/*
 /plugins/
+config.js

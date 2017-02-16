@@ -9,9 +9,9 @@
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/ico">
 </head>
 
-<frameset cols="180,*" style="border: 0px;">
+<frameset style="border: 0px;">
 
-	<frame src="anotherTest.php" name = "main" frameborder ="0" style="">
+	<frame src="merc.html" name = "main" frameborder ="0" style="">
 
 	<noframes>
 		<!-- This page requires a web browser which supports frames. -->
