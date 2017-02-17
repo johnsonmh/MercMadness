@@ -24,15 +24,15 @@
     <script type='text/javascript' src='config.js'></script>
     <script>
       var map;
-      var kmlSources = [
-        'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/MBV.kml',
+      var mainKmlSource = 'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/MBV.kml';
+      var subKmlSources = [
         'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Assembly%20Line1.kml',
         'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Body%20OffLoad1.kml',
         'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Dyno1.kml',
         'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Finish%20Line1.kml',
         'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Paint%20Touch%20Up1.kml',
         'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Rework1.kml',
-        'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Wheel%20Alignment1.kml',
+        'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Wheel%20Alignment1.kml'
       ];
       
 
@@ -55,21 +55,22 @@
           ],
         });
 
-        for(var i = 0; i < kmlSources.length; i++) {
-          loadKmlLayer(kmlSources[i], map);
+        loadKmlLayer(mainKmlSource, map);
+
+        for(var i = 0; i < subKmlSources.length; i++) {
+          loadKmlLayer(subKmlSources[i], map);
         }
       }
 
       /**
        * Adds a KMLLayer based on the URL passed. Clicking on a marker
-       * results in the balloon content being loaded into the right-hand div.
        * @param {string} src A URL for a KML file.
        */
       function loadKmlLayer(src, map) {
         var kmlLayer = new google.maps.KmlLayer(src, {
           suppressInfoWindows: true,
           preserveViewport: false,
-          map: map
+          map: map,
         });
         google.maps.event.addListener(kmlLayer, 'click', function(event) {
           // var content = event.featureData.infoWindowHtml;
