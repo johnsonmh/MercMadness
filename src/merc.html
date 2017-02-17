@@ -24,7 +24,17 @@
     <script type='text/javascript' src='config.js'></script>
     <script>
       var map;
-      var src = 'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/MBV.kml';
+      var kmlSources = [
+        'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/MBV.kml',
+        'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Assembly%20Line1.kml',
+        'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Body%20OffLoad1.kml',
+        'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Dyno1.kml',
+        'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Finish%20Line1.kml',
+        'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Paint%20Touch%20Up1.kml',
+        'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Rework1.kml',
+        'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Wheel%20Alignment1.kml',
+      ];
+      
 
       /**
        * Initializes the map and calls the function that loads the KML layer.
@@ -33,9 +43,21 @@
         map = new google.maps.Map(document.getElementById('map'), {
           center: new google.maps.LatLng(-19.257753, 146.823688),
           zoom: 2,
-          mapTypeId: 'terrain'
+          mapTypeId: 'terrain',
+          styles: [
+            {
+              featureType: "all",
+              elementType: "labels",
+              stylers: [
+                { visibility: "off" }
+              ]
+            },
+          ],
         });
-        loadKmlLayer(src, map);
+
+        for(var i = 0; i < kmlSources.length; i++) {
+          loadKmlLayer(kmlSources[i], map);
+        }
       }
 
       /**
@@ -50,9 +72,10 @@
           map: map
         });
         google.maps.event.addListener(kmlLayer, 'click', function(event) {
-          var content = event.featureData.infoWindowHtml;
-          var testimonial = document.getElementById('capture');
-          testimonial.innerHTML = content;
+          // var content = event.featureData.infoWindowHtml;
+          // var testimonial = document.getElementById('capture');
+          // testimonial.innerHTML = content;
+          map.fitBounds(kmlLayer.getDefaultViewport());
         });
       }
       var maps_api_src = 'https://maps.googleapis.com/maps/api/js?key='+config.GOOGLE_MAPS_API_KEY+'&callback=initMap';
