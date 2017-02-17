@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>KML Click Capture Sample</title>
     <style>
@@ -22,6 +21,7 @@
   <body>
     <div id="map"></div>
     <div id="capture"></div>
+    <script type='text/javascript' src='config.js'></script>
     <script>
       var map;
       var src = 'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/MBV.kml';
@@ -55,9 +55,8 @@
           testimonial.innerHTML = content;
         });
       }
-    </script>
-    <script async defer
-    src='https://maps.googleapis.com/maps/api/js?key=&callback=initMap'>
+      var maps_api_src = 'https://maps.googleapis.com/maps/api/js?key='+config.GOOGLE_MAPS_API_KEY+'&callback=initMap';
+    document.write('\x3Cscript async defer src='+maps_api_src+'>\x3C/script>');
     </script>
   </body>
 </html>
