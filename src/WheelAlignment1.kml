@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>WheelAlignment1.kml</name>
+	<StyleMap id="msn_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#failed</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#failed0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="failed">
+		<PolyStyle>
+			<color>ffc1c1c1</color>
+		</PolyStyle>
+	</Style>
+	<Style id="failed0">
+		<PolyStyle>
+			<color>ffc1c1c1</color>
+		</PolyStyle>
+	</Style>
+	<Placemark>
+		<name>Wheel Alignment</name>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<altitudeMode>relativeToGround</altitudeMode>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-80.10912555326047,32.96306123529521,20 -80.10893281636703,32.96300556619457,20 -80.10887450017044,32.96315283642009,20 -80.10906944348997,32.96319576877637,20 -80.10912555326047,32.96306123529521,20 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>

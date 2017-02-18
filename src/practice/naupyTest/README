@@ -1,0 +1,23 @@
+
+README for NAUPY - A PHP class to read Nagios configuration and status files.
+Copyright (C) 2003 Craig Small <csmall@small.dropbear.id.au>
+
+This class itself is in naupy.inc.php.  I have also included a demo that
+is a Big Brother-like php script that uses this class.
+
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+

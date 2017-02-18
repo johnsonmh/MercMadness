@@ -1,0 +1,42 @@
+</html>
+<style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+</style>
+
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&sensor=false">
+        </script>
+
+        <script type="text/javascript">
+              function initialize() {
+                var mapOptions = {
+                  center: new google.maps.LatLng(-15.869167, -47.920834),
+                  zoom: 3,
+                  disableDefaultUI: true,
+                  mapTypeId: google.maps.MapTypeId.HYBRID
+                };
+                var map = new google.maps.Map(document.getElementById("map_canvas"),
+                    mapOptions);
+
+                var nyLayer = new google.maps.KmlLayer(
+              'YOUR_REAL_KML_LINK',
+              {  suppressInfoWindows: false,
+                 map: map});
+
+
+
+
+                google.maps.event.addListener(nYLayer,'click',function(){
+                    infowindow.open(map, nYLayer); 
+                });
+        }
+
+
+        </script> 
+</head>
+
+    <body onLoad="initialize()">
+    <div id="map_canvas" style="width:800; height:400;"></div>
+    </body>
+</html>
