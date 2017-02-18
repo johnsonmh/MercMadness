@@ -1,3 +1,2 @@
 .vagrant/*
-/plugins/
-config.js
+.DS_Store
