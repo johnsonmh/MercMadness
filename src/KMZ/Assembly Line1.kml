@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Assembly Line1.kml</name>
+	<Style id="failed">
+		<PolyStyle>
+			<color>ffbfbfbf</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#failed</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#failed0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="failed0">
+		<PolyStyle>
+			<color>ffbfbfbf</color>
+		</PolyStyle>
+	</Style>
+	<Placemark>
+		<name>Assembly Line</name>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<altitudeMode>relativeToGround</altitudeMode>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-80.1082844373128,32.96403044290358,20 -80.10833923838234,32.96384199778112,20 -80.10665488149473,32.96339782495483,20 -80.10659947879904,32.963609175603,20 -80.1082844373128,32.96403044290358,20 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>
