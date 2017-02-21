@@ -22,7 +22,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 // Change this accordingly
-$statusFile = "../../var/status.dat";
+$statusFile = "../../../var/status.dat";
 $nag_version = getFileVersion($statusFile);
 $created_ts = 0;
 $debug = false;
@@ -61,11 +61,20 @@ function outputJson($hosts, $services, $program)
 
     foreach ($hosts as $hostName => $hostArray) {
         echo '   "' . jsonString($hostName) . '": {' . "\n";
-/*
-        foreach ($hostArray as $key => $val) {
-            echo '      "' . jsonString($key) . '": "' . jsonString($val) . '"' . (isLast($hostArray, $key) ? '' : ',') . "\n";
-        }
+/*	foreach ($hostArray as $key =>val){
+		echo " jsonString($key)";
+	}
 */
+
+        foreach ($hostArray as $key => $val) {
+	//	echo jsonString($key) == "host_name";
+	//	echo "Work" ==  "Work";
+		if (jsonString($key) == "host_name" || jsonString($key) == "current_state" || jsonString($key) == "current_problem_id"){
+            echo '     "' . jsonString($key) . '": "' . jsonString($val) . '"' . (isLast($hostArray, $key) ? '' : ',') . "\n";
+        	}
+	}
+		
+
         unset($key, $val);
         echo '   }' . (isLast($hosts, $hostName) ? '' : ',') . "\n";
     }
