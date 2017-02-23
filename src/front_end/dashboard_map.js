@@ -1,15 +1,14 @@
 var map;
-var mainKmlSource = 'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/MBV.kml';
-var subKmlSources = [
-  'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Assembly%20Line1.kml',
-  'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Body%20OffLoad1.kml',
-  'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Dyno1.kml',
-  'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Finish%20Line1.kml',
-  'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Paint%20Touch%20Up1.kml',
-  'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Rework1.kml',
-  'https://raw.githubusercontent.com/johnsonmh/MercMadness/master/KMZ/Wheel%20Alignment1.kml'
-];
 
+var mainKmlSource = '../KMZ/MBV.kml';
+var subKmlSources = [
+  '../KMZ/Assembly Line1.kml',
+  '../KMZ/Body OffLoad1.kml',
+  '../KMZ/Dyno1.kml',
+  '../KMZ/Finish Line1.kml',
+  '../KMZ/Paint Touch Up1.kml',
+  '../KMZ/Rework1.kml',
+  '../KMZ/Wheel Alignment1.kml'];
 
 /**
  * Initializes the map and calls the function that loads the KML layer.
@@ -32,9 +31,9 @@ function initMap() {
 
   loadKmlLayer(mainKmlSource, map);
 
-  for(var i = 0; i < subKmlSources.length; i++) {
-    loadKmlLayer(subKmlSources[i], map);
-  }
+   for(var i = 0; i < subKmlSources.length; i++) {
+     loadKmlLayer(subKmlSources[i], map);
+   }
 }
 
 /**
@@ -42,17 +41,15 @@ function initMap() {
  * @param {string} src A URL for a KML file.
  */
 function loadKmlLayer(src, map) {
-  var kmlLayer = new google.maps.KmlLayer(src, {
-    suppressInfoWindows: true,
-    preserveViewport: false,
+  var kmlParser = new geoXML3.parser({
     map: map,
+    suppressInfoWindows: true
   });
-  google.maps.event.addListener(kmlLayer, 'click', function(event) {
-    // var content = event.featureData.infoWindowHtml;
-    // var testimonial = document.getElementById('capture');
-    // testimonial.innerHTML = content;
-    map.fitBounds(kmlLayer.getDefaultViewport());
+  kmlParser.parse(src);
+  google.maps.event.addListener(kmlParser, 'click', function(event) {
+    map.fitBounds(kmlParser.getDefaultViewport());
   });
 }
+
 var maps_api_src = 'https://maps.googleapis.com/maps/api/js?key='+config.GOOGLE_MAPS_API_KEY+'&callback=initMap';
 document.write('\x3Cscript async defer src='+maps_api_src+'>\x3C/script>');
