@@ -1,4 +1,5 @@
 function w3_open() {
+  document.getElementById("mySidenav").style.width = "300px";
   document.getElementById("mySidenav").style.display = "block";
 }
 function w3_close() {

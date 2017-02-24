@@ -22,7 +22,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 // Change this accordingly
-$statusFile = "../../../var/status.dat";
+$statusFile = "/opt/nagios/var/status.dat"; //ours is /opt/nagios/var/status.dat
 $nag_version = getFileVersion($statusFile);
 $created_ts = 0;
 $debug = false;
@@ -73,7 +73,7 @@ function outputJson($hosts, $services, $program)
             echo '     "' . jsonString($key) . '": "' . jsonString($val) . '"' . (isLast($hostArray, $key) ? '' : ',') . "\n";
         	}
 	}
-		
+
 
         unset($key, $val);
         echo '   }' . (isLast($hosts, $hostName) ? '' : ',') . "\n";
