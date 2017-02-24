@@ -29,25 +29,32 @@ function initMap() {
     ],
   });
 
-  loadKmlLayer(mainKmlSource, map);
-
-   for(var i = 0; i < subKmlSources.length; i++) {
-     loadKmlLayer(subKmlSources[i], map);
-   }
-}
-
-/**
- * Adds a KMLLayer based on the URL passed. Clicking on a marker
- * @param {string} src A URL for a KML file.
- */
-function loadKmlLayer(src, map) {
   var kmlParser = new geoXML3.parser({
     map: map,
     suppressInfoWindows: true
   });
+
+  loadKmlLayer(mainKmlSource, map, kmlParser);
+
+   for(var i = 0; i < subKmlSources.length; i++) {
+     loadKmlLayer(subKmlSources[i], map, kmlParser);
+   }
+
+  console.log(kmlParser.docs);
+
+}
+
+/**
+ * Adds a KMLLayer based on the URL passed. 
+ * @param {string} src A URL for a KML file.
+ */
+function loadKmlLayer(src, map, kmlParser) {
+  
   kmlParser.parse(src);
+
   google.maps.event.addListener(kmlParser, 'click', function(event) {
-    map.fitBounds(kmlParser.getDefaultViewport());
+    console.log(kmlParser)
+    map.fitBounds(kmlParser);
   });
 }
 
