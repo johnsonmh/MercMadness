@@ -168,7 +168,8 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
     .w3-topnav,.w3-navbar{text-align:center}.w3-hide-small{display:none!important}.w3-layout-col,.w3-mobile{display:block;width:100%!important}.w3-bar-item.w3-mobile,.w3-dropdown-hover.w3-mobile,.w3-dropdown-click.w3-mobile{text-align:center}
     .w3-dropdown-hover.w3-mobile,.w3-dropdown-hover.w3-mobile .w3-btn,.w3-dropdown-hover.w3-mobile .w3-button,.w3-dropdown-click.w3-mobile,.w3-dropdown-click.w3-mobile .w3-btn,.w3-dropdown-click.w3-mobile .w3-button{width:100%}}
     @media (max-width:768px){.w3-modal-content{width:500px}.w3-modal{padding-top:50px}}
-    @media (min-width:2000px){.w3-modal-content{width:2000px}.w3-hide-large{display:none!important}.w3-sidenav.w3-collapse{display:block!important}}
+    @media (min-width:993px){.w3-modal-content{width:900px}.w3-hide-large{display:none!important}.w3-sidenav.w3-collapse{display:block!important}}
+    @media (max-width:992px) and (min-width:601px){.w3-hide-medium{display:none!important}}
     @media (max-width:992px){.w3-sidenav.w3-collapse{display:none}.w3-main{margin-left:0!important;margin-right:0!important}}
     .w3-top,.w3-bottom{position:fixed;width:100%;z-index:1}.w3-top{top:0}.w3-bottom{bottom:0}
     .w3-overlay{position:fixed;display:none;width:100%;height:100%;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.5);z-index:2}
@@ -354,119 +355,3 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
     .w3-border-dark-grey,.w3-hover-border-dark-grey:hover,.w3-border-dark-gray,.w3-hover-border-dark-gray:hover{border-color:#616161!important}
     .w3-border-pale-red,.w3-hover-border-pale-red:hover{border-color:#ffe7e7!important}.w3-border-pale-green,.w3-hover-border-pale-green:hover{border-color:#e7ffe7!important}
     .w3-border-pale-yellow,.w3-hover-border-pale-yellow:hover{border-color:#ffffcc!important}.w3-border-pale-blue,.w3-hover-border-pale-blue:hover{border-color:#e7ffff!important}
-
-    button.accordion {
-      background-color: #eee;
-      color: #444;
-      cursor: pointer;
-      padding: 18px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 15px;
-      transition: 0.4s;
-    }
-
-    buttonGreen.accordion {
-      background-color: #4CAF50; /* Green */
-      color: white;
-      cursor: pointer;
-      padding: 15px 32px;
-      width: 100%;
-      border: 1px solid white;
-      border-left: none;
-      border-right: none;
-      text-align: left;
-      outline: none;
-      font-size: 15px;
-      display: inline-block;
-      transition: 0.4s;
-    }
-    buttonYellow.accordion {
-      background-color: #FFD000; /* Yellow */
-      color: white;
-      cursor: pointer;
-      padding: 15px 32px;
-      width: 100%;
-      border: 1px solid white;
-      border-left: none;
-      border-right: none;
-      text-align: left;
-      outline: none;
-      font-size: 15px;
-      display: inline-block;
-      transition: 0.4s;
-    }
-    buttonRed.accordion {
-      background-color: #f44336; /* Red */
-      color: white;
-      cursor: pointer;
-      padding: 15px 32px;
-      width: 100%;
-      border: 1px solid white;
-      border-left: none;
-      border-right: none;
-      text-align: left;
-      outline: none;
-      font-size: 15px;
-      display: inline-block;
-      transition: 0.4s;
-    }
-    buttonYellow:hover {
-      background-color: #ffaf00;
-    }
-    buttonRed:hover {
-      background-color: #cc0000;
-    }
-    buttonGreen:hover {
-      background-color: #006600;
-    }
-    button.accordion.active, button.accordion:hover {
-      background-color: #ddd;
-    }
-
-    div.panel {
-      padding: 0 15px;
-      background-color: white;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.2s ease-out;
-    }
-    html, body {
-      height: 100%;
-      padding: 0;
-      margin: 0;
-    }
-    #map {
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-      float: left;
-      border: none;
-    }
-    #capture {
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-      float: left;
-      background-color: #ECECFB;
-      border: none;
-      border-left: none;
-    }
-    #over_map {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 80;
-    }
-
-    #device {
-      border: 2px solid #ddd;
-      border-radius: 1px;
-      display:block;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 5px;
-      width:150px;
-    }
