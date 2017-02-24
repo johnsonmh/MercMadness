@@ -34,27 +34,29 @@ function initMap() {
     suppressInfoWindows: true
   });
 
-  loadKmlLayer(mainKmlSource, map, kmlParser);
+  kmlParser.parse(mainKmlSource);
 
-   for(var i = 0; i < subKmlSources.length; i++) {
-     loadKmlLayer(subKmlSources[i], map, kmlParser);
-   }
+  for(var i = 0; i < subKmlSources.length; i++) {
+    kmlParser.parse(subKmlSources[i]);
+  }
 
-  console.log(kmlParser.docs);
+  google.maps.event.addListener(kmlParser, 'parsed', function () {
+    var placemark = kmlParser.docs[kmlParser.docs.length - 1].placemarks[0];
+    addClickListener(map, placemark.polygon);
+
+    if(placemark.polygon.title == 'MBV') {
+      placemark.polygon.fillColor = '#ffd12b';
+    } else {
+      placemark.polygon.fillColor = '#64f961';
+    }
+
+  });
 
 }
 
-/**
- * Adds a KMLLayer based on the URL passed. 
- * @param {string} src A URL for a KML file.
- */
-function loadKmlLayer(src, map, kmlParser) {
-  
-  kmlParser.parse(src);
-
-  google.maps.event.addListener(kmlParser, 'click', function(event) {
-    console.log(kmlParser)
-    map.fitBounds(kmlParser);
+function addClickListener(map, polygon) {
+  google.maps.event.addListener(polygon, 'click', function(event) {
+    map.fitBounds(polygon.bounds);
   });
 }
 
