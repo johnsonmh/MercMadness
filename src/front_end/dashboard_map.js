@@ -29,25 +29,34 @@ function initMap() {
     ],
   });
 
-  loadKmlLayer(mainKmlSource, map);
-
-   for(var i = 0; i < subKmlSources.length; i++) {
-     loadKmlLayer(subKmlSources[i], map);
-   }
-}
-
-/**
- * Adds a KMLLayer based on the URL passed. Clicking on a marker
- * @param {string} src A URL for a KML file.
- */
-function loadKmlLayer(src, map) {
   var kmlParser = new geoXML3.parser({
     map: map,
     suppressInfoWindows: true
   });
-  kmlParser.parse(src);
-  google.maps.event.addListener(kmlParser, 'click', function(event) {
-    map.fitBounds(kmlParser.getDefaultViewport());
+
+  kmlParser.parse(mainKmlSource);
+
+  for(var i = 0; i < subKmlSources.length; i++) {
+    kmlParser.parse(subKmlSources[i]);
+  }
+
+  google.maps.event.addListener(kmlParser, 'parsed', function () {
+    var placemark = kmlParser.docs[kmlParser.docs.length - 1].placemarks[0];
+    addClickListener(map, placemark.polygon);
+
+    if(placemark.polygon.title == 'MBV') {
+      placemark.polygon.fillColor = '#ffd12b';
+    } else {
+      placemark.polygon.fillColor = '#64f961';
+    }
+
+  });
+
+}
+
+function addClickListener(map, polygon) {
+  google.maps.event.addListener(polygon, 'click', function(event) {
+    map.fitBounds(polygon.bounds);
   });
 }
 
