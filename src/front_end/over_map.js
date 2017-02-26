@@ -2,9 +2,13 @@ function w3_open() {
   document.getElementById("mySidenav").style.width = "300px";
   document.getElementById("mySidenav").style.display = "block";
 }
+
 function w3_close() {
   document.getElementById("mySidenav").style.display = "none";
 }
+var json_obj_str = JSON.stringify($myJsonObject);
+console.log(json_obj_str);
+
 var acc = document.getElementsByClassName("accordion");
 var i;
 

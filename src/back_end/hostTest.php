@@ -40,40 +40,41 @@ if (array_key_exists("program", $data)) {
   $program1 = $data['program'];
 }
 
-//vincent's outputJson
-outputJson($hosts, $services, $program1);
-//makeJson($hosts, $services, $program1);
+//vincent's original outputJson with 'echo'
+//outputJson($hosts, $services, $program1);
+
+//make a json object out of status.dat info
+$myJsonObject = makeJson($hosts, $services, $program1);
+//echo $myJsonObject;
 
 
+
+//functions start here
+
+//make a json object out of the status.dat information - edit Vincent's original function "outputJson()"
 function makeJson($hosts, $services, $program)
 {
-
-  $myObj->name = "John";
-  $myObj->age = 30;
-  $myObj->city = "New York";
-
-  //$myJSON = json_encode($myObj);
-  //echo $myJSON;
-
+  //header('Content-type: application/json');
+  $myObj = array();
   foreach ($hosts as $hostName => $hostArray) {
-    $myObj->my_host_name = $hosts;
+    $myHostInfo = array();
     foreach ($hostArray as $key => $val) {
       if (jsonString($key) == "host_name" || jsonString($key) == "current_state" || jsonString($key) == "current_problem_id"){
-        echo '     "' . jsonString($key) . '": "' . jsonString($val) . '"' . (isLast($hostArray, $key) ? '' : ',') . "\n";
-
+        $myNewObj = array(jsonString($key) => jsonString($val) );
+        $myHostInfo[] = $myNewObj;
       }
     }
     unset($key, $val);
-    echo '   }' . (isLast($hosts, $hostName) ? '' : ',') . "\n";
+    $myObj[] = $myHostInfo;
   }
   unset($hostName, $hostArray);
 
   $myJSON = json_encode($myObj);
-  echo $myJSON;
+
+  //echo $myJSON;
+
+  return $myJSON;
 }
-
-
-
 
 
 
@@ -81,14 +82,11 @@ function makeJson($hosts, $services, $program)
 //vincent's
 function outputJson($hosts, $services, $program)
 {
-  echo "starting";
- $myfile = fopen("my_results.txt", "a") or die("Unable to open file!");
-
 
 
   // begin outputting XML
-  $d = "{" . "\n";
-    fwrite($myfile, $d);
+  header("Content-type: application/json");
+  echo "{" . "\n";
     /*
     // program status
     if ($program != "") {
@@ -101,12 +99,11 @@ function outputJson($hosts, $services, $program)
 }
 */
 // hosts
-$m = '  "hosts": {' . "\n";
-fwrite($myfile, $m);
+echo '  "hosts": {' . "\n";
+
 
   foreach ($hosts as $hostName => $hostArray) {
-    $g = '   "' . jsonString($hostName) . '": {' . "\n";
-      fwrite($myfile, $g);
+    echo '   "' . jsonString($hostName) . '": {' . "\n";
       /*	foreach ($hostArray as $key =>val){
       echo " jsonString($key)";
     }
@@ -116,19 +113,16 @@ fwrite($myfile, $m);
       //	echo jsonString($key) == "host_name";
       //	echo "Work" ==  "Work";
       if (jsonString($key) == "host_name" || jsonString($key) == "current_state" || jsonString($key) == "current_problem_id"){
-        $ff = '     "' . jsonString($key) . '": "' . jsonString($val) . '"' . (isLast($hostArray, $key) ? '' : ',') . "\n";
-        fwrite($myfile, $ff);
+        echo '     "' . jsonString($key) . '": "' . jsonString($val) . '"' . (isLast($hostArray, $key) ? '' : ',') . "\n";
       }
     }
 
 
     unset($key, $val);
-    $r = '   }' . (isLast($hosts, $hostName) ? '' : ',') . "\n";
-    fwrite($myfile, $r);
+    echo '   }' . (isLast($hosts, $hostName) ? '' : ',') . "\n";
   }
   unset($hostName, $hostArray);
-  $w = '  },' . "\n";
-  fwrite($myfile, $w);
+  echo '  },' . "\n";
   /*
   // loop through the services
   echo '  "services": {' . "\n";
@@ -147,22 +141,9 @@ unset($serviceDesc, $serviceArray);
 }
 unset($hostName, $service);
 */
-$t = '  }' . "\n";
-fwrite($myfile, $t);
-$tt = "}";
-fwrite($myfile, $tt);
-
-
-fclose($myfile);
-echo "done";
-
+echo '  }' . "\n";
+echo "}";
 }
-
-
-
-
-
-
 // Determines if the given key is last in the given array
 function isLast($array, $key)
 {
