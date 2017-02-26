@@ -7,9 +7,7 @@ function w3_close() {
   document.getElementById("mySidenav").style.display = "none";
 }
 
-$.getJSON('http://localhost:8080/hostTest.php', function(data) {
-    console.log(data);
-});
+
 
 var acc = document.getElementsByClassName("accordion");
 var i;

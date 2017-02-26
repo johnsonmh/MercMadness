@@ -55,22 +55,21 @@ $myJsonObject = makeJson($hosts, $services, $program1);
 function makeJson($hosts, $services, $program)
 {
   //header('Content-type: application/json');
-  $myObj = array();
+  $myAllHostsObj = array();
   foreach ($hosts as $hostName => $hostArray) {
-    $myHostInfo = array();
+    $myEachHostInfo = array();
     foreach ($hostArray as $key => $val) {
       if (jsonString($key) == "host_name" || jsonString($key) == "current_state" || jsonString($key) == "current_problem_id"){
-        $myNewObj = array(jsonString($key) => jsonString($val) );
-        $myHostInfo[] = $myNewObj;
+        $myEachHostInfo[jsonString($key)] = jsonString($val);
       }
     }
     unset($key, $val);
-    $myObj[] = $myHostInfo;
+    $myAllHostsObj[] = $myEachHostInfo;
   }
   unset($hostName, $hostArray);
 
-  $myJSON = json_encode($myObj);
-
+  //$myJSON = json_encode($myObj);
+  $myJSON = json_encode($myAllHostsObj, JSON_FORCE_OBJECT);
   //echo $myJSON;
 
   return $myJSON;
