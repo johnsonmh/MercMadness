@@ -93,7 +93,7 @@
     <script type='text/javascript' src='config.js'></script>
     <script type='text/javascript' src='geoxml3.js'></script>
     <script type='text/javascript' src='dashboard_map.js'></script>
-    <script src="jquery-3.1.1.min.js"></script>   <!-- include jquery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
   </body>
 </html>

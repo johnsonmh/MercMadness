@@ -6,8 +6,10 @@ function w3_open() {
 function w3_close() {
   document.getElementById("mySidenav").style.display = "none";
 }
-var json_obj_str = JSON.stringify($myJsonObject);
-console.log(json_obj_str);
+
+$.getJSON('http://localhost:8080/hostTest.php', function(data) {
+    console.log(data);
+});
 
 var acc = document.getElementsByClassName("accordion");
 var i;
