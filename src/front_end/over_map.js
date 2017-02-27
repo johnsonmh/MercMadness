@@ -10,6 +10,8 @@ function w3_close() {
 
 
 var acc = document.getElementsByClassName("accordion");
+//console.log(acc);
+
 var i;
 
 for (i = 0; i < acc.length; i++) {

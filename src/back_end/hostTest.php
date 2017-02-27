@@ -59,9 +59,9 @@ function makeJson($hosts, $services, $program)
   foreach ($hosts as $hostName => $hostArray) {
     $myEachHostInfo = array();
     foreach ($hostArray as $key => $val) {
-      if (jsonString($key) == "host_name" || jsonString($key) == "current_state" || jsonString($key) == "current_problem_id"){
+      //if (jsonString($key) == "host_name" || jsonString($key) == "current_state" || jsonString($key) == "current_problem_id"){
         $myEachHostInfo[jsonString($key)] = jsonString($val);
-      }
+      //}
     }
     unset($key, $val);
     $myAllHostsObj[] = $myEachHostInfo;
