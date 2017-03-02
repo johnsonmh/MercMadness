@@ -45,9 +45,9 @@ function initMap() {
     addClickListener(map, placemark.polygon);
 
     if(placemark.polygon.title == 'MBV') {
-      placemark.polygon.fillColor = '#c6c6c6'; // Grey
+      placemark.polygon.fillColor = '#ffd12b'; // Orange
     } else {
-      placemark.polygon.fillColor = '#4caf50'; // Green
+      placemark.polygon.fillColor = '#64f961'; // Green
     }
 
   });
