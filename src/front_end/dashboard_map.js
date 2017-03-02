@@ -40,6 +40,8 @@ function initMap() {
     kmlParser.parse(subKmlSources[i]);
   }
 
+  console.log(jsonObject);
+
   google.maps.event.addListener(kmlParser, 'parsed', function () {
     var placemark = kmlParser.docs[kmlParser.docs.length - 1].placemarks[0];
     addClickListener(map, placemark.polygon);
