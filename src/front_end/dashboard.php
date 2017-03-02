@@ -122,6 +122,8 @@
 <div id="map">
   <div id="capture"></div>
 </div>
+
+<script type='text/javascript' src='jquery-3.1.1.min.js'></script>
 <script type='text/javascript' src='over_map.js'></script>
 <script type='text/javascript' src='config.js'></script>
 <script type='text/javascript' src='geoxml3.js'></script>
