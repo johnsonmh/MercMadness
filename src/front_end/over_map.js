@@ -33,14 +33,17 @@ for (i = 0; i < Object.keys(jsonObject).length ; i++) {
 
 function createButtons(type, currentJsonObject, parentId) {
   var element;
-  if (currentJsonObject.current_problem_id == "0"){
+  if (currentJsonObject.current_state == "0"){ //OK
     element = document.createElement("buttonGreen");
   }
-  else if (currentJsonObject.current_problem_id == "1"){
+  else if (currentJsonObject.current_state == "1"){ //WARNING
     element = document.createElement("buttonYellow");
   }
-  else{
+  else if (currentJsonObject.current_state == "2"){ //CRITICAL
     element = document.createElement("buttonRed");
+  }
+  else{
+    element = document.createElement("buttonGrey"); //UNKNOWN
   }
   element.setAttribute("class", "accordion");
   //Assign different attributes to the element.
