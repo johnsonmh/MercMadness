@@ -79,8 +79,8 @@ function makeJson($hosts, $services, $program)
   }
   unset($hostName, $hostArray);
 
-  //$myJSON = json_encode($myObj);
-  $myJSON = json_encode($myAllHostsObj, JSON_FORCE_OBJECT);
+  //$myJSON = json_encode($myAllHostsObj, JSON_FORCE_OBJECT); // this makes a stringified json object
+  $myJSON = json_encode($myAllHostsObj); // this makes an ARRAY, easier to use
   //echo $myJSON;
 
   return $myJSON;
