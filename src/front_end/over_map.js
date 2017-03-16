@@ -78,6 +78,7 @@ function createButtons(type, currentJsonObject, parentId) {
 
   pic.setAttribute("id", "device");
 
+  /* TRYING TO GET LARGER IMAGE TO POP UP IF THUMBNAIL IS CLICKED
   var modalImg = document.getElementById("img01");
   pic.onclick = function(){
         var x = modalImg;
@@ -87,10 +88,7 @@ function createButtons(type, currentJsonObject, parentId) {
         } else {
             x.style.display = 'none';
         }
-  }
-
-
-
+  }*/
 
   pan.appendChild(pic);
 

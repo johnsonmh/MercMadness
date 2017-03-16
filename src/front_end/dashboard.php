@@ -24,9 +24,6 @@
 </nav>
 </div>
 
-<div id="myModal" class="modal">
-  <img class="modal-content" id="img01">
-</div>
 
 <div id="map">
   <div id="capture"></div>
