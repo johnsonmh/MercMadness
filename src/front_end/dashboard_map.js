@@ -41,6 +41,7 @@ var subKmlSources = [
     }
 
     console.log(jsonObject);
+    var bounds;
 
     google.maps.event.addListener(kmlParser, 'parsed', function () {
       var placemark = kmlParser.docs[kmlParser.docs.length - 1].placemarks[0];
@@ -48,17 +49,12 @@ var subKmlSources = [
 
       if(placemark.polygon.title == 'MBV') {
         placemark.polygon.fillColor = '#c6c6c6'; // Grey
+        bounds = placemark.polygon.bounds;
       } else {
         placemark.polygon.fillColor = '#4caf50'; // Green
       }
-
+      map.fitBounds(bounds);
     });
-
-    var placemark = kmlParser.docs[0];
-    console.log(placemark);
-    if(placemark.polygon.title == 'MBV') {
-      map.fitBounds(placemark.polygon.bounds);
-    }
 
   }
 

@@ -15,9 +15,7 @@
 
       <a href="javascript:void(0)" onclick="w3_close()" class="w3-closenav w3-xlarge w3-hide-xlarge">&times;</a>
       <script>
-
       var jsonObject = <?php include('../back_end/hostTest.php'); echo $myJsonObject; ?>;
-
       </script>
     </div>
   </div>
