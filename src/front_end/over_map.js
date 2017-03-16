@@ -1,28 +1,25 @@
+//sidenav open function
 function w3_open() {
   document.getElementById("mySidenav").style.width = "300px";
   document.getElementById("mySidenav").style.display = "block";
 }
 
+//sidenav close function
 function w3_close() {
   document.getElementById("mySidenav").style.display = "none";
 
   /*if(parent.frames && parent.frames['side']) {
-      var elem = parent.frames['side'].document.documentElement;
-      console.log(elem);
-      elem.style.width = "180px";
-      var mainElem = parent.frames['main'].document.body;
-      console.log(mainElem);
-      //mainElem.style.marginLeft = "180px";
-   }*/
-
+  var elem = parent.frames['side'].document.documentElement;
+  console.log(elem);
+  elem.style.width = "180px";
+  var mainElem = parent.frames['main'].document.body;
+  console.log(mainElem);
+  //mainElem.style.marginLeft = "180px";
+}*/
 }
 
 
-/*console.log(Object.keys(jsonObject).length);
-for (i = 0; i < Object.keys(jsonObject).length ; i++) {
-console.log(document.getElementById("tryingJson").innerHTML = jsonObject[i].host_name);
-}*/
-
+//create buttons based on the plugin_output... can change later
 function createButtons(type, currentJsonObject, parentId) {
   var element;
   if (currentJsonObject.plugin_output.includes('OK')){ //OK
@@ -60,6 +57,33 @@ function createButtons(type, currentJsonObject, parentId) {
   pan.appendChild(plugOut);
   pan.appendChild(execTime);
 
+  //find right image for device
+  var hostString = currentJsonObject.host_name.toLowerCase();
+  var pic = document.createElement("img");
+  if(hostString.includes("printer")){
+    pic.setAttribute("src", "device_images/printer.png");
+  }
+  else if(hostString.includes("hp")){
+    pic.setAttribute("src", "device_images/multifunction_printer.jpeg");
+  }
+  else if (hostString.includes("srv") || hostString.includes("server") ){
+    pic.setAttribute("src", "device_images/server.png");
+  }
+  else if(hostString.includes("switch")){
+    pic.setAttribute("src", "device_images/switch.png");
+  }
+  else{
+    pic.setAttribute("src", "device_images/laptop.png");
+  }
+
+  pic.setAttribute("id", "device");
+  pan.appendChild(pic);
+
+
+  //add some space after image
+  var br = document.createElement("br");
+  pan.appendChild(br);
+
   var parent = document.getElementById(parentId);
   //Append the button element and panel to the sideNav
   parent.appendChild(element);
@@ -75,24 +99,21 @@ function addBreak(parentId) {
 
 //sort an array by a given key
 function sortByKey(array, key) {
-return array.sort(function(a, b) {
+  return array.sort(function(a, b) {
     var x = a[key]; var y = b[key];
     return ((x < y) ? 1 : ((x > y) ? -1 : 0)); //flipped negatives so that most negative is at top
-});
+  });
 }
 
 
 window.onload = function () {
-
   //make parent the sidenav
   var parent = document.getElementById('mySidenav');
 
   //split json object into two arrays
   var station1 = [];
   var station2 = [];
-  //station1.push(jsonObject[1]);
-  //console.log(station1);
-
+  //for now, put even hosts into station 1, odd into station 2
   for (var j = 0; j < Object.keys(jsonObject).length; j++) {
     if (j%2 == 0){
       station1.push(jsonObject[j]);
@@ -100,10 +121,8 @@ window.onload = function () {
       station2.push(jsonObject[j]);
     }
   }
-  console.log(station1);
-  console.log(station2);
 
-  //sort elements
+  //sort elements so that red buttons are on top, grey are on bottom
   station1 = sortByKey(station1, 'check_execution_time');
   station1 = sortByKey(station1, 'current_state');
 
@@ -111,12 +130,14 @@ window.onload = function () {
   station2 = sortByKey(station2, 'current_state');
 
 
-// this is hard coded right now - will be changed so that each time a station is clicked, the menu updates info
+  // this is hard coded right now - will be changed so that each time a station is clicked, the menu updates info
+  //Create heading of "Wheel Alignment"
   var menuKMLName = document.createElement("H1");
   menuKMLName.innerHTML = "Wheel Alignment";
   menuKMLName.setAttribute("style", "text-align:center;font-size: 24px;");
   parent.appendChild(menuKMLName);
 
+  //Create subheading of "Station 1" - change later to reflect real station number
   var menuStationName = document.createElement("H2");
   menuStationName.innerHTML = "Station 1";
   menuStationName.setAttribute("style", "text-align:Left;font-size: 18px; padding: 0 15px;");
@@ -128,28 +149,29 @@ window.onload = function () {
 
   //on load of sideNav, create buttons
   /*for (var j = 0; j < Object.keys(jsonObject).length; j++) {
-    var temp = 'mybutton' + j;
-    createButtons('button', jsonObject[j], 'mySidenav');
-  }
-  addBreak('mySidenav');*/
+  var temp = 'mybutton' + j;
+  createButtons('button', jsonObject[j], 'mySidenav');
+}
+addBreak('mySidenav');*/
 
-  //populate station1
-  for (var j = 0; j < station1.length; j++) {
-    var temp = 'mybutton' + j;
-    createButtons('button', station1[j], 'mySidenav');
-  }
-  addBreak('mySidenav');
+//populate station1
+for (var j = 0; j < station1.length; j++) {
+  var temp = 'mybutton' + j;
+  createButtons('button', station1[j], 'mySidenav');
+}
+addBreak('mySidenav');
 
-  var menuStationName2 = document.createElement("H2");
-  menuStationName2.innerHTML = "Station 2";
-  menuStationName2.setAttribute("style", "text-align:Left;font-size: 18px; padding: 0 15px;");
-  parent.appendChild(menuStationName2);
+//hard code Station 2 and populate with buttons
+var menuStationName2 = document.createElement("H2");
+menuStationName2.innerHTML = "Station 2";
+menuStationName2.setAttribute("style", "text-align:Left;font-size: 18px; padding: 0 15px;");
+parent.appendChild(menuStationName2);
 
-  for (var j = 0; j < station2.length; j++) {
-    var temp = 'mybutton' + j;
-    createButtons('button', station2[j], 'mySidenav');
-  }
-  addBreak('mySidenav');
+for (var j = 0; j < station2.length; j++) {
+  var temp = 'mybutton' + j;
+  createButtons('button', station2[j], 'mySidenav');
+}
+addBreak('mySidenav');
 
 //enables clicking and opening accordion
 var acc = document.getElementsByClassName("accordion");
