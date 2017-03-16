@@ -77,6 +77,21 @@ function createButtons(type, currentJsonObject, parentId) {
   }
 
   pic.setAttribute("id", "device");
+
+  var modalImg = document.getElementById("img01");
+  pic.onclick = function(){
+        var x = modalImg;
+        x.src = this.src;
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+  }
+
+
+
+
   pan.appendChild(pic);
 
 

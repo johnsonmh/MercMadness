@@ -6,8 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="w3_edited.css">
   <script type='text/javascript' src='over_map.js'></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
 </head>
 <body>
 
@@ -24,6 +22,10 @@
     </div>
   </div>
 </nav>
+</div>
+
+<div id="myModal" class="modal">
+  <img class="modal-content" id="img01">
 </div>
 
 <div id="map">
