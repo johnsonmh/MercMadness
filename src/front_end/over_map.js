@@ -8,14 +8,21 @@ function w3_open() {
 function w3_close() {
   document.getElementById("mySidenav").style.display = "none";
 
-  /*if(parent.frames && parent.frames['side']) {
-  var elem = parent.frames['side'].document.documentElement;
-  console.log(elem);
-  elem.style.width = "180px";
-  var mainElem = parent.frames['main'].document.body;
-  console.log(mainElem);
-  //mainElem.style.marginLeft = "180px";
-}*/
+  if(parent.frames && parent.frames['side']) {
+    var side = parent.frames['side'];
+    var map = document.getElementById('map');
+
+
+/*
+    if (side.style.display === 'none') {
+        side.style.display = 'block';
+    } else {
+        side.style.display = 'none';
+        //map.style.margin-left = -100%;
+        //side.style.visibility = 'hidden';
+    }*/
+
+  }
 }
 
 
@@ -91,7 +98,6 @@ function createButtons(type, currentJsonObject, parentId) {
   }*/
 
   pan.appendChild(pic);
-
 
   //add some space after image
   var br = document.createElement("br");
