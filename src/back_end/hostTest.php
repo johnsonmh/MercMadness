@@ -45,7 +45,7 @@ if (array_key_exists("program", $data)) {
 
 //make a json object out of status.dat info
 $myJsonObject = makeJson($hosts, $services, $program1);
-echo $myJsonObject;
+// echo $myJsonObject;
 
 
 

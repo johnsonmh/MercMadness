@@ -20,9 +20,7 @@
 
 
       <script>
-
       var jsonObject = <?php include('../back_end/hostTest.php'); echo $myJsonObject; ?>;
-
       </script>
       </div>
     </div>

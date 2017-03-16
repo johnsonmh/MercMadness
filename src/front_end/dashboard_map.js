@@ -34,6 +34,7 @@ function initMap() {
     suppressInfoWindows: true
   });
 
+
   kmlParser.parse(mainKmlSource);
 
   for(var i = 0; i < subKmlSources.length; i++) {
@@ -41,6 +42,7 @@ function initMap() {
   }
 
   console.log(jsonObject);
+  var bounds;
 
   google.maps.event.addListener(kmlParser, 'parsed', function () {
     var placemark = kmlParser.docs[kmlParser.docs.length - 1].placemarks[0];
@@ -48,11 +50,13 @@ function initMap() {
 
     if(placemark.polygon.title == 'MBV') {
       placemark.polygon.fillColor = '#c6c6c6'; // Grey
+      bounds = placemark.polygon.bounds;
     } else {
       placemark.polygon.fillColor = '#4caf50'; // Green
     }
-
+    map.fitBounds(bounds);
   });
+
 
 }
 
