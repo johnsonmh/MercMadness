@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="w3_edited.css">
   <script type='text/javascript' src='over_map.js'></script>
-
 </head>
 <body>
 
@@ -15,17 +14,14 @@
     <nav class="w3-sidenav w3-collapse w3-white w3-card-2 w3-animate-right" style="width:0px;right:0;" id="mySidenav">
 
       <a href="javascript:void(0)" onclick="w3_close()" class="w3-closenav w3-xlarge w3-hide-xlarge">&times;</a>
-      <h1 style="text-align:center;font-size: 24px;">Station 4:</h1>
-      <h2 style="text-align:center;font-size: 18px;">Wheel Alignment</h2>
-
-
       <script>
       var jsonObject = <?php include('../back_end/hostTest.php'); echo $myJsonObject; ?>;
       </script>
-      </div>
     </div>
-  </nav>
+  </div>
+</nav>
 </div>
+
 
 <div id="map">
   <div id="capture"></div>

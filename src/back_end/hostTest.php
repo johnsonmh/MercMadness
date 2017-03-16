@@ -45,8 +45,19 @@ if (array_key_exists("program", $data)) {
 
 //make a json object out of status.dat info
 $myJsonObject = makeJson($hosts, $services, $program1);
-// echo $myJsonObject;
+//echo $myJsonObject;
 
+
+$confFile = "/opt/nagios/etc/conf.d";
+$data2 = getData3($confFile);
+$hosts2 = $data2['hosts'];
+$services2 = $data2['services'];
+$program2 = "";
+if (array_key_exists("program", $data2)) {
+  $program2 = $data2['program'];
+}
+//$jsonConf = outputJson($hosts2, $services2, $program2);
+//echo $jsonConf;
 
 
 //functions start here
@@ -68,8 +79,8 @@ function makeJson($hosts, $services, $program)
   }
   unset($hostName, $hostArray);
 
-  //$myJSON = json_encode($myObj);
-  $myJSON = json_encode($myAllHostsObj, JSON_FORCE_OBJECT);
+  //$myJSON = json_encode($myAllHostsObj, JSON_FORCE_OBJECT); // this makes a stringified json object
+  $myJSON = json_encode($myAllHostsObj); // this makes an ARRAY, easier to use
   //echo $myJSON;
 
   return $myJSON;
