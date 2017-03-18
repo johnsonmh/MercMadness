@@ -3,11 +3,14 @@ require.config({
   paths: {
     'geo': 'geoxml3',
     'overmap': 'over_map',
-    'dashboard': 'dashboard_map'
+    'dashboard': 'dashboard_map',
+    'jquery': 'jquery-3.1.1.min'
   }
 });
 
-require(["overmap"], function(loadMenu, loadMainViewMenu) {
+//loads functions from overmap and enables main menu to be displayed from the beginning
+require(["overmap"], function() {
+  loadMainViewMenu();
   console.log("over map loaded OK.");
 });
 
@@ -22,7 +25,6 @@ var areasMapped = {
   "Rework": ["12","13","14"]
 }
 
-
 var map;
 var mainKmlSource = '../KMZ/MBV.kml';
 var subKmlSources = [
@@ -34,7 +36,7 @@ var subKmlSources = [
   '../KMZ/Rework1.kml',
   '../KMZ/Wheel Alignment1.kml'];
 
-var areaTitles = [];
+  var areaTitles = [];
 
   /**
   * Initializes the map and calls the function that loads the KML layer.
@@ -66,7 +68,7 @@ var areaTitles = [];
       kmlParser.parse(subKmlSources[i]);
     }
 
-    console.log(jsonObject);
+    //console.log(jsonObject);
     var bounds;
     var placemark;
 
@@ -84,10 +86,6 @@ var areaTitles = [];
       map.fitBounds(bounds);
 
     });
-
-    //here we use a function from over_map.js
-    loadMainViewMenu();
-
   }
 
   //when an area is clicked on, the side menu will change automatically
