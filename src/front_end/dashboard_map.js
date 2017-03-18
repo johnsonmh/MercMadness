@@ -15,7 +15,7 @@ require(["overmap"], function(loadMenu, loadMainViewMenu) {
 var areasMapped = {
   "Assembly Line": ["1","2"],
   "Wheel Alignment": ["3","4","5"],
-  "Body Offload": ["6","7"],
+  "Body OffLoad": ["6","7"],
   "Dyno": ["8","9"],
   "Finish Line": ["10"],
   "Paint Touch Up": ["11"],
@@ -99,7 +99,7 @@ var areaTitles = [];
         clearMenu();
         loadMainViewMenu(place.polygon.title);
       } else {
-        console.log("other kml");
+        console.log(place.polygon.title);
         clearMenu();
         loadMenu(place.polygon.title);
       }

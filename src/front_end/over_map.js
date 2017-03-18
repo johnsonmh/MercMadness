@@ -52,20 +52,25 @@ function createButtons(type, currentJsonObject, parentId) {
   //find right image for device
   var hostString = currentJsonObject.host_name.toLowerCase();
   var pic = document.createElement("img");
-  if(hostString.includes("printer")){
+  var device = currentJsonObject.device_type.toLowerCase();
+
+  if(device == "printer"){
     pic.setAttribute("src", "device_images/printer.png");
   }
-  else if(hostString.includes("hp")){
+  else if (device == "hp" ){
     pic.setAttribute("src", "device_images/multifunction_printer.jpeg");
   }
-  else if (hostString.includes("srv") || hostString.includes("server") ){
+  else if (device == "srv" || device == "server" ){
     pic.setAttribute("src", "device_images/server.png");
   }
-  else if(hostString.includes("switch")){
+  else if (device == "switch"){
     pic.setAttribute("src", "device_images/switch.png");
   }
-  else{
+  else if (device == "pc"){
     pic.setAttribute("src", "device_images/laptop.png");
+  }
+  else{
+    pic.setAttribute("src", "device_images/not_found.jpeg");
   }
 
   //set id attribute for device for CSS purposes
@@ -118,32 +123,19 @@ function parseStationStr(stationNum){
   }
 }
 
-//find area based on host_name... probably unnecessary!
-function findArea(areaAbbreviation){
-  switch (areaAbbreviation){
-    case "PEDALP":
-    return "Pedal Push";
-    case "XWHEEL":
-    return "Wheel Alignment";
-    case "XLIGHT":
-    return "Wheel Alignment";
-    //...
-  }
-}
-
 function mapStationToArea(stationNum){
   //fetch info from dashboard_map
   var areas = getAreaTitles();
   var areasMapped = getAreasMapped();
 
-  //using the above map, you can find which area your station is in
+  //using the mapping created in dashboard_map.js, you can find which area your station is in
   var keyArr = Object.keys(areasMapped);
   for ( var i = 0; i < keyArr.length; i++) {
     var numArr = areasMapped[keyArr[i]];
-    var areaName = keyArr[i];
+    var area = keyArr[i];
     for (var j = 0; j < numArr.length;j++){
       if(numArr[j] == stationNum){
-        return areaName;
+        return area;
       }
     }
   }
@@ -156,10 +148,8 @@ function parseHost(host){
   //will return an array with [ deviceType, stationNum, area ]
   var type = host.hostgroups;
   type = type.toUpperCase();
-
   var capsHostName = host.host_name.toUpperCase();
   var hostNameArr = capsHostName.split('_');
-
   var rtnArr = [];
 
   switch (type) {
@@ -169,7 +159,7 @@ function parseHost(host){
     stationNumber = parseStationStr(hostNameArr[2]);
     rtnArr.push(stationNumber);
     rtnArr.push(mapStationToArea(stationNumber));
-    return rtnArr;
+    break;
     case "QSYS_SVR_WIN":
     //console.log("qsys server win");
     break;
@@ -180,9 +170,17 @@ function parseHost(host){
     //console.log("qsys server linux");
     break;
     case "SWITCHES":
+    rtnArr.push(hostNameArr[0]);
+    stationNumber = parseStationStr(hostNameArr[1]);
+    rtnArr.push(stationNumber);
+    rtnArr.push(mapStationToArea(stationNumber));
     //console.log("switches");
     break;
     case "PRINTERS":
+    rtnArr.push(hostNameArr[0]);
+    stationNumber = parseStationStr(hostNameArr[1]);
+    rtnArr.push(stationNumber);
+    rtnArr.push(mapStationToArea(stationNumber));
     //console.log("printers");
     break;
     case "WIRELESS":
@@ -191,13 +189,13 @@ function parseHost(host){
     case "WINDOWS":
     //console.log("windows");
     break;
-
   }
+  return rtnArr;
 }
 
-function processHostsInFocus(all, areaName){
+function processHostsInFocus(all, aName){
   var areasMapped = getAreasMapped();
-  var stationList = areasMapped[areaName];
+  var stationList = areasMapped[aName];
   var hosts_in_station = [];
 
   for (var j = 0; j < stationList.length; j++){
@@ -298,10 +296,75 @@ function loadMenu(areaName) {
     "check_execution_time": "4.00",
     "current_state": "1"
   }
+  var host7 = {
+    "host_name": "HP_STA8_XLIGHT",
+    "alias": "PRINTER XLIGHT STA8",
+    "address": "53.234.83.35",
+    "contact_groups": "+luhd,shopfloor,admins",
+    "max_check_attempts": "10",
+    "hostgroups": "PRINTERS",
+    "----------BAD INFO STARTS HERE--": "------------",
+    "plugin_output": "OK !! :) ",
+    "current_problem_id": "0",
+    "check_execution_time": "4.00",
+    "current_state": "0"
+  }
+  var host8 = {
+    "host_name": "SWITCH_STA7_XLIGHT",
+    "alias": "SWITCH XLIGHT STA7",
+    "address": "53.234.83.35",
+    "contact_groups": "+luhd,shopfloor,admins",
+    "max_check_attempts": "10",
+    "hostgroups": "SWITCHES",
+    "----------BAD INFO STARTS HERE--": "------------",
+    "plugin_output": "WARNING !! :( ",
+    "current_problem_id": "3",
+    "check_execution_time": "4.00",
+    "current_state": "3"
+  }
+  var host9 = {
+    "host_name": "PRINTER_STA1_XLIGHT",
+    "alias": "WHEEL ALIGNMENT XLIGHT STA8",
+    "address": "53.234.83.35",
+    "contact_groups": "+luhd,shopfloor,admins",
+    "max_check_attempts": "10",
+    "hostgroups": "PRINTERS",
+    "----------BAD INFO STARTS HERE--": "------------",
+    "plugin_output": "CRITICAL !! :) ",
+    "current_problem_id": "112",
+    "check_execution_time": "4.00",
+    "current_state": "3"
+  }
+  var host10 = {
+    "host_name": "PRINTER_STA2_XLIGHT",
+    "alias": "WHEEL ALIGNMENT XLIGHT STA2",
+    "address": "53.234.83.35",
+    "contact_groups": "+luhd,shopfloor,admins",
+    "max_check_attempts": "10",
+    "hostgroups": "PRINTERS",
+    "----------BAD INFO STARTS HERE--": "------------",
+    "plugin_output": "OK !! :) ",
+    "current_problem_id": "0",
+    "check_execution_time": "4.00",
+    "current_state": "0"
+  }
+  var host11 = {
+    "host_name": "PRINTER_STA6_XLIGHT",
+    "alias": "WHEEL ALIGNMENT XLIGHT STA6",
+    "address": "53.234.83.35",
+    "contact_groups": "+luhd,shopfloor,admins",
+    "max_check_attempts": "10",
+    "hostgroups": "PRINTERS",
+    "----------BAD INFO STARTS HERE--": "------------",
+    "plugin_output": "WARNING WARNING",
+    "current_problem_id": "12",
+    "check_execution_time": "14.00",
+    "current_state": "1"
+  }
   //console.log(jsonObject);
   // here, we should be combining info from status.dat with the host data!! -> host data is another JSON object?
   // use the jsonObject here!!
-  var UNPARSED_hosts = [host1,host2,host3,host4,host5,host6];
+  var UNPARSED_hosts = [host1,host2,host3,host4,host5,host6, host7,host8,host9,host10,host11];
   var PARSED_hosts = []; //ALL parsed hosts... maybe delete later?
 
   var hosts_in_focus = [];
@@ -314,10 +377,10 @@ function loadMenu(areaName) {
     original_unparsed_host["station_number"] = parsed_host[1];
     original_unparsed_host["area_name"] = parsed_host[2];
     parsed_host = original_unparsed_host;
+    console.log(parsed_host);
     PARSED_hosts.push(parsed_host);
-
     //if the area name matches the areaName passed into the function, then host is in focus!
-    if (parsed_host.area_name == areaName){
+    if (parsed_host.area_name === areaName){
       hosts_in_focus.push(parsed_host);
     }
   }
@@ -325,16 +388,6 @@ function loadMenu(areaName) {
   //here for testing, I am going to check which area is in focus
   // and then populate it with the above fake hosts
   var arrayOfObjects = processHostsInFocus(hosts_in_focus, areaName);
-
-
-
-  /*arrayOfObjects[0] = sortByKey(arrayOfObjects[0], 'check_execution_time');
-  arrayOfObjects[0] = sortByKey(arrayOfObjects[0], 'current_state');
-
-  arrayOfObjects[1] = sortByKey(arrayOfObjects[1], 'check_execution_time');
-  arrayOfObjects[1] = sortByKey(arrayOfObjects[1], 'current_state');
-  */
-
 
   //make parent the sidenav
   var parent = document.getElementById('mySidenav');
@@ -349,7 +402,6 @@ function loadMenu(areaName) {
   var keyArr = Object.keys(arrayOfObjects);
   for ( var i = 0; i < keyArr.length; i++) {
     var station_hosts_array = arrayOfObjects[keyArr[i]];
-    console.log(station_hosts_array);
 
     //sort elements so that red buttons are on top, grey are on bottom
     station_hosts_array = sortByKey(station_hosts_array, 'check_execution_time');
