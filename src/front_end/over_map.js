@@ -113,7 +113,7 @@ function parseStationStr(stationNum){
     stationNum = stationNum.replace(/\D/g,''); //remove "STA"
     var isnum = /^\d+$/.test(stationNum); //boolean
     if(isnum){
-      return parseInt(stationNum);
+      return stationNum;
     }
   }
 }
@@ -132,18 +132,9 @@ function findArea(areaAbbreviation){
 }
 
 function mapStationToArea(stationNum){
+  //fetch info from dashboard_map
   var areas = getAreaTitles();
-
-  // FAKE mapping of all the areas and stations within the area
-  var areasMapped = {
-    "Assembly Line": ["1","2"],
-    "Wheel Alignment": ["3","4","5"],
-    "Body Offload": ["6","7"],
-    "Dyno": ["8","9"],
-    "Finish Line": ["10"],
-    "Paint Touch Up": ["11"],
-    "Rework": ["12","13","14"]
-  }
+  var areasMapped = getAreasMapped();
 
   //using the above map, you can find which area your station is in
   var keyArr = Object.keys(areasMapped);
@@ -158,7 +149,7 @@ function mapStationToArea(stationNum){
   }
 }
 
-//get relevant info from each host!
+//gets [ deviceType, Station Number, Area Title ] info from each host!
 function parseHost(host){
 
   //example host names: QSYS_PC_STA11_PEDALP   QSYS_PC_STA19_XWHEEL  QSYS_PC_STA19_XLIGHT
@@ -173,96 +164,180 @@ function parseHost(host){
 
   switch (type) {
     case "QSYS_PC_WIN_CTRL":
-    console.log("qsys pc win control");
+    //console.log("qsys pc win control");
     rtnArr.push(hostNameArr[1]);
     stationNumber = parseStationStr(hostNameArr[2]);
     rtnArr.push(stationNumber);
     rtnArr.push(mapStationToArea(stationNumber));
     return rtnArr;
     case "QSYS_SVR_WIN":
-    console.log("qsys server win");
+    //console.log("qsys server win");
     break;
     case "QSYS_CTRL":
-    console.log("qsys ctrl");
+    //console.log("qsys ctrl");
     break;
     case "QSYS_SVR_LNX":
-    console.log("qsys server linux");
+    //console.log("qsys server linux");
     break;
     case "SWITCHES":
-    console.log("switches");
+    //console.log("switches");
     break;
     case "PRINTERS":
-    console.log("printers");
+    //console.log("printers");
     break;
     case "WIRELESS":
-    console.log("wireless");
+    //console.log("wireless");
     break;
     case "WINDOWS":
-    console.log("windows");
+    //console.log("windows");
     break;
 
   }
 }
 
-function loadMenu(areaName) {
+function processHostsInFocus(all, areaName){
+  var areasMapped = getAreasMapped();
+  var stationList = areasMapped[areaName];
+  var hosts_in_station = [];
 
+  for (var j = 0; j < stationList.length; j++){
+    hosts_in_station[stationList[j]] = [];
+  }
+
+  for (var i = 0; i < all.length; i++){
+    for (var j = 0; j < stationList.length; j++){
+      if (all[i]['station_number'] == stationList[j]){
+        //var stationObj = {};
+        //stationObj[stationList[j]] = all[i];
+        //hosts_in_station.push(stationObj);
+        hosts_in_station[stationList[j]].push(all[i]);
+      }
+    }
+  }
+  //console.log(hosts_in_station);
+  return hosts_in_station;
+}
+
+function loadMenu(areaName) {
   //FAKE HOST data - needs to be combined with the STATUS.DAT info for live information
   var host1 = {
     "host_name": "QSYS_PC_STA3_PEDALP",
-    "alias": "Pedal Push Controller STA11",
+    "alias": "Pedal Push Controller STA3",
     "address": "53.234.79.188",
     "contact_groups": "+luhd,shopfloor,admins",
     "max_check_attempts": "10",
-    "hostgroups": "QSYS_PC_WIN_CTRL"
+    "hostgroups": "QSYS_PC_WIN_CTRL",
+    "----------BAD INFO STARTS HERE--": "------------",
+    "plugin_output": "WARNING battery almost dead",
+    "current_problem_id": "33",
+    "check_execution_time": "5.00",
+    "current_state": "2"
   }
   var host2 = {
-    "host_name": "QSYS_PC_STA4_XWHEEL",
-    "alias": "WHEEL ALIGNMENT XWHEEL STA19",
+    "host_name": "QSYS_PC_STA9_XWHEEL",
+    "alias": "WHEEL ALIGNMENT XWHEEL STA9",
     "address": "53.234.83.20",
     "contact_groups": "+luhd,shopfloor,admins",
     "max_check_attempts": "10",
-    "hostgroups": "QSYS_PC_WIN_CTRL"
+    "hostgroups": "QSYS_PC_WIN_CTRL",
+    "----------BAD INFO STARTS HERE--": "------------",
+    "plugin_output": "OK -> PINGING LIKE CRAZY",
+    "current_problem_id": "2",
+    "check_execution_time": "5.00",
+    "current_state": "0"
   }
   var host3 = {
     "host_name": "QSYS_PC_STA9_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA19",
+    "alias": "WHEEL ALIGNMENT XLIGHT STA9",
     "address": "53.234.83.35",
     "contact_groups": "+luhd,shopfloor,admins",
     "max_check_attempts": "10",
-    "hostgroups": "QSYS_PC_WIN_CTRL"
+    "hostgroups": "QSYS_PC_WIN_CTRL",
+    "----------BAD INFO STARTS HERE--": "------------",
+    "plugin_output": "CRITICAL MAYDAY MAYDAY",
+    "current_problem_id": "120",
+    "check_execution_time": "1.00",
+    "current_state": "3"
   }
+  var host4 = {
+    "host_name": "QSYS_PC_STA9_XLIGHT",
+    "alias": "WHEEL ALIGNMENT XLIGHT STA9",
+    "address": "53.234.83.35",
+    "contact_groups": "+luhd,shopfloor,admins",
+    "max_check_attempts": "10",
+    "hostgroups": "QSYS_PC_WIN_CTRL",
+    "----------BAD INFO STARTS HERE--": "------------",
+    "plugin_output": "OK :) ",
+    "current_problem_id": "0",
+    "check_execution_time": "14.00",
+    "current_state": "0"
+  }
+  var host5 = {
+    "host_name": "QSYS_PC_STA8_XLIGHT",
+    "alias": "WHEEL ALIGNMENT XLIGHT STA8",
+    "address": "53.234.83.35",
+    "contact_groups": "+luhd,shopfloor,admins",
+    "max_check_attempts": "10",
+    "hostgroups": "QSYS_PC_WIN_CTRL",
+    "----------BAD INFO STARTS HERE--": "------------",
+    "plugin_output": "OK !! :) ",
+    "current_problem_id": "4",
+    "check_execution_time": "4.00",
+    "current_state": "0"
+  }
+  var host6 = {
+    "host_name": "QSYS_PC_STA8_XLIGHT",
+    "alias": "WHEEL ALIGNMENT XLIGHT STA8",
+    "address": "53.234.83.35",
+    "contact_groups": "+luhd,shopfloor,admins",
+    "max_check_attempts": "10",
+    "hostgroups": "QSYS_PC_WIN_CTRL",
+    "----------BAD INFO STARTS HERE--": "------------",
+    "plugin_output": "OK !! :) ",
+    "current_problem_id": "1",
+    "check_execution_time": "4.00",
+    "current_state": "1"
+  }
+  //console.log(jsonObject);
   // here, we should be combining info from status.dat with the host data!! -> host data is another JSON object?
   // use the jsonObject here!!
-  var UNPARSED_hosts = [host1,host2,host3];
-  var PARSED_hosts = [];
+  var UNPARSED_hosts = [host1,host2,host3,host4,host5,host6];
+  var PARSED_hosts = []; //ALL parsed hosts... maybe delete later?
+
+  var hosts_in_focus = [];
+  //this is where hosts whose area matches the area in focus get to populate the menu!
+  // device type, station number, and area on map are added to the host information
   for (var i = 0; i < UNPARSED_hosts.length; i++){
-    PARSED_hosts = parseHost(UNPARSED_hosts[i]);
-    console.log(PARSED_hosts);
-  }
-  console.log(jsonObject);
+    original_unparsed_host = UNPARSED_hosts[i];
+    parsed_host = parseHost(original_unparsed_host);
+    original_unparsed_host["device_type"] = parsed_host[0];
+    original_unparsed_host["station_number"] = parsed_host[1];
+    original_unparsed_host["area_name"] = parsed_host[2];
+    parsed_host = original_unparsed_host;
+    PARSED_hosts.push(parsed_host);
 
-  //make parent the sidenav
-  var parent = document.getElementById('mySidenav');
-
-  //split json object into two arrays
-  var station1 = [];
-  var station2 = [];
-  //for now, put even hosts into station 1, odd into station 2
-  for (var j = 0; j < Object.keys(jsonObject).length; j++) {
-    if (j%2 == 0){
-      station1.push(jsonObject[j]);
-    }else{
-      station2.push(jsonObject[j]);
+    //if the area name matches the areaName passed into the function, then host is in focus!
+    if (parsed_host.area_name == areaName){
+      hosts_in_focus.push(parsed_host);
     }
   }
 
-  //sort elements so that red buttons are on top, grey are on bottom
-  station1 = sortByKey(station1, 'check_execution_time');
-  station1 = sortByKey(station1, 'current_state');
+  //here for testing, I am going to check which area is in focus
+  // and then populate it with the above fake hosts
+  var arrayOfObjects = processHostsInFocus(hosts_in_focus, areaName);
 
 
-  station2 = sortByKey(station2, 'check_execution_time');
-  station2 = sortByKey(station2, 'current_state');
+
+  /*arrayOfObjects[0] = sortByKey(arrayOfObjects[0], 'check_execution_time');
+  arrayOfObjects[0] = sortByKey(arrayOfObjects[0], 'current_state');
+
+  arrayOfObjects[1] = sortByKey(arrayOfObjects[1], 'check_execution_time');
+  arrayOfObjects[1] = sortByKey(arrayOfObjects[1], 'current_state');
+  */
+
+
+  //make parent the sidenav
+  var parent = document.getElementById('mySidenav');
 
   //Create heading of areaName passed in
   var menuKMLName = document.createElement("H1");
@@ -271,37 +346,33 @@ function loadMenu(areaName) {
   menuKMLName.setAttribute("style", "text-align:center;font-size: 24px;");
   parent.appendChild(menuKMLName);
 
-  //Create subheading of "Station 1" - change later to reflect real station number
-  var menuStationName = document.createElement("H2");
-  menuStationName.setAttribute("class", "stations");
-  menuStationName.innerHTML = "Station 1";
-  menuStationName.setAttribute("style", "text-align:Left;font-size: 18px; padding: 0 15px;");
-  parent.appendChild(menuStationName);
+  var keyArr = Object.keys(arrayOfObjects);
+  for ( var i = 0; i < keyArr.length; i++) {
+    var station_hosts_array = arrayOfObjects[keyArr[i]];
+    console.log(station_hosts_array);
 
-  //populate station1
-  for (var j = 0; j < station1.length; j++) {
-    var temp = 'mybutton' + j;
-    createButtons('button', station1[j], 'mySidenav');
+    //sort elements so that red buttons are on top, grey are on bottom
+    station_hosts_array = sortByKey(station_hosts_array, 'check_execution_time');
+    station_hosts_array = sortByKey(station_hosts_array, 'current_state');
+
+    //Create subheading of "Station 1" - change later to reflect real station number
+    var menuStationName = document.createElement("H2");
+    menuStationName.setAttribute("class", "stations");
+    menuStationName.innerHTML = "Station " + keyArr[i];
+    menuStationName.setAttribute("style", "text-align:Left;font-size: 18px; padding: 0 15px;");
+    parent.appendChild(menuStationName);
+
+    //populate station1
+    for (var j = 0; j < station_hosts_array.length; j++) {
+      var temp = 'mybutton' + j;
+      createButtons('button', station_hosts_array[j], 'mySidenav');
+    }
+    var br = document.createElement("br");
+    br.setAttribute("class", "stations");
+    parent.appendChild(br);
   }
-  var br = document.createElement("br");
-  br.setAttribute("class", "stations");
-  parent.appendChild(br);
 
-  //hard code Station 2 and populate with buttons
-  var menuStationName2 = document.createElement("H2");
-  menuStationName2.setAttribute("class", "stations");
-  menuStationName2.innerHTML = "Station 2";
-  menuStationName2.setAttribute("style", "text-align:Left;font-size: 18px; padding: 0 15px;");
-  parent.appendChild(menuStationName2);
-
-  for (var j = 0; j < station2.length; j++) {
-    var temp = 'mybutton' + j;
-    createButtons('button', station2[j], 'mySidenav');
-  }
-  var br2 = document.createElement("br");
-  br2.setAttribute("class", "stations");
-  parent.appendChild(br2);
-
+  //enable panel drop downs for buttons
   enableAccordion();
 }
 

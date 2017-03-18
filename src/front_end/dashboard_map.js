@@ -11,6 +11,18 @@ require(["overmap"], function(loadMenu, loadMainViewMenu) {
   console.log("over map loaded OK.");
 });
 
+// FAKE mapping of all the areas and stations within the area
+var areasMapped = {
+  "Assembly Line": ["1","2"],
+  "Wheel Alignment": ["3","4","5"],
+  "Body Offload": ["6","7"],
+  "Dyno": ["8","9"],
+  "Finish Line": ["10"],
+  "Paint Touch Up": ["11"],
+  "Rework": ["12","13","14"]
+}
+
+
 var map;
 var mainKmlSource = '../KMZ/MBV.kml';
 var subKmlSources = [
@@ -94,8 +106,8 @@ var areaTitles = [];
     });
   }
 
-  function printHi(){
-    console.log("hi");
+  function getAreasMapped(){
+    return areasMapped;
   }
 
   function getAreaTitles(){
