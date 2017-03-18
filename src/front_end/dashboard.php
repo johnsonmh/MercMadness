@@ -10,7 +10,12 @@
   <script src="require.js"></script>
   <script src="config.js"></script>
   <script>
-  require(['dashboard_map']);
+  require(['config'], function() {
+    require(['geoxml3'], function() {
+      require(['dashboard_map'], function() {
+      });
+    });
+  });
   </script>
   <div id="over_map">
     <div class="w3-opennav w3-xlarge w3-hide-xlarge w3-right" onclick="w3_open()">&#9776;</div>

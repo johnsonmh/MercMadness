@@ -2,16 +2,14 @@
 require.config({
   paths: {
     'geo': 'geoxml3',
-    'overmap': 'over_map'
+    'overmap': 'over_map',
+    'dashboard': 'dashboard_map'
   }
 });
 
-require(["geo"], function() {
-  console.log("geoxml3 loaded OK.");
+require(["overmap"], function(loadMenu, loadMainViewMenu) {
+  console.log("over map loaded OK.");
 });
-
-//get all functions from over_map.js
-require(['overmap']);
 
 var map;
 var mainKmlSource = '../KMZ/MBV.kml';
@@ -23,6 +21,8 @@ var subKmlSources = [
   '../KMZ/Paint Touch Up1.kml',
   '../KMZ/Rework1.kml',
   '../KMZ/Wheel Alignment1.kml'];
+
+var areaTitles = [];
 
   /**
   * Initializes the map and calls the function that loads the KML layer.
@@ -57,10 +57,11 @@ var subKmlSources = [
     console.log(jsonObject);
     var bounds;
     var placemark;
+
     google.maps.event.addListener(kmlParser, 'parsed', function () {
       placemark = kmlParser.docs[kmlParser.docs.length - 1].placemarks[0];
       addClickListener(map, placemark);
-
+      areaTitles.push(placemark.polygon.title);
       if(placemark.polygon.title == 'MBV') {
         placemark.polygon.fillColor = '#c6c6c6'; // Grey
         bounds = placemark.polygon.bounds;
@@ -72,6 +73,7 @@ var subKmlSources = [
 
     });
 
+    //here we use a function from over_map.js
     loadMainViewMenu();
 
   }
@@ -90,6 +92,14 @@ var subKmlSources = [
         loadMenu(place.polygon.title);
       }
     });
+  }
+
+  function printHi(){
+    console.log("hi");
+  }
+
+  function getAreaTitles(){
+    return areaTitles;
   }
 
   var maps_api_src = 'https://maps.googleapis.com/maps/api/js?key='+config.GOOGLE_MAPS_API_KEY+'&callback=initMap';

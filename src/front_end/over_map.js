@@ -1,3 +1,8 @@
+require(["dashboard_map"], function () {
+  console.log("dashboard_map working from over_map");
+});
+
+
 //sidenav open function
 function w3_open() {
   document.getElementById("mySidenav").style.width = "300px";
@@ -94,7 +99,7 @@ function enableAccordion(){
   }
 }
 
-//sort an array by a given key
+//sort an array by a given key - used for button sorting
 function sortByKey(array, key) {
   return array.sort(function(a, b) {
     var x = a[key]; var y = b[key];
@@ -102,30 +107,140 @@ function sortByKey(array, key) {
   });
 }
 
-function clearMenu(){
-  //get side nav container, remove all elements except the close button
-  var container = document.getElementById("mySidenav");
+//strip "STA from station name, for example ""STA11" -> 11
+function parseStationStr(stationNum){
+  if (stationNum.includes("STA")){
+    stationNum = stationNum.replace(/\D/g,''); //remove "STA"
+    var isnum = /^\d+$/.test(stationNum); //boolean
+    if(isnum){
+      return parseInt(stationNum);
+    }
+  }
+}
 
-  //remove all text from sidenav
-  var elements = container.getElementsByClassName("stations");
-  while (elements[0]) {
-    elements[0].parentNode.removeChild(elements[0]);
+//find area based on host_name... probably unnecessary!
+function findArea(areaAbbreviation){
+  switch (areaAbbreviation){
+    case "PEDALP":
+    return "Pedal Push";
+    case "XWHEEL":
+    return "Wheel Alignment";
+    case "XLIGHT":
+    return "Wheel Alignment";
+    //...
+  }
+}
+
+function mapStationToArea(stationNum){
+  var areas = getAreaTitles();
+
+  // FAKE mapping of all the areas and stations within the area
+  var areasMapped = {
+    "Assembly Line": ["1","2"],
+    "Wheel Alignment": ["3","4","5"],
+    "Body Offload": ["6","7"],
+    "Dyno": ["8","9"],
+    "Finish Line": ["10"],
+    "Paint Touch Up": ["11"],
+    "Rework": ["12","13","14"]
   }
 
-  //remove all button elements from sidenav
-  var buttons = container.getElementsByClassName("accordion");
-  while (buttons[0]) {
-    buttons[0].parentNode.removeChild(buttons[0]);
+  //using the above map, you can find which area your station is in
+  var keyArr = Object.keys(areasMapped);
+  for ( var i = 0; i < keyArr.length; i++) {
+    var numArr = areasMapped[keyArr[i]];
+    var areaName = keyArr[i];
+    for (var j = 0; j < numArr.length;j++){
+      if(numArr[j] == stationNum){
+        return areaName;
+      }
+    }
   }
+}
 
-  //remove all panel elements from sidenav
-  var panels = container.getElementsByClassName("panel");
-  while (panels[0]) {
-    panels[0].parentNode.removeChild(panels[0]);
+//get relevant info from each host!
+function parseHost(host){
+
+  //example host names: QSYS_PC_STA11_PEDALP   QSYS_PC_STA19_XWHEEL  QSYS_PC_STA19_XLIGHT
+  //will return an array with [ deviceType, stationNum, area ]
+  var type = host.hostgroups;
+  type = type.toUpperCase();
+
+  var capsHostName = host.host_name.toUpperCase();
+  var hostNameArr = capsHostName.split('_');
+
+  var rtnArr = [];
+
+  switch (type) {
+    case "QSYS_PC_WIN_CTRL":
+    console.log("qsys pc win control");
+    rtnArr.push(hostNameArr[1]);
+    stationNumber = parseStationStr(hostNameArr[2]);
+    rtnArr.push(stationNumber);
+    rtnArr.push(mapStationToArea(stationNumber));
+    return rtnArr;
+    case "QSYS_SVR_WIN":
+    console.log("qsys server win");
+    break;
+    case "QSYS_CTRL":
+    console.log("qsys ctrl");
+    break;
+    case "QSYS_SVR_LNX":
+    console.log("qsys server linux");
+    break;
+    case "SWITCHES":
+    console.log("switches");
+    break;
+    case "PRINTERS":
+    console.log("printers");
+    break;
+    case "WIRELESS":
+    console.log("wireless");
+    break;
+    case "WINDOWS":
+    console.log("windows");
+    break;
+
   }
 }
 
 function loadMenu(areaName) {
+
+  //FAKE HOST data - needs to be combined with the STATUS.DAT info for live information
+  var host1 = {
+    "host_name": "QSYS_PC_STA3_PEDALP",
+    "alias": "Pedal Push Controller STA11",
+    "address": "53.234.79.188",
+    "contact_groups": "+luhd,shopfloor,admins",
+    "max_check_attempts": "10",
+    "hostgroups": "QSYS_PC_WIN_CTRL"
+  }
+  var host2 = {
+    "host_name": "QSYS_PC_STA4_XWHEEL",
+    "alias": "WHEEL ALIGNMENT XWHEEL STA19",
+    "address": "53.234.83.20",
+    "contact_groups": "+luhd,shopfloor,admins",
+    "max_check_attempts": "10",
+    "hostgroups": "QSYS_PC_WIN_CTRL"
+  }
+  var host3 = {
+    "host_name": "QSYS_PC_STA9_XLIGHT",
+    "alias": "WHEEL ALIGNMENT XLIGHT STA19",
+    "address": "53.234.83.35",
+    "contact_groups": "+luhd,shopfloor,admins",
+    "max_check_attempts": "10",
+    "hostgroups": "QSYS_PC_WIN_CTRL"
+  }
+  // here, we should be combining info from status.dat with the host data!! -> host data is another JSON object?
+  // use the jsonObject here!!
+  var UNPARSED_hosts = [host1,host2,host3];
+  var PARSED_hosts = [];
+  for (var i = 0; i < UNPARSED_hosts.length; i++){
+    PARSED_hosts = parseHost(UNPARSED_hosts[i]);
+    console.log(PARSED_hosts);
+  }
+  console.log(jsonObject);
+
   //make parent the sidenav
   var parent = document.getElementById('mySidenav');
 
@@ -144,6 +259,7 @@ function loadMenu(areaName) {
   //sort elements so that red buttons are on top, grey are on bottom
   station1 = sortByKey(station1, 'check_execution_time');
   station1 = sortByKey(station1, 'current_state');
+
 
   station2 = sortByKey(station2, 'check_execution_time');
   station2 = sortByKey(station2, 'current_state');
@@ -197,4 +313,28 @@ function loadMainViewMenu(){
   title.innerHTML = "Main View";
   title.setAttribute("style", "text-align:center;font-size: 24px;");
   parent.appendChild(title);
+}
+
+//remove all elements in sidenav menu except the close button
+function clearMenu(){
+  //get side nav container
+  var container = document.getElementById("mySidenav");
+
+  //remove all text from sidenav
+  var elements = container.getElementsByClassName("stations");
+  while (elements[0]) {
+    elements[0].parentNode.removeChild(elements[0]);
+  }
+
+  //remove all button elements from sidenav
+  var buttons = container.getElementsByClassName("accordion");
+  while (buttons[0]) {
+    buttons[0].parentNode.removeChild(buttons[0]);
+  }
+
+  //remove all panel elements from sidenav
+  var panels = container.getElementsByClassName("panel");
+  while (panels[0]) {
+    panels[0].parentNode.removeChild(panels[0]);
+  }
 }
