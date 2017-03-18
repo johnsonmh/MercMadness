@@ -7,26 +7,9 @@ function w3_open() {
 //sidenav close function
 function w3_close() {
   document.getElementById("mySidenav").style.display = "none";
-
-  if(parent.frames && parent.frames['side']) {
-    var side = parent.frames['side'];
-    var map = document.getElementById('map');
-
-
-/*
-    if (side.style.display === 'none') {
-        side.style.display = 'block';
-    } else {
-        side.style.display = 'none';
-        //map.style.margin-left = -100%;
-        //side.style.visibility = 'hidden';
-    }*/
-
-  }
 }
 
-
-//create buttons based on the plugin_output... can change later
+//populate the station with buttons
 function createButtons(type, currentJsonObject, parentId) {
   var element;
   if (currentJsonObject.plugin_output.includes('OK')){ //OK
@@ -37,19 +20,16 @@ function createButtons(type, currentJsonObject, parentId) {
   }
   else if (currentJsonObject.plugin_output.includes('WARNING')){ //WARNING
     element = document.createElement("buttonYellow");
-
-  }else{
+  }
+  else{
     element = document.createElement("buttonGrey"); //unknown / pending
   }
+
+  //set class attribute and display the host's name - maybe change to ALIAS later?
   element.setAttribute("class", "accordion");
-  //Assign different attributes to the element.
-  //element.type = type;
-  //element.value = value; // Really? You want the default value to be the type string?
-  //element.name = name; // And the name too?
-  //element.id = id;
   element.innerHTML = currentJsonObject.host_name;
 
-  //create the panel within the button
+  //create the panel to slide out from under the button
   var pan = document.createElement("div");
   pan.setAttribute("class", "panel");
 
@@ -83,37 +63,35 @@ function createButtons(type, currentJsonObject, parentId) {
     pic.setAttribute("src", "device_images/laptop.png");
   }
 
+  //set id attribute for device for CSS purposes
   pic.setAttribute("id", "device");
-
-  /* TRYING TO GET LARGER IMAGE TO POP UP IF THUMBNAIL IS CLICKED
-  var modalImg = document.getElementById("img01");
-  pic.onclick = function(){
-        var x = modalImg;
-        x.src = this.src;
-        if (x.style.display === 'none') {
-            x.style.display = 'block';
-        } else {
-            x.style.display = 'none';
-        }
-  }*/
-
   pan.appendChild(pic);
 
   //add some space after image
   var br = document.createElement("br");
   pan.appendChild(br);
 
-  var parent = document.getElementById(parentId);
   //Append the button element and panel to the sideNav
+  var parent = document.getElementById(parentId);
   parent.appendChild(element);
   parent.appendChild(pan);
 }
 
-//simple function, just adds a bit of space
-function addBreak(parentId) {
-  var br = document.createElement("br");
-  var parent = document.getElementById(parentId);
-  parent.appendChild(br);
+//enables clicking and opening accordion panels
+function enableAccordion(){
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+  for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight){
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    }
+  }
 }
 
 //sort an array by a given key
@@ -124,8 +102,30 @@ function sortByKey(array, key) {
   });
 }
 
+function clearMenu(){
+  //get side nav container, remove all elements except the close button
+  var container = document.getElementById("mySidenav");
 
-window.onload = function () {
+  //remove all text from sidenav
+  var elements = container.getElementsByClassName("stations");
+  while (elements[0]) {
+    elements[0].parentNode.removeChild(elements[0]);
+  }
+
+  //remove all button elements from sidenav
+  var buttons = container.getElementsByClassName("accordion");
+  while (buttons[0]) {
+    buttons[0].parentNode.removeChild(buttons[0]);
+  }
+
+  //remove all panel elements from sidenav
+  var panels = container.getElementsByClassName("panel");
+  while (panels[0]) {
+    panels[0].parentNode.removeChild(panels[0]);
+  }
+}
+
+function loadMenu(areaName) {
   //make parent the sidenav
   var parent = document.getElementById('mySidenav');
 
@@ -148,62 +148,53 @@ window.onload = function () {
   station2 = sortByKey(station2, 'check_execution_time');
   station2 = sortByKey(station2, 'current_state');
 
-
-  // this is hard coded right now - will be changed so that each time a station is clicked, the menu updates info
-  //Create heading of "Wheel Alignment"
+  //Create heading of areaName passed in
   var menuKMLName = document.createElement("H1");
-  menuKMLName.innerHTML = "Wheel Alignment";
+  menuKMLName.setAttribute("class", "stations");
+  menuKMLName.innerHTML = areaName;
   menuKMLName.setAttribute("style", "text-align:center;font-size: 24px;");
   parent.appendChild(menuKMLName);
 
   //Create subheading of "Station 1" - change later to reflect real station number
   var menuStationName = document.createElement("H2");
+  menuStationName.setAttribute("class", "stations");
   menuStationName.innerHTML = "Station 1";
   menuStationName.setAttribute("style", "text-align:Left;font-size: 18px; padding: 0 15px;");
   parent.appendChild(menuStationName);
 
-
-  //jsonObject = sortByKey(jsonObject, 'check_execution_time');
-  //jsonObject = sortByKey(jsonObject, 'current_state');
-
-  //on load of sideNav, create buttons
-  /*for (var j = 0; j < Object.keys(jsonObject).length; j++) {
-  var temp = 'mybutton' + j;
-  createButtons('button', jsonObject[j], 'mySidenav');
-}
-addBreak('mySidenav');*/
-
-//populate station1
-for (var j = 0; j < station1.length; j++) {
-  var temp = 'mybutton' + j;
-  createButtons('button', station1[j], 'mySidenav');
-}
-addBreak('mySidenav');
-
-//hard code Station 2 and populate with buttons
-var menuStationName2 = document.createElement("H2");
-menuStationName2.innerHTML = "Station 2";
-menuStationName2.setAttribute("style", "text-align:Left;font-size: 18px; padding: 0 15px;");
-parent.appendChild(menuStationName2);
-
-for (var j = 0; j < station2.length; j++) {
-  var temp = 'mybutton' + j;
-  createButtons('button', station2[j], 'mySidenav');
-}
-addBreak('mySidenav');
-
-//enables clicking and opening accordion
-var acc = document.getElementsByClassName("accordion");
-var i;
-for (i = 0; i < acc.length; i++) {
-  acc[i].onclick = function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight){
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
+  //populate station1
+  for (var j = 0; j < station1.length; j++) {
+    var temp = 'mybutton' + j;
+    createButtons('button', station1[j], 'mySidenav');
   }
+  var br = document.createElement("br");
+  br.setAttribute("class", "stations");
+  parent.appendChild(br);
+
+  //hard code Station 2 and populate with buttons
+  var menuStationName2 = document.createElement("H2");
+  menuStationName2.setAttribute("class", "stations");
+  menuStationName2.innerHTML = "Station 2";
+  menuStationName2.setAttribute("style", "text-align:Left;font-size: 18px; padding: 0 15px;");
+  parent.appendChild(menuStationName2);
+
+  for (var j = 0; j < station2.length; j++) {
+    var temp = 'mybutton' + j;
+    createButtons('button', station2[j], 'mySidenav');
+  }
+  var br2 = document.createElement("br");
+  br2.setAttribute("class", "stations");
+  parent.appendChild(br2);
+
+  enableAccordion();
 }
+
+//menu for when main KML is in view
+function loadMainViewMenu(){
+  var parent = document.getElementById('mySidenav');
+  var title = document.createElement("H1");
+  title.setAttribute("class", "stations");
+  title.innerHTML = "Main View";
+  title.setAttribute("style", "text-align:center;font-size: 24px;");
+  parent.appendChild(title);
 }

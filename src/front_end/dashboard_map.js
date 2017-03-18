@@ -1,5 +1,19 @@
-var map;
+//allows all javascript files to communicate with each other through mapping
+require.config({
+  paths: {
+    'geo': 'geoxml3',
+    'overmap': 'over_map'
+  }
+});
 
+require(["geo"], function() {
+  console.log("geoxml3 loaded OK.");
+});
+
+//get all functions from over_map.js
+require(['overmap']);
+
+var map;
 var mainKmlSource = '../KMZ/MBV.kml';
 var subKmlSources = [
   '../KMZ/Assembly Line1.kml',
@@ -42,10 +56,10 @@ var subKmlSources = [
 
     console.log(jsonObject);
     var bounds;
-
+    var placemark;
     google.maps.event.addListener(kmlParser, 'parsed', function () {
-      var placemark = kmlParser.docs[kmlParser.docs.length - 1].placemarks[0];
-      addClickListener(map, placemark.polygon);
+      placemark = kmlParser.docs[kmlParser.docs.length - 1].placemarks[0];
+      addClickListener(map, placemark);
 
       if(placemark.polygon.title == 'MBV') {
         placemark.polygon.fillColor = '#c6c6c6'; // Grey
@@ -53,16 +67,33 @@ var subKmlSources = [
       } else {
         placemark.polygon.fillColor = '#4caf50'; // Green
       }
+      //fit intial map load to main map
       map.fitBounds(bounds);
+
     });
+
+    loadMainViewMenu();
 
   }
 
-  function addClickListener(map, polygon) {
-    google.maps.event.addListener(polygon, 'click', function(event) {
-      map.fitBounds(polygon.bounds);
+  //when an area is clicked on, the side menu will change automatically
+  function addClickListener(map, place) {
+    google.maps.event.addListener(place.polygon, 'click', function(event) {
+      map.fitBounds(place.polygon.bounds);
+      if(place.polygon.title == 'MBV') {
+        console.log("main kml");
+        clearMenu();
+        loadMainViewMenu(place.polygon.title);
+      } else {
+        console.log("other kml");
+        clearMenu();
+        loadMenu(place.polygon.title);
+      }
     });
   }
 
   var maps_api_src = 'https://maps.googleapis.com/maps/api/js?key='+config.GOOGLE_MAPS_API_KEY+'&callback=initMap';
-  document.write('\x3Cscript async defer src='+maps_api_src+'>\x3C/script>');
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = maps_api_src;
+  document.body.appendChild(script);
