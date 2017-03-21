@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/env python2.6
 import pynag.Model
 
 all_host = pynag.Model.Host.objects.all
