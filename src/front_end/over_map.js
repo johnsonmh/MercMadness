@@ -1,7 +1,55 @@
 require(["dashboard_map"], function () {
   console.log("dashboard_map working from over_map");
+
 });
 
+var begun = 0;
+//populateMainViewMenu();
+//console.log(begun);
+
+function createPulseButtons(parent){
+
+  //create buttons, red pulses
+  var areaButton = document.createElement("button");
+  areaButton.setAttribute("id", "buttonMain");
+  areaButton.setAttribute("class", "pulse-button");
+
+  parent.appendChild(areaButton);
+
+  //breaks in between buttons
+  var br = document.createElement("br");
+  br.setAttribute("class", "stations");
+  parent.appendChild(br);
+  var br1 = document.createElement("br");
+  br1.setAttribute("class", "stations");
+  parent.appendChild(br1);
+  var br2 = document.createElement("br");
+  br2.setAttribute("class", "stations");
+  parent.appendChild(br2);
+
+  var areaButton2 = document.createElement("button");
+  areaButton2.setAttribute("id", "buttonMain");
+  areaButton2.setAttribute("class", "no-pulse-button");
+  areaButton2.style.backgroundColor = "#57bc5b";
+  areaButton2.style.color = "#57bc5b";
+
+  parent.appendChild(areaButton2);
+
+}
+
+
+function addFullScreenButton(){
+  var googleOptions = document.getElementsByClassName("gmnoprint");
+  console.log(googleOptions[5]);
+  var itm = googleOptions[5].lastChild;
+  var cln = itm.cloneNode(true);
+  cln.firstChild.innerHTML = "Full Screen";
+  cln.firstChild.onclick = function (){
+    window.open('http://localhost:8080/merc/front_end/dashboard.php'); // MAYBE CONFIG - DEPENDS ON WHAT THEY ARE RUNNING THEIR NAGIOS ON
+  }
+  //console.log(cln.firstChild.innerHTML);
+  googleOptions[5].appendChild(cln);
+}
 
 //sidenav open function
 function w3_open() {
@@ -55,22 +103,22 @@ function createButtons(type, currentJsonObject, parentId) {
   var device = currentJsonObject.device_type.toLowerCase();
 
   if(device == "printer"){
-    pic.setAttribute("src", "device_images/printer.png");
+    pic.setAttribute("src", "images/printer.png");
   }
   else if (device == "hp" ){
-    pic.setAttribute("src", "device_images/multifunction_printer.jpeg");
+    pic.setAttribute("src", "images/multifunction_printer.jpeg");
   }
   else if (device == "srv" || device == "server" ){
-    pic.setAttribute("src", "device_images/server.png");
+    pic.setAttribute("src", "images/server.png");
   }
   else if (device == "switch"){
-    pic.setAttribute("src", "device_images/switch.png");
+    pic.setAttribute("src", "images/switch.png");
   }
   else if (device == "pc"){
-    pic.setAttribute("src", "device_images/laptop.png");
+    pic.setAttribute("src", "images/laptop.png");
   }
   else{
-    pic.setAttribute("src", "device_images/not_found.jpeg");
+    pic.setAttribute("src", "images/not_found.jpeg");
   }
 
   //set id attribute for device for CSS purposes
@@ -495,12 +543,15 @@ function loadMenu(areaName) {
   // here, we should be combining info from status.dat with the host data!! -> host data is another JSON object?
   // use the jsonObject here!!
 
+
   var UNPARSED_hosts = [host1,host2,host3,host4,host5,host6, host7,host8,host9,host10,host11,host12,host13,host14,host15,host16,host17,host18,host19,host20,host21];
   var PARSED_hosts = []; //ALL parsed hosts... maybe delete later?
 
   var hosts_in_focus = [];
   //this is where hosts whose area matches the area in focus get to populate the menu!
   // device type, station number, and area on map are added to the host information
+  var total_states = 0;
+  var num_hosts;
   for (var i = 0; i < UNPARSED_hosts.length; i++){
     original_unparsed_host = UNPARSED_hosts[i];
     parsed_host = parseHost(original_unparsed_host);
@@ -512,8 +563,12 @@ function loadMenu(areaName) {
     //if the area name matches the areaName passed into the function, then host is in focus!
     if (parsed_host.area_name === areaName){
       hosts_in_focus.push(parsed_host);
+      total_states += parsed_host.current_state;
+      num_hosts++;
     }
   }
+
+
 
   //here for testing, I am going to check which area is in focus
   // and then populate it with the above fake hosts
@@ -558,14 +613,22 @@ function loadMenu(areaName) {
   enableAccordion();
 }
 
+
 //menu for when main KML is in view
-function loadMainViewMenu(){
+function populateMainViewMenu(){
+  /*if (begun == 0){
+    addFullScreenButton();
+  }
+  begun = begun+1;*/
+
   var parent = document.getElementById('mySidenav');
   var title = document.createElement("H1");
   title.setAttribute("class", "stations");
   title.innerHTML = "Main View";
   title.setAttribute("style", "text-align:center;font-size: 24px;");
   parent.appendChild(title);
+  createPulseButtons(parent);
+
 }
 
 //remove all elements in sidenav menu except the close button
@@ -575,6 +638,18 @@ function clearMenu(){
 
   //remove all text from sidenav
   var elements = container.getElementsByClassName("stations");
+  while (elements[0]) {
+    elements[0].parentNode.removeChild(elements[0]);
+  }
+
+  //remove all pulse buttons from Main menu sidenav
+  var elements = container.getElementsByClassName("pulse-button");
+  while (elements[0]) {
+    elements[0].parentNode.removeChild(elements[0]);
+  }
+
+  //remove all non pulse buttons from Main menu sidenav
+  var elements = container.getElementsByClassName("no-pulse-button");
   while (elements[0]) {
     elements[0].parentNode.removeChild(elements[0]);
   }

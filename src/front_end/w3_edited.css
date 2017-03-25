@@ -226,7 +226,7 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
     .w3-panel{padding:0.01em 16px;margin-top:16px!important;margin-bottom:16px!important}
     .w3-example{background-color:#f1f1f1;padding:0.01em 16px}
     .w3-code,.w3-codespan{font-family:Consolas,"courier new";font-size:16px}
-    .w3-code{line-height:1.4;width:auto;background-color:#fff;padding:8px 12px;border-left:4px solid #4CAF50;word-wrap:break-word}
+    .w3-code{line-height:1.4;width:auto;background-color:#fff;padding:8px 12px;border-left:4px solid #57bc5b;word-wrap:break-word}
     .w3-codespan{color:crimson;background-color:#f1f1f1;padding-left:4px;padding-right:4px;font-size:110%}
     .w3-example,.w3-code{margin:20px 0}.w3-card{border:1px solid #ccc}
     .w3-card-2,.w3-example{box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important}
@@ -278,7 +278,7 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
     .w3-brown,.w3-hover-brown:hover{color:#fff!important;background-color:#795548!important}
     .w3-cyan,.w3-hover-cyan:hover{color:#000!important;background-color:#00bcd4!important}
     .w3-blue-grey,.w3-hover-blue-grey:hover,.w3-blue-gray,.w3-hover-blue-gray:hover{color:#fff!important;background-color:#607d8b!important}
-    .w3-green,.w3-hover-green:hover{color:#fff!important;background-color:#4CAF50!important}
+    .w3-green,.w3-hover-green:hover{color:#fff!important;background-color:#57bc5b!important}
     .w3-light-green,.w3-hover-light-green:hover{color:#000!important;background-color:#8bc34a!important}
     .w3-indigo,.w3-hover-indigo:hover{color:#fff!important;background-color:#3f51b5!important}
     .w3-khaki,.w3-hover-khaki:hover{color:#000!important;background-color:#f0e68c!important}
@@ -308,7 +308,7 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
     .w3-text-brown,.w3-hover-text-brown:hover{color:#795548!important}
     .w3-text-cyan,.w3-hover-text-cyan:hover{color:#00bcd4!important}
     .w3-text-blue-grey,.w3-hover-text-blue-grey:hover,.w3-text-blue-gray,.w3-hover-text-blue-gray:hover{color:#607d8b!important}
-    .w3-text-green,.w3-hover-text-green:hover{color:#4CAF50!important}
+    .w3-text-green,.w3-hover-text-green:hover{color:#57bc5b!important}
     .w3-text-light-green,.w3-hover-text-light-green:hover{color:#8bc34a!important}
     .w3-text-indigo,.w3-hover-text-indigo:hover{color:#3f51b5!important}
     .w3-text-khaki,.w3-hover-text-khaki:hover{color:#b4aa50!important}
@@ -334,7 +334,7 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
     .w3-border-brown,.w3-hover-border-brown:hover{border-color:#795548!important}
     .w3-border-cyan,.w3-hover-border-cyan:hover{border-color:#00bcd4!important}
     .w3-border-blue-grey,.w3-hover-border-blue-grey:hover,.w3-border-blue-gray,.w3-hover-border-blue-gray:hover{border-color:#607d8b!important}
-    .w3-border-green,.w3-hover-border-green:hover{border-color:#4CAF50!important}
+    .w3-border-green,.w3-hover-border-green:hover{border-color:#57bc5b!important}
     .w3-border-light-green,.w3-hover-border-light-green:hover{border-color:#8bc34a!important}
     .w3-border-indigo,.w3-hover-border-indigo:hover{border-color:#3f51b5!important}
     .w3-border-khaki,.w3-hover-border-khaki:hover{border-color:#f0e68c!important}
@@ -370,7 +370,7 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
     }
 
     buttonGreen.accordion {
-      background-color: #4CAF50; /* Green */
+      background-color: #57bc5b; /* Green */
       color: white;
       cursor: pointer;
       padding: 15px 32px;
@@ -490,4 +490,64 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
       width:150px;
     }
 
-    
+
+    #buttonMain {
+      background-color: #e84c3d;
+      color: #e84c3d;
+      cursor: pointer;
+      padding: 0px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+      transition: 0.4s;
+    }
+
+
+    .container {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto 0;
+    }
+
+    .pulse-button {
+      position: relative;
+      width: 200px;
+      height: 50px;
+      border: none;
+      box-shadow: 0 0 0 0 rgba(232, 76, 61, 0.7);
+      border-radius: 0%;
+      background-color: #e84c3d;
+      background-image: "./plain_red_circle.png";
+      background-size:cover;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+      -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+      -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+      animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    }
+
+    .no-pulse-button {
+      position: relative;
+      width: 200px;
+      height: 50px;
+      border: none;
+      box-shadow: 0 0 0 0 rgba(232, 76, 61, 0.7);
+      border-radius: 0%;
+      background-color: #57bc5b;
+      background-image: "./plain_green_circle.png";
+      background-size:cover;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+
+    .pulse-button:hover{
+      -webkit-animation: none;-moz-animation: none;-ms-animation: none;animation: none;
+    }
+
+    @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+    @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+    @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+    @keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

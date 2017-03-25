@@ -9,10 +9,12 @@
 <body>
   <script src="require.js"></script>
   <script src="config.js"></script>
+  <script type='text/javascript' src='jquery-3.1.1.min.js'></script>
   <script>
   require(['config'], function() {
     require(['geoxml3'], function() {
       require(['dashboard_map'], function() {
+
       });
     });
   });
@@ -23,6 +25,7 @@
       <a href="javascript:void(0)" onclick="w3_close()" class="w3-closenav w3-xlarge w3-hide-xlarge">&times;</a>
       <script>
       var jsonObject = <?php include('../back_end/hostTest.php'); echo $myJsonObject; ?>;
+      var dataObject = <?php exec('python ../back_end/parseCFGTest.py', $output, $code); echo json_encode($output);?>;
       </script>
     </div>
   </div>
