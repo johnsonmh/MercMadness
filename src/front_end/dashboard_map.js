@@ -54,10 +54,11 @@ var subKmlSources = [
     '../KMZ2/hw_area2.kml'];*/
 
   var areaTitles = [];
+  var kmlParser;
 
-  /**
-  * Initializes the map and calls the function that loads the KML layer.
-  */
+
+  //Initializes the map and calls the function that loads the KML layer.
+
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
       center: new google.maps.LatLng(-19.257753, 146.823688),
@@ -74,7 +75,7 @@ var subKmlSources = [
       ],
     });
 
-    var kmlParser = new geoXML3.parser({
+    kmlParser = new geoXML3.parser({
       map: map,
       suppressInfoWindows: true
     });
@@ -88,8 +89,6 @@ var subKmlSources = [
 
     //var hostInfoJsonObject = JSON.parse(dataObject[0]);
     //console.log(Object.keys(hostInfoJsonObject).length);
-
-
 
   //  console.log(Object.keys(dataObject)[0]);
     var bounds;
@@ -105,20 +104,19 @@ var subKmlSources = [
         placemark.polygon.fillOpacity = 0.4;
         placemark.polygon.strokeWeight = 1;
         placemark.polygon.strokeColor = "#dbdbdb";
-
         bounds = placemark.polygon.bounds;
       } else {
         placemark.polygon.fillColor = '#57bc5b'; // Green
         placemark.polygon.fillOpacity = 1;
         placemark.polygon.strokeColor = "#dbdbdb";
         placemark.polygon.strokeWeight = 1;
-
       }
       //fit intial map load to main map
       map.fitBounds(bounds);
-
     });
 
+    var g = gatherPolygons();
+    console.log(g.length);
   }
 
   //when an area is clicked on, the side menu will change automatically
@@ -129,7 +127,7 @@ var subKmlSources = [
       //if(place.polygon.title == 'Harbor Walk') {
         console.log("main kml");
         clearMenu();
-        populateMainViewMenu(place.polygon.title);
+        populateMainViewMenu();
       } else {
         console.log(place.polygon.title);
         clearMenu();
@@ -144,4 +142,12 @@ var subKmlSources = [
 
   function getAreaTitles(){
     return areaTitles;
+  }
+
+  function gatherPolygons() {
+    var allAreaPolygons = [];
+    for (var i = 0; i < areaTitles.length; i++){
+      allAreaPolygons.push(kmlParser.docs[i].placemarks[0]);
+    }
+    return allAreaPolygons;
   }
