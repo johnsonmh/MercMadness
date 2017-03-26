@@ -25,7 +25,8 @@
       <a href="javascript:void(0)" onclick="w3_close()" class="w3-closenav w3-xlarge w3-hide-xlarge">&times;</a>
       <script>
       var jsonObject = <?php include('../back_end/hostTest.php'); echo $myJsonObject; ?>;
-      var dataObject = <?php exec('python ../back_end/parseCFGTest.py', $output, $code); echo json_encode($output);?>;
+      var dataObject = <?php exec('python ../back_end/parseCFGTest.py', $output, $code);
+      echo json_encode($output);?>;
       </script>
     </div>
   </div>

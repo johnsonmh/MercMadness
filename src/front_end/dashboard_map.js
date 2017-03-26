@@ -84,8 +84,12 @@ var subKmlSources = [
     for(var i = 0; i < subKmlSources.length; i++) {
       kmlParser.parse(subKmlSources[i]);
     }
-    console.log(jsonObject);
-    console.log(dataObject[0]);
+    //console.log(jsonObject);
+
+    //var hostInfoJsonObject = JSON.parse(dataObject[0]);
+    //console.log(Object.keys(hostInfoJsonObject).length);
+
+
 
   //  console.log(Object.keys(dataObject)[0]);
     var bounds;
