@@ -4,6 +4,7 @@ script.type = 'text/javascript';
 script.src = maps_api_src;
 document.head.appendChild(script);
 
+
   var map;
   var areaTitles = [];
   var kmlParser;
@@ -24,8 +25,19 @@ document.head.appendChild(script);
     return allAreaPolygons;
   }
 
+  function parseMain(){
+    kmlParser.parse(mainKmlSource);
+  }
+
+  function parseOthers(){
+    for(var i = 0; i < subKmlSources.length; i++) {
+      kmlParser.parse(subKmlSources[i]);
+    }
+  }
+
   //Initializes the map and calls the function that loads the KML layer.
   function initMap() {
+
     map = new google.maps.Map(document.getElementById('map'), {
       center: new google.maps.LatLng(-19.257753, 146.823688),
       zoom:2,
@@ -46,11 +58,10 @@ document.head.appendChild(script);
       suppressInfoWindows: true
     });
 
-    kmlParser.parse(mainKmlSource);
+    //separating these into two functions makes it load smoother!
+    parseMain();
+    parseOthers();
 
-    for(var i = 0; i < subKmlSources.length; i++) {
-      kmlParser.parse(subKmlSources[i]);
-    }
     console.log("json obj[0] = " +jsonObject[0].host_name);
 
     //var hostInfoJsonObject = JSON.parse(dataObject[0]);
@@ -79,7 +90,7 @@ document.head.appendChild(script);
       }
       //fit intial map load to main map
       map.fitBounds(bounds);
-    });
+    }); 
   }
 
   //when an area is clicked on, the side menu will change automatically
@@ -90,7 +101,7 @@ document.head.appendChild(script);
       //if(place.polygon.title == 'Harbor Walk') {
         console.log("main kml");
         clearMenu();
-        populateMainViewMenu();
+        populateMainViewMenu(place.polygon.title);
       } else {
         console.log(place.polygon.title);
         clearMenu();

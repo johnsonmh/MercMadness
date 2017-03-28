@@ -1,5 +1,5 @@
 var script = document.currentScript;
-console.log(script);
+//console.log(script);
 window.onload = function(){
   titles = getAreaTitles();
   console.log("titles = "+titles);
@@ -44,9 +44,10 @@ function calculateAreaStatus() {
 
   polygons = gatherPolygons();
 
-  console.log("polys" +polygons);
+
+  //console.log("polys" +polygons);
   for (var i = 0; i < titles.length; i++){
-      console.log(polygons[i].name);
+      console.log(polygons[i]);
     if (statusAreaMapping[titles[i]].includes("red")){
       console.log(i+ " red");
       colorPolygonByTitle(titles[i], RED);
@@ -59,6 +60,7 @@ function calculateAreaStatus() {
       console.log(i + " green");
       colorPolygonByTitle(titles[i], GREEN);
     }
+
   }
 }
 
@@ -69,6 +71,7 @@ function colorPolygonByTitle(title, color) {
       polygons[i].polygon.fillColor = color;
       //change main menu too!
       console.log("color after = " +polygons[i].polygon.fillColor);
+      console.log(polygons[i]);
       var parent = document.getElementById("mySidenav");
       createPulseButtons(title, color, parent);
     }
@@ -76,12 +79,12 @@ function colorPolygonByTitle(title, color) {
 }
 
 //menu for when main KML is in view
-function populateMainViewMenu(){
+function populateMainViewMenu(name){
 
   var parent = document.getElementById('mySidenav');
   var title = document.createElement("H1");
   title.setAttribute("class", "stations");
-  title.innerHTML = "Main View";
+  title.innerHTML = name;
   title.setAttribute("style", "text-align:center;font-size: 24px;");
   parent.appendChild(title);
 
@@ -107,7 +110,7 @@ function createPulseButtons(title, color, parent) {
   areaButton.onclick = function () {
     for (var i = 0; i < titles.length; i++){
       if (title == polygons[i].name){
-        console.log(polygons[i]);
+        //console.log(polygons[i]);
         map.fitBounds(polygons[i].polygon.bounds);
       }
     }
@@ -143,7 +146,7 @@ function createPulseButtons(title, color, parent) {
 
 function addFullScreenButton(){
   var googleOptions = document.getElementsByClassName("gmnoprint");
-  console.log(googleOptions[5]);
+  //console.log(googleOptions[5]);
   var itm = googleOptions[5].lastChild;
   var cln = itm.cloneNode(true);
   cln.firstChild.innerHTML = "Full Screen";
@@ -199,7 +202,6 @@ function createButtons(type, currentJsonObject, parentId) {
   pan.appendChild(address);
   pan.appendChild(currProbID);
   pan.appendChild(plugOut);
-
 
   //find right image for device
   var hostString = currentJsonObject.host_name.toLowerCase();
@@ -388,8 +390,6 @@ function loadMenu(areaName) {
       num_hosts++;
     }
   }
-
-
 
   //here for testing, I am going to check which area is in focus
   // and then populate it with the above fake hosts
@@ -619,8 +619,8 @@ function getAreaStatus(){
     "hostgroups": "PRINTERS",
     "----------BAD INFO STARTS HERE--": "------------",
     "plugin_output": "OK NO WARNING",
-    "current_problem_id": "12",
-    "check_execution_time": "14.00",
+    "current_problem_id": "1",
+    "check_execution_time": "1.00",
     "current_state": "1"
   }
   var host12 = {
@@ -756,7 +756,7 @@ function getAreaStatus(){
 
 
   //Here we combine the two json objects - one made from Status.dat and one made from all the Host .config files
-console.log("DATA OBJECT = " + dataObject[0]);
+//console.log("DATA OBJECT = " + dataObject[0]);
   //var hostInfoJsonObject = JSON.parse(dataObject[0]);
 
   //console.log(Object.keys(hostInfoJsonObject).length);
@@ -803,13 +803,10 @@ console.log("DATA OBJECT = " + dataObject[0]);
       current_host["my_state"] = "grey";
     }
 
-    // stationStatusMapping[current_host.station_number] =
-
     //add this host to list of ALL hosts -> PARSED_hosts
     PARSED_hosts.push(current_host);
     //console.log(parsed_host.host_name);
     total++;
     addHostStateToArea(current_host.my_state, current_host.station_number);
   }
-
 }

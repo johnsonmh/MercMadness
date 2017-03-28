@@ -11,7 +11,7 @@
   var dataObject = <?php exec('python ../back_end/parseCFGTest.py', $output, $code); echo json_encode($output);?>;
   [
     'jquery-3.1.1.min.js',
-    'geoXML3.js',
+    'geoxml3.js',
     'config.js',
     'dashboard_map.js',
     'over_map.js'

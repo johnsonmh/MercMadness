@@ -224,27 +224,132 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-						-80.108560,32.964648,1
-						-80.107702,32.964432,1
-						-80.107627,32.964648,1
-						-80.107305,32.964576,1
-						-80.107251,32.964720,1
-						-80.106930,32.964846,1
-						-80.106683,32.964783,1
-						-80.106876,32.964225,1
-						-80.105942,32.963991,1
-						-80.106221,32.963208,1
-						-80.108421,32.963775,1
-						-80.108850,32.962586,1
-						-80.108711,32.962550,1
-						-80.108796,32.962289,1
-						-80.109580,32.962487,1
-						-80.109397,32.963010,1
-						-80.109236,32.962974,1
-						-80.108861,32.964009,1
-						-80.108818,32.964000,1
-						-80.108582,32.964657,1
-						-80.108560,32.964648,1
+						-80.108560,32.964648,20
+						-80.107702,32.964432,20
+						-80.107627,32.964648,20
+						-80.107305,32.964576,20
+						-80.107251,32.964720,20
+						-80.106930,32.964846,20
+						-80.106683,32.964783,20
+						-80.106876,32.964225,20
+						-80.105942,32.963991,20
+						-80.106221,32.963208,20
+						-80.108421,32.963775,20
+						-80.108850,32.962586,20
+						-80.108711,32.962550,20
+						-80.108796,32.962289,20
+						-80.109580,32.962487,20
+						-80.109397,32.963010,20
+						-80.109236,32.962974,20
+						-80.108861,32.964009,20
+						-80.108818,32.964000,20
+						-80.108582,32.964657,20
+						-80.108560,32.964648,20
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Body Offload</name>
+			<styleUrl>#msn_ylw-pushpin6</styleUrl>
+			<Polygon>
+				<tessellate>1</tessellate>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-80.10604970330411,32.96387196795129,20 -80.10645196040703,32.96398920464866,20 -80.1065497623099,32.9636701210117,20 -80.1061763637926,32.96358539671677,20 -80.10604970330411,32.96387196795129,20
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Assembly Line</name>
+			<styleUrl>#msn_ylw-pushpin4</styleUrl>
+			<Polygon>
+				<tessellate>1</tessellate>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-80.1082844373128,32.96403044290358,20 -80.10833923838234,32.96384199778112,20 -80.10665488149473,32.96339782495483,20 -80.10659947879904,32.963609175603,20 -80.1082844373128,32.96403044290358,20
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Finish Line</name>
+			<styleUrl>#msn_ylw-pushpin3</styleUrl>
+			<Polygon>
+				<tessellate>1</tessellate>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-80.10909032741249,32.9632238380518,20 -80.10883956847265,32.96315505360047,20 -80.10849097158385,32.96404923632402,20 -80.10872813417338,32.9641209419627,20 -80.10909032741249,32.9632238380518,20
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Wheel Alignment</name>
+			<styleUrl>#msn_ylw-pushpin2</styleUrl>
+			<Polygon>
+				<tessellate>1</tessellate>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-80.10912555326047,32.96306123529521,20 -80.10893281636703,32.96300556619457,20 -80.10887450017044,32.96315283642009,20 -80.10906944348997,32.96319576877637,20 -80.10912555326047,32.96306123529521,20
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Dyno</name>
+			<styleUrl>#msn_ylw-pushpin1</styleUrl>
+			<Polygon>
+				<tessellate>1</tessellate>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-80.10923134063739,32.96278631225336,20 -80.10902231682802,32.96273715841657,20 -80.10893311270399,32.96296980582265,20 -80.10913868874322,32.96303351168186,20 -80.10923134063739,32.96278631225336,20
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Paint Touch Up</name>
+			<styleUrl>#msn_ylw-pushpin</styleUrl>
+			<Polygon>
+				<tessellate>1</tessellate>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-80.10926566384663,32.96258328186839,20 -80.10933490639914,32.96245164527329,20 -80.10914886645047,32.96240305885441,20 -80.10910281914607,32.96253981058525,20 -80.10926566384663,32.96258328186839,20
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Rework</name>
+			<styleUrl>#msn_ylw-pushpin0</styleUrl>
+			<Polygon>
+				<tessellate>1</tessellate>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-80.10904240728756,32.96259728444023,20 -80.1089276400039,32.96256769515973,20 -80.10887639801486,32.96274074359714,20 -80.10898031640178,32.96277098848523,20 -80.10904240728756,32.96259728444023,20
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
