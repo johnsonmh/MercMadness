@@ -9,7 +9,9 @@ window.onload = function(){
     statusAreaMapping[titles[i]] = [];
   }
   //begin over_map.js functions
+  //get the two json objects (-> status.dat and all host.cfg files) and combine the information
   getAreaStatus();
+  //display general area statuses in main menu on load
   populateMainViewMenu();
 };
 
@@ -25,12 +27,6 @@ var titles;
 var statusAreaMapping = {};
 
 
-  //get area status
-  //getAreaStatus();
-
-  //display general area statuses in main menu on load
-  //populateMainViewMenu();
-
 function addHostStateToArea(my_state, host_station){
   var area = mapStationToArea(host_station);
   for (var i = 0; i < titles.length;i++){
@@ -41,37 +37,26 @@ function addHostStateToArea(my_state, host_station){
 }
 
 function calculateAreaStatus() {
-
   polygons = gatherPolygons();
-
-
   //console.log("polys" +polygons);
   for (var i = 0; i < titles.length; i++){
-      console.log(polygons[i]);
     if (statusAreaMapping[titles[i]].includes("red")){
-      console.log(i+ " red");
       colorPolygonByTitle(titles[i], RED);
     }
     else if (statusAreaMapping[titles[i]].includes("yellow")){
-      console.log(i+ " yellow");
       colorPolygonByTitle(titles[i], YELLOW);
     }
     else if (statusAreaMapping[titles[i]].includes("green")){
-      console.log(i + " green");
       colorPolygonByTitle(titles[i], GREEN);
     }
-
   }
 }
 
 function colorPolygonByTitle(title, color) {
   for (var i = 0; i < titles.length; i++){
     if (title == polygons[i].name){
-      console.log("color b4 = " +polygons[i].polygon.fillColor);
       polygons[i].polygon.setOptions({fillColor: color});
       //change main menu too!
-      console.log("color after = " +polygons[i].polygon.fillColor);
-      console.log(polygons[i]);
       var parent = document.getElementById("mySidenav");
       createPulseButtons(title, color, parent);
     }
@@ -110,7 +95,6 @@ function createPulseButtons(title, color, parent) {
   areaButton.onclick = function () {
     for (var i = 0; i < titles.length; i++){
       if (title == polygons[i].name){
-        //console.log(polygons[i]);
         map.fitBounds(polygons[i].polygon.bounds);
       }
     }
@@ -140,9 +124,7 @@ function createPulseButtons(title, color, parent) {
   br1.setAttribute("class", "stations");
   container.appendChild(areaButton);
   parent.appendChild(container);
-
 }
-
 
 function addFullScreenButton(){
   var googleOptions = document.getElementsByClassName("gmnoprint");
@@ -277,12 +259,17 @@ function parseStationStr(stationNum){
   }
 }
 
+//use area-station mapping from config.js -> need for mapStationToArea()
+function getAreasMapped(){
+  return areasMapped;
+}
+
 function mapStationToArea(stationNum){
   //fetch info from dashboard_map
   var areas = getAreaTitles();
   var areasMapped = getAreasMapped();
 
-  //using the mapping created in dashboard_map.js, you can find which area your station is in
+  //using the mapping defined in config.js, you can find which area your station is in
   var keyArr = Object.keys(areasMapped);
   for ( var i = 0; i < keyArr.length; i++) {
     var numArr = areasMapped[keyArr[i]];
@@ -308,32 +295,34 @@ function parseHost(host){
 
   switch (type) {
     case "QSYS_PC_WIN_CTRL":
-    //console.log("qsys pc win control");
     rtnArr.push(hostNameArr[1]);
     stationNumber = parseStationStr(hostNameArr[2]);
     rtnArr.push(stationNumber);
     rtnArr.push(mapStationToArea(stationNumber));
     break;
+
     case "QSYS_SVR_WIN":
     rtnArr.push(hostNameArr[0]);
     stationNumber = parseStationStr(hostNameArr[1]);
     rtnArr.push(stationNumber);
     rtnArr.push(mapStationToArea(stationNumber));
-    //console.log("qsys server win");
     break;
+
     case "QSYS_CTRL":
     //console.log("qsys ctrl");
     break;
+
     case "QSYS_SVR_LNX":
     //console.log("qsys server linux");
     break;
+
     case "SWITCHES":
     rtnArr.push(hostNameArr[0]);
     stationNumber = parseStationStr(hostNameArr[1]);
     rtnArr.push(stationNumber);
     rtnArr.push(mapStationToArea(stationNumber));
-    //console.log("switches");
     break;
+
     case "PRINTERS":
     rtnArr.push(hostNameArr[0]);
     stationNumber = parseStationStr(hostNameArr[1]);
@@ -341,9 +330,11 @@ function parseHost(host){
     rtnArr.push(mapStationToArea(stationNumber));
     //console.log("printers");
     break;
+
     case "WIRELESS":
     //console.log("wireless");
     break;
+
     case "WINDOWS":
     //console.log("windows");
     break;
@@ -370,12 +361,10 @@ function processHostsInFocus(all, aName){
       }
     }
   }
-  //console.log(hosts_in_station);
   return hosts_in_station;
 }
 
 function loadMenu(areaName) {
-
   var hosts_in_focus = [];
   //this is where hosts whose area matches the area in focus get to populate the menu!
   // device type, station number, and area on map are added to the host information
@@ -391,11 +380,10 @@ function loadMenu(areaName) {
     }
   }
 
-  //here for testing, I am going to check which area is in focus
-  // and then populate it with the above fake hosts
+  //check which area is in focus and then populate it with the corresponding hosts
   var arrayOfObjects = processHostsInFocus(hosts_in_focus, areaName);
 
-  //make parent the sidenav
+  //make parent = sidenav
   var parent = document.getElementById('mySidenav');
 
   //Create heading of areaName passed in
@@ -420,11 +408,12 @@ function loadMenu(areaName) {
     menuStationName.setAttribute("style", "text-align:Left;font-size: 18px; padding: 0 15px;");
     parent.appendChild(menuStationName);
 
-    //populate station1
+    //populate stations with buttons
     for (var j = 0; j < station_hosts_array.length; j++) {
       var temp = 'mybutton' + j;
       createButtons('button', station_hosts_array[j], 'mySidenav');
     }
+    //add a little break for spacing
     var br = document.createElement("br");
     br.setAttribute("class", "stations");
     parent.appendChild(br);
@@ -433,7 +422,6 @@ function loadMenu(areaName) {
   //enable panel drop downs for buttons
   enableAccordion();
 }
-
 
 //remove all elements in sidenav menu except the close button
 function clearMenu(){
@@ -445,30 +433,26 @@ function clearMenu(){
   while (elements[0]) {
     elements[0].parentNode.removeChild(elements[0]);
   }
-
   //remove all pulse buttons from Main menu sidenav
   var elements = container.getElementsByClassName("pulse-button");
   while (elements[0]) {
     elements[0].parentNode.removeChild(elements[0]);
   }
-
+  //remove all breaks in between buttons
   var elements = container.getElementsByClassName("container");
   while (elements[0]) {
     elements[0].parentNode.removeChild(elements[0]);
   }
-
   //remove all non pulse buttons from Main menu sidenav
   var elements = container.getElementsByClassName("no-pulse-button");
   while (elements[0]) {
     elements[0].parentNode.removeChild(elements[0]);
   }
-
   //remove all button elements from sidenav
   var buttons = container.getElementsByClassName("accordion");
   while (buttons[0]) {
     buttons[0].parentNode.removeChild(buttons[0]);
   }
-
   //remove all panel elements from sidenav
   var panels = container.getElementsByClassName("panel");
   while (panels[0]) {
@@ -477,7 +461,6 @@ function clearMenu(){
 }
 
 function getAreaStatus(){
-
 
   //FAKE HOST data - needs to be combined with the STATUS.DAT info for live information
   var host1 = {
@@ -805,7 +788,6 @@ function getAreaStatus(){
 
     //add this host to list of ALL hosts -> PARSED_hosts
     PARSED_hosts.push(current_host);
-    //console.log(parsed_host.host_name);
     total++;
     addHostStateToArea(current_host.my_state, current_host.station_number);
   }

@@ -1,23 +1,22 @@
+//use Google maps API defined in config.js -> calls initMap()
 var maps_api_src = 'https://maps.googleapis.com/maps/api/js?key='+config.GOOGLE_MAPS_API_KEY+'&callback=initMap';
 var script = document.createElement('script');
 script.type = 'text/javascript';
 script.src = maps_api_src;
 document.head.appendChild(script);
 
-
   var map;
   var areaTitles = [];
   var kmlParser;
   var allAreaPolygons = [];
 
-  function getAreasMapped(){
-    return areasMapped;
-  }
-
+  //created as the kmls are loaded -> use in over_map.js to iterate allAreaPolygons array
+  //and match titles/area names to polygons
   function getAreaTitles(){
     return areaTitles;
   }
 
+  //make an array of all the polygons -> use in over_map.js to change polygon colors based on area status
   function gatherPolygons() {
     for (var i = 0; i < areaTitles.length; i++){
       allAreaPolygons.push(kmlParser.docs[i].placemarks[0]);
@@ -25,19 +24,20 @@ document.head.appendChild(script);
     return allAreaPolygons;
   }
 
+  //parse the main kml
   function parseMain(){
     kmlParser.parse(mainKmlSource);
   }
 
+  //parse the subKML sources
   function parseOthers(){
     for(var i = 0; i < subKmlSources.length; i++) {
       kmlParser.parse(subKmlSources[i]);
     }
   }
 
-  //Initializes the map and calls the function that loads the KML layer.
+  //Initialize the map and call the function that loads the KML layer -> geoxml3.js
   function initMap() {
-
     map = new google.maps.Map(document.getElementById('map'), {
       center: new google.maps.LatLng(-19.257753, 146.823688),
       zoom:2,
@@ -66,14 +66,14 @@ document.head.appendChild(script);
 
     //var hostInfoJsonObject = JSON.parse(dataObject[0]);
     //console.log(Object.keys(hostInfoJsonObject).length);
+    //console.log(Object.keys(dataObject)[0]);
 
-  //  console.log(Object.keys(dataObject)[0]);
     var bounds;
     var placemark;
-
     google.maps.event.addListener(kmlParser, 'parsed', function () {
       placemark = kmlParser.docs[kmlParser.docs.length - 1].placemarks[0];
       addClickListener(map, placemark);
+      //add title of the kml to areaTitles
       areaTitles.push(placemark.polygon.title);
       if(placemark.polygon.title == 'MBV') {
       //if(placemark.polygon.title == 'Harbor Walk') {
@@ -81,16 +81,17 @@ document.head.appendChild(script);
         placemark.polygon.fillOpacity = 0.4;
         placemark.polygon.strokeWeight = 1;
         placemark.polygon.strokeColor = "#dbdbdb";
+        //store boundary of main kml to fitBounds later
         bounds = placemark.polygon.bounds;
       } else {
-        placemark.polygon.fillColor = 'grey'; 
+        placemark.polygon.fillColor = 'grey';
         placemark.polygon.fillOpacity = 1;
         placemark.polygon.strokeColor = "#dbdbdb";
         placemark.polygon.strokeWeight = 1;
       }
       //fit intial map load to main map
       map.fitBounds(bounds);
-    }); 
+    });
   }
 
   //when an area is clicked on, the side menu will change automatically
