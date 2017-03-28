@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Wheel Alignment1.kml</name>
+	<name>Finish Line1.kml</name>
+	<Style id="failed">
+		<PolyStyle>
+			<color>ffc8c8c8</color>
+		</PolyStyle>
+	</Style>
 	<StyleMap id="msn_ylw-pushpin">
 		<Pair>
 			<key>normal</key>
@@ -12,18 +17,13 @@
 			<styleUrl>#failed0</styleUrl>
 		</Pair>
 	</StyleMap>
-	<Style id="failed">
-		<PolyStyle>
-			<color>ffc1c1c1</color>
-		</PolyStyle>
-	</Style>
 	<Style id="failed0">
 		<PolyStyle>
-			<color>ffc1c1c1</color>
+			<color>ffc8c8c8</color>
 		</PolyStyle>
 	</Style>
 	<Placemark>
-		<name>Wheel Alignment</name>
+		<name>Finish Line</name>
 		<styleUrl>#msn_ylw-pushpin</styleUrl>
 		<Polygon>
 			<tessellate>1</tessellate>
@@ -31,7 +31,10 @@
 			<outerBoundaryIs>
 				<LinearRing>
 					<coordinates>
-						-80.10912555326047,32.96306123529521,20 -80.10893281636703,32.96300556619457,20 -80.10887450017044,32.96315283642009,20 -80.10906944348997,32.96319576877637,20 -80.10912555326047,32.96306123529521,20 
+					-80.109070,32.963190,20
+					-80.108849,32.963141,20
+					-80.108481,32.964158,20
+					-80.108698,32.964217,20 
 					</coordinates>
 				</LinearRing>
 			</outerBoundaryIs>

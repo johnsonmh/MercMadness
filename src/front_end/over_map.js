@@ -8,9 +8,7 @@ var RED = "#e84c3d";
 var YELLOW = "#FFD000";
 var GREY = "#D3D3D3";
 
-require(["dashboard_map"], function () {
-  console.log("dashboard_map working from over_map");
-});
+
 
 var PARSED_hosts = []; //ALL parsed hosts
 
@@ -21,6 +19,7 @@ var statusAreaMapping = {};
 for (var i = 0; i < titles.length;i++){
   statusAreaMapping[titles[i]] = [];
 }
+
 getAreaStatus();
 
 //begin by displaying main menu - general area statuses
@@ -127,7 +126,7 @@ function getAreaStatus(){
     "max_check_attempts": "10",
     "hostgroups": "SWITCHES",
     "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "WARNING !! :( ",
+    "plugin_output": "OK !! :( ",
     "current_problem_id": "3",
     "check_execution_time": "4.00",
     "current_state": "3"
@@ -140,7 +139,7 @@ function getAreaStatus(){
     "max_check_attempts": "10",
     "hostgroups": "PRINTERS",
     "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "CRITICAL !! :) ",
+    "plugin_output": "OK !! :) ",
     "current_problem_id": "112",
     "check_execution_time": "4.00",
     "current_state": "3"
@@ -166,7 +165,7 @@ function getAreaStatus(){
     "max_check_attempts": "10",
     "hostgroups": "PRINTERS",
     "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "WARNING WARNING",
+    "plugin_output": "OK NO WARNING",
     "current_problem_id": "12",
     "check_execution_time": "14.00",
     "current_state": "1"
@@ -179,7 +178,7 @@ function getAreaStatus(){
     "max_check_attempts": "10",
     "hostgroups": "PRINTERS",
     "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "WARNING WARNING",
+    "plugin_output": "OK NO WARNING",
     "current_problem_id": "12",
     "check_execution_time": "14.00",
     "current_state": "1"
@@ -205,7 +204,7 @@ function getAreaStatus(){
     "max_check_attempts": "10",
     "hostgroups": "PRINTERS",
     "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "WARNING WARNING",
+    "plugin_output": "OK NO WARNING",
     "current_problem_id": "12",
     "check_execution_time": "14.00",
     "current_state": "1"
@@ -218,7 +217,7 @@ function getAreaStatus(){
     "max_check_attempts": "10",
     "hostgroups": "PRINTERS",
     "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "CRITICAL ----",
+    "plugin_output": "OK ----",
     "current_problem_id": "2",
     "check_execution_time": "14.00",
     "current_state": "4"
@@ -283,7 +282,7 @@ function getAreaStatus(){
     "max_check_attempts": "10",
     "hostgroups": "PRINTERS",
     "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "WARNING WARNING",
+    "plugin_output": "OK NO WARNING",
     "current_problem_id": "12",
     "check_execution_time": "14.00",
     "current_state": "1"
@@ -374,12 +373,14 @@ function addHostStateToArea(my_state, host_station){
 }
 
 function calculateAreaStatus() {
+  console.log(titles.length);
+
   polygons = gatherPolygons();
   while (polygons.length != titles.length){
     polygons = gatherPolygons();
+    console.log(polygons.length);
   }
   //console.log(polygons);
-
   for (var i = 0; i < titles.length; i++){
     if (statusAreaMapping[titles[i]].includes("red")){
       colorPolygonByTitle(titles[i], RED);
@@ -415,6 +416,9 @@ function populateMainViewMenu(){
   title.setAttribute("style", "text-align:center;font-size: 24px;");
   parent.appendChild(title);
 
+  var br = document.createElement("br");
+  br.setAttribute("class", "stations");
+  parent.appendChild(br);
   calculateAreaStatus();
 
   //var areas = getAreasMapped();
@@ -427,8 +431,26 @@ function createPulseButtons(title, color, parent) {
   var container = document.createElement("div");
   container.setAttribute("class", "container");
 
+/*  var next = document.createElement("H2");
+  next.innerHTML = title;
+  next.setAttribute("style", "text-align:center;font-size: 18px; padding: 0 35px;");
+  next.style.display = "inline-block";
+  next.style.verticalAlign = "middle";
+  next.style.height = "70px";
+  next.setAttribute("class", "stations");
+*/
   var areaButton = document.createElement("button");
   areaButton.setAttribute("id", "buttonMain");
+
+  //if button is clicked, map zooms in on that area
+  areaButton.onclick = function () {
+    for (var i = 0; i < titles.length; i++){
+      if (title == polygons[i].name){
+        console.log(polygons[i]);
+        map.fitBounds(polygons[i].polygon.bounds);
+      }
+    }
+  }
 
   if (color == RED){
     areaButton.setAttribute("class", "pulse-button");
@@ -444,6 +466,8 @@ function createPulseButtons(title, color, parent) {
     areaButton.style.color = YELLOW;
   }
 
+  container.innerHTML = title;
+
   //breaks in between buttons
   var br = document.createElement("br");
   br.setAttribute("class", "stations");
@@ -451,14 +475,14 @@ function createPulseButtons(title, color, parent) {
   var br1 = document.createElement("br");
   br1.setAttribute("class", "stations");
 
-  container.appendChild(br1);
+//  container.appendChild(br1);
   container.appendChild(areaButton);
-  container.appendChild(br);
+
+  //container.appendChild(next);
+  //container.appendChild(br);
 
 
   parent.appendChild(container);
-
-
 
 }
 
@@ -770,6 +794,11 @@ function clearMenu(){
 
   //remove all pulse buttons from Main menu sidenav
   var elements = container.getElementsByClassName("pulse-button");
+  while (elements[0]) {
+    elements[0].parentNode.removeChild(elements[0]);
+  }
+
+  var elements = container.getElementsByClassName("container");
   while (elements[0]) {
     elements[0].parentNode.removeChild(elements[0]);
   }

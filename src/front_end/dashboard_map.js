@@ -5,54 +5,7 @@ script.src = maps_api_src;
 document.body.appendChild(script);
 
 
-//allows all javascript files to communicate with each other through mapping
-require.config({
-  paths: {
-    'geo': 'geoxml3',
-    'overmap': 'over_map',
-    'dashboard': 'dashboard_map',
-    'jquery': 'jquery-3.1.1.min'
-  }
-});
-
-//loads functions from overmap and enables main menu to be displayed from the beginning
-require(["overmap"], function() {
-  console.log("over map loaded OK.");
-});
-
-// FAKE mapping of all the areas and stations within the area
-var areasMapped = {
-  "Assembly Line": ["1","2"],
-  "Wheel Alignment": ["3","4","5"],
-  "Body OffLoad": ["6","7"],
-  "Dyno": ["8","9"],
-  "Finish Line": ["10"],
-  "Paint Touch Up": ["11"],
-  "Rework": ["12","13","14"]
-}
-
-/*var areasMapped = {
-  "Area 1": ["1","2", "6", "9", "10", "11", "14"],
-  "Area 2": ["3","4","5","7", "8", "12", "13"]
-}*/
-
-var map;
-
-var mainKmlSource = '../KMZ/MBV.kml';
-var subKmlSources = [
-  '../KMZ/Assembly Line1.kml',
-  '../KMZ/Body OffLoad1.kml',
-  '../KMZ/Dyno1.kml',
-  '../KMZ/Finish Line1.kml',
-  '../KMZ/Paint Touch Up1.kml',
-  '../KMZ/Rework1.kml',
-  '../KMZ/Wheel Alignment1.kml'];
-
-  /*var mainKmlSource = '../KMZ2/harbor_walk.kml';
-  var subKmlSources = [
-    '../KMZ2/hw_area1.kml',
-    '../KMZ2/hw_area2.kml'];*/
-
+  var map;
   var areaTitles = [];
   var kmlParser;
 

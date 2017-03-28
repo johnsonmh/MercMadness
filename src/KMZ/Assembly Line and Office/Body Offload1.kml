@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Rework1.kml</name>
+	<name>Body Offload1.kml</name>
+	<Style id="failed">
+		<PolyStyle>
+			<color>ffaaaaaa</color>
+		</PolyStyle>
+	</Style>
 	<StyleMap id="msn_ylw-pushpin">
 		<Pair>
 			<key>normal</key>
@@ -12,18 +17,13 @@
 			<styleUrl>#failed</styleUrl>
 		</Pair>
 	</StyleMap>
-	<Style id="failed">
-		<PolyStyle>
-			<color>ffaaaaaa</color>
-		</PolyStyle>
-	</Style>
 	<Style id="failed0">
 		<PolyStyle>
 			<color>ffaaaaaa</color>
 		</PolyStyle>
 	</Style>
 	<Placemark>
-		<name>Rework</name>
+		<name>Body Offload</name>
 		<styleUrl>#msn_ylw-pushpin</styleUrl>
 		<Polygon>
 			<tessellate>1</tessellate>
@@ -31,7 +31,10 @@
 			<outerBoundaryIs>
 				<LinearRing>
 					<coordinates>
-						-80.10904240728756,32.96259728444023,20 -80.1089276400039,32.96256769515973,20 -80.10887639801486,32.96274074359714,20 -80.10898031640178,32.96277098848523,20 -80.10904240728756,32.96259728444023,20 
+					-80.106466,32.963736,20
+					-80.106133,32.963651,20
+					-80.106026,32.963952,20
+					-80.106361,32.964033,20
 					</coordinates>
 				</LinearRing>
 			</outerBoundaryIs>
