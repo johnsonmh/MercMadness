@@ -2,16 +2,29 @@ var maps_api_src = 'https://maps.googleapis.com/maps/api/js?key='+config.GOOGLE_
 var script = document.createElement('script');
 script.type = 'text/javascript';
 script.src = maps_api_src;
-document.body.appendChild(script);
-
+document.head.appendChild(script);
 
   var map;
   var areaTitles = [];
   var kmlParser;
+  var allAreaPolygons = [];
 
+  function getAreasMapped(){
+    return areasMapped;
+  }
+
+  function getAreaTitles(){
+    return areaTitles;
+  }
+
+  function gatherPolygons() {
+    for (var i = 0; i < areaTitles.length; i++){
+      allAreaPolygons.push(kmlParser.docs[i].placemarks[0]);
+    }
+    return allAreaPolygons;
+  }
 
   //Initializes the map and calls the function that loads the KML layer.
-
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
       center: new google.maps.LatLng(-19.257753, 146.823688),
@@ -38,7 +51,7 @@ document.body.appendChild(script);
     for(var i = 0; i < subKmlSources.length; i++) {
       kmlParser.parse(subKmlSources[i]);
     }
-    //console.log(jsonObject);
+    console.log("json obj[0] = " +jsonObject[0].host_name);
 
     //var hostInfoJsonObject = JSON.parse(dataObject[0]);
     //console.log(Object.keys(hostInfoJsonObject).length);
@@ -67,9 +80,6 @@ document.body.appendChild(script);
       //fit intial map load to main map
       map.fitBounds(bounds);
     });
-
-    var g = gatherPolygons();
-    console.log(g.length);
   }
 
   //when an area is clicked on, the side menu will change automatically
@@ -87,20 +97,4 @@ document.body.appendChild(script);
         loadMenu(place.polygon.title);
       }
     });
-  }
-
-  function getAreasMapped(){
-    return areasMapped;
-  }
-
-  function getAreaTitles(){
-    return areaTitles;
-  }
-
-  function gatherPolygons() {
-    var allAreaPolygons = [];
-    for (var i = 0; i < areaTitles.length; i++){
-      allAreaPolygons.push(kmlParser.docs[i].placemarks[0]);
-    }
-    return allAreaPolygons;
   }
