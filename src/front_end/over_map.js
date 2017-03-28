@@ -12,7 +12,7 @@ window.onload = function(){
   //get the two json objects (-> status.dat and all host.cfg files) and combine the information
   getAreaStatus();
   //display general area statuses in main menu on load
-  populateMainViewMenu();
+  populateMainViewMenu(titles[0]);
 };
 
 var GREEN = "#57bc5b";
