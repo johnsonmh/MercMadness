@@ -83,7 +83,7 @@ document.head.appendChild(script);
         placemark.polygon.strokeColor = "#dbdbdb";
         bounds = placemark.polygon.bounds;
       } else {
-        placemark.polygon.fillColor = '#57bc5b'; // Green
+        placemark.polygon.fillColor = 'grey'; 
         placemark.polygon.fillOpacity = 1;
         placemark.polygon.strokeColor = "#dbdbdb";
         placemark.polygon.strokeWeight = 1;

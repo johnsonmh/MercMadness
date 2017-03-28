@@ -68,7 +68,7 @@ function colorPolygonByTitle(title, color) {
   for (var i = 0; i < titles.length; i++){
     if (title == polygons[i].name){
       console.log("color b4 = " +polygons[i].polygon.fillColor);
-      polygons[i].polygon.fillColor = color;
+      polygons[i].polygon.setOptions({fillColor: color});
       //change main menu too!
       console.log("color after = " +polygons[i].polygon.fillColor);
       console.log(polygons[i]);
