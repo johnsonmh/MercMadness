@@ -12,7 +12,7 @@ window.onload = function(){
   //get the two json objects (-> status.dat and all host.cfg files) and combine the information
   getAreaStatus();
   //display general area statuses in main menu on load
-  populateMainViewMenu(titles[0]);
+  populateMainViewMenu("General Areas");
 };
 
 var GREEN = "#57bc5b";
@@ -96,6 +96,8 @@ function createPulseButtons(title, color, parent) {
     for (var i = 0; i < titles.length; i++){
       if (title == polygons[i].name){
         map.fitBounds(polygons[i].polygon.bounds);
+        clearMenu();
+        loadMenu(titles[i]);
       }
     }
   }
@@ -253,7 +255,14 @@ function parseStationStr(stationNum){
 }
 
 //use area-station mapping from config.js -> need for mapStationToArea()
-function getAreasMapped(){
+function getAreasMapped(buildingTitle){
+  // function getAreasMapped(buildingTitle){
+  // for (var i = 0; i < mainKmlArray; i++){
+  //   if (buildingTitle == mainKmlArray[i].title){
+  //     // console.log(mainKmlArray[i].areasMapped);
+  //     return mainKmlArray[i].areasMapped;
+  //   }
+  // }
   return areasMapped;
 }
 
@@ -294,9 +303,9 @@ function parseHost(host){
 }
 
 // getting an array of the hosts in the area that has been recently clicked on
-function processHostsInFocus(all, aName){
+function processHostsInFocus(all, areaName){
   var areasMapped = getAreasMapped();
-  var stationList = areasMapped[aName];
+  var stationList = areasMapped[areaName];
   var hosts_in_station = [];
 
   for (var j = 0; j < stationList.length; j++){
@@ -414,294 +423,19 @@ function clearMenu(){
 
 function getAreaStatus(){
 
-  //FAKE HOST data - needs to be combined with the STATUS.DAT info for live information
-  var host1 = {
-    "host_name": "QSYS_PC_STA3_PEDALP",
-    "alias": "Pedal Push Controller STA3",
-    "address": "53.234.79.188",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "QSYS_PC_WIN_CTRL",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "CRITICAL battery almost dead",
-    "current_problem_id": "33",
-    "check_execution_time": "5.00",
-    "current_state": "3"
-  }
-  var host2 = {
-    "host_name": "QSYS_PC_STA9_XWHEEL",
-    "alias": "WHEEL ALIGNMENT XWHEEL STA9",
-    "address": "53.234.83.20",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "QSYS_PC_WIN_CTRL",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK -> PINGING LIKE CRAZY",
-    "current_problem_id": "2",
-    "check_execution_time": "5.00",
-    "current_state": "0"
-  }
-  var host3 = {
-    "host_name": "QSYS_PC_STA9_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA9",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "QSYS_PC_WIN_CTRL",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "CRITICAL MAYDAY MAYDAY",
-    "current_problem_id": "120",
-    "check_execution_time": "1.00",
-    "current_state": "3"
-  }
-  var host4 = {
-    "host_name": "QSYS_PC_STA9_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA9",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "QSYS_PC_WIN_CTRL",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK :) ",
-    "current_problem_id": "0",
-    "check_execution_time": "14.00",
-    "current_state": "0"
-  }
-  var host5 = {
-    "host_name": "QSYS_PC_STA8_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA8",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "QSYS_PC_WIN_CTRL",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK !! :) ",
-    "current_problem_id": "4",
-    "check_execution_time": "4.00",
-    "current_state": "0"
-  }
-  var host6 = {
-    "host_name": "QSYS_PC_STA8_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA8",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "QSYS_PC_WIN_CTRL",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK !! :) ",
-    "current_problem_id": "1",
-    "check_execution_time": "4.00",
-    "current_state": "1"
-  }
-  var host7 = {
-    "host_name": "HP_STA14_XLIGHT",
-    "alias": "PRINTER XLIGHT STA14",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "PRINTERS",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK !! :) ",
-    "current_problem_id": "0",
-    "check_execution_time": "4.00",
-    "current_state": "0"
-  }
-  var host8 = {
-    "host_name": "SWITCH_STA7_XLIGHT",
-    "alias": "SWITCH XLIGHT STA7",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "SWITCHES",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK !! :( ",
-    "current_problem_id": "3",
-    "check_execution_time": "4.00",
-    "current_state": "3"
-  }
-  var host9 = {
-    "host_name": "PRINTER_STA1_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA8",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "PRINTERS",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK !! :) ",
-    "current_problem_id": "112",
-    "check_execution_time": "4.00",
-    "current_state": "3"
-  }
-  var host10 = {
-    "host_name": "PRINTER_STA2_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA2",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "PRINTERS",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK !! :) ",
-    "current_problem_id": "0",
-    "check_execution_time": "4.00",
-    "current_state": "0"
-  }
-  var host11 = {
-    "host_name": "PRINTER_STA6_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA6",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "PRINTERS",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK NO WARNING",
-    "current_problem_id": "1",
-    "check_execution_time": "1.00",
-    "current_state": "1"
-  }
-  var host12 = {
-    "host_name": "PRINTER_STA4_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA4",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "PRINTERS",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK NO WARNING",
-    "current_problem_id": "12",
-    "check_execution_time": "14.00",
-    "current_state": "1"
-  }
-  var host13 = {
-    "host_name": "PRINTER_STA10",
-    "alias": "WHEEL ALIGNMENT STA10",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "PRINTERS",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "CRITICAL ",
-    "current_problem_id": "112",
-    "check_execution_time": "14.00",
-    "current_state": "4"
-  }
-  var host14 = {
-    "host_name": "PRINTER_STA13_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA13",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "PRINTERS",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK NO WARNING",
-    "current_problem_id": "12",
-    "check_execution_time": "14.00",
-    "current_state": "1"
-  }
-  var host15 = {
-    "host_name": "PRINTER_STA10_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA10",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "PRINTERS",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK ----",
-    "current_problem_id": "2",
-    "check_execution_time": "14.00",
-    "current_state": "4"
-  }
-  var host16 = {
-    "host_name": "SERVER_STA11_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA11",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "QSYS_SVR_WIN",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK",
-    "current_problem_id": "12",
-    "check_execution_time": "14.00",
-    "current_state": "0"
-  }
-  var host17 = {
-    "host_name": "PRINTER_STA7_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA7",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "PRINTERS",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK yes its okay",
-    "current_problem_id": "12",
-    "check_execution_time": "14.00",
-    "current_state": "0"
-  }
-  var host18 = {
-    "host_name": "HP_STA6_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA6",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "PRINTERS",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "WARNING WARNING",
-    "current_problem_id": "12",
-    "check_execution_time": "14.00",
-    "current_state": "1"
-  }
-  var host19 = {
-    "host_name": "HP_STA1_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA6",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "PRINTERS",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "PENDING",
-    "current_problem_id": "12",
-    "check_execution_time": "14.00",
-    "current_state": "4"
-  }
-  var host20 = {
-    "host_name": "PRINTER_STA4_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA4",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "PRINTERS",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK NO WARNING",
-    "current_problem_id": "12",
-    "check_execution_time": "14.00",
-    "current_state": "1"
-  }
-  var host21 = {
-    "host_name": "QSYS_PC_STA5_XLIGHT",
-    "alias": "WHEEL ALIGNMENT XLIGHT STA5",
-    "address": "53.234.83.35",
-    "contact_groups": "+luhd,shopfloor,admins",
-    "max_check_attempts": "10",
-    "hostgroups": "QSYS_PC_WIN_CTRL",
-    "----------BAD INFO STARTS HERE--": "------------",
-    "plugin_output": "OK ----",
-    "current_problem_id": "0",
-    "check_execution_time": "14.00",
-    "current_state": "0"
-  }
-
-
   //Here we combine the two json objects - one made from Status.dat and one made from all the Host .config files
   var hostInfoJsonObject = JSON.parse(dataObject[0]);
 
   //console.log(Object.keys(hostInfoJsonObject).length);
-  console.log("status.dat json length = " + jsonObject.length);
-  console.log("host config json length = " + hostInfoJsonObject.length);
+  //console.log("status.dat json length = " + jsonObject.length);
+  //console.log("host config json length = " + hostInfoJsonObject.length);
 
   var UNPARSED_hosts = [];
 
 // --------------------------------------------------------------------------------
   //COMMENT OUT IF YOU ONLY WANT TO POPULATE THE MAP WITH REAL HOSTS
-  var FAKE_hosts = [host1,host2,host3,host4,host5,host6, host7,host8,host9,host10,host11,host12,host13,host14,host15,host16,host17,host18,host19,host20,host21];
+  //DELETE FOR FINAL SUBMISSION
+  var FAKE_hosts = [host1,host2,host3,host4,host5,host6, host7,host8,host9,host10,host11,host12,host13,host14,host15,host16,host17,host18,host19,host20,host21,host22,host23,host24,host25,host26,host27,host28,host29, host30,host31,host32,host33,host34,host35, host36, host37];
   for (var i = 0; i < FAKE_hosts.length; i++){
     UNPARSED_hosts.push(FAKE_hosts[i]);
   }

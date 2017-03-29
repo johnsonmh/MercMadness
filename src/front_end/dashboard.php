@@ -15,14 +15,15 @@
     'geoxml3.js',
     'config.js',
     'dashboard_map.js',
-    'over_map.js'
+    'over_map.js',
+    'fake_hosts.js' //DELETE FOR FINAL SUBMISSION
   ].forEach(function(src) {
     var script = document.createElement('script');
     script.src = src;
     script.async = false;
     document.head.appendChild(script);
   });
-  
+
   </script>
 
 </head>
