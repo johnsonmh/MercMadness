@@ -2,7 +2,7 @@ var script = document.currentScript;
 //console.log(script);
 window.onload = function(){
   titles = getAreaTitles();
-  console.log("titles = "+titles);
+  //console.log("titles = "+titles);
 
   //initialize statusAreaMapping to empty arrays
   for (var i = 0; i < titles.length;i++){

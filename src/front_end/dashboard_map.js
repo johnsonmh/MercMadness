@@ -58,12 +58,6 @@ document.head.appendChild(script);
       suppressInfoWindows: true
     });
 
-    //separating these into two functions makes it load smoother!
-    // parseMain();
-    // parseOthers();
-
-    //console.log("json obj[0] = " +jsonObject[0].host_name);
-
     for (var i = 0; i < mainKmlArray.length; i++){
       //index array to get main kml json object
       var kmlSource = mainKmlArray[i];
@@ -87,7 +81,9 @@ document.head.appendChild(script);
         placemark.polygon.strokeWeight = 1;
         placemark.polygon.strokeColor = "#dbdbdb";
         //store boundary of main kml to fitBounds later
-        bounds = placemark.polygon.bounds;
+        if (placemark.polygon.title.includes("MBV")){
+          bounds = placemark.polygon.bounds;
+        }
       } else {
         placemark.polygon.fillColor = 'grey';
         placemark.polygon.fillOpacity = 1;
@@ -107,12 +103,11 @@ document.head.appendChild(script);
       //if(place.polygon.title == 'Harbor Walk') {
         console.log("main kml: "+place.polygon.title);
         clearMenu();
-        populateMainViewMenu("General areas");
+        populateMainViewMenu("General Areas");
       } else {
         console.log(place.polygon.title);
         clearMenu();
         loadMenu(place.polygon.title);
       }
     });
-
   }
