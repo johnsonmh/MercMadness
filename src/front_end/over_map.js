@@ -188,26 +188,19 @@ function createButtons(type, currentJsonObject, parentId) {
   //find right image for device
   var hostString = currentJsonObject.host_name.toLowerCase();
   var pic = document.createElement("img");
-  var device = currentJsonObject.device_type.toLowerCase();
 
-  if(device == "printer"){
-    pic.setAttribute("src", "images/printer.png");
-  }
-  else if (device == "hp" ){
-    pic.setAttribute("src", "images/multifunction_printer.jpeg");
-  }
-  else if (device == "srv" || device == "server" ){
-    pic.setAttribute("src", "images/server.png");
-  }
-  else if (device == "switch"){
-    pic.setAttribute("src", "images/switch.png");
-  }
-  else if (device == "pc"){
-    pic.setAttribute("src", "images/laptop.png");
-  }
-  else{
-    pic.setAttribute("src", "images/not_found.jpeg");
-  }
+
+
+
+
+
+  //NEED TO SET UP IMAGES - NEED A 1-1 HOST MATCH FOR DEVICE IMAGES AND HOST NAMES *******************
+  pic.setAttribute("src", config.PATH_TO_IMAGES+'/not_found.jpeg'); //right now, set to image not found pic
+
+
+
+
+
 
   //set id attribute for device for CSS purposes
   pic.setAttribute("id", "device");
@@ -282,66 +275,25 @@ function mapStationToArea(stationNum){
   }
 }
 
-//gets [ deviceType, Station Number, Area Title ] info from each host!
+//parses host individually -> returns [ Station Number, Area Title ] info from each host!
 function parseHost(host){
-
-  //example host names: QSYS_PC_STA11_PEDALP   QSYS_PC_STA19_XWHEEL  QSYS_PC_STA19_XLIGHT
-  //will return an array with [ deviceType, stationNum, area ]
-  var type = host.hostgroups;
-  type = type.toUpperCase();
-  var capsHostName = host.host_name.toUpperCase();
-  var hostNameArr = capsHostName.split('_');
   var rtnArr = [];
+  aliasStr = host.alias.toUpperCase();
+  aliasArr = host.alias.split(' ');
 
-  switch (type) {
-    case "QSYS_PC_WIN_CTRL":
-    rtnArr.push(hostNameArr[1]);
-    stationNumber = parseStationStr(hostNameArr[2]);
-    rtnArr.push(stationNumber);
-    rtnArr.push(mapStationToArea(stationNumber));
-    break;
-
-    case "QSYS_SVR_WIN":
-    rtnArr.push(hostNameArr[0]);
-    stationNumber = parseStationStr(hostNameArr[1]);
-    rtnArr.push(stationNumber);
-    rtnArr.push(mapStationToArea(stationNumber));
-    break;
-
-    case "QSYS_CTRL":
-    //console.log("qsys ctrl");
-    break;
-
-    case "QSYS_SVR_LNX":
-    //console.log("qsys server linux");
-    break;
-
-    case "SWITCHES":
-    rtnArr.push(hostNameArr[0]);
-    stationNumber = parseStationStr(hostNameArr[1]);
-    rtnArr.push(stationNumber);
-    rtnArr.push(mapStationToArea(stationNumber));
-    break;
-
-    case "PRINTERS":
-    rtnArr.push(hostNameArr[0]);
-    stationNumber = parseStationStr(hostNameArr[1]);
-    rtnArr.push(stationNumber);
-    rtnArr.push(mapStationToArea(stationNumber));
-    //console.log("printers");
-    break;
-
-    case "WIRELESS":
-    //console.log("wireless");
-    break;
-
-    case "WINDOWS":
-    //console.log("windows");
-    break;
+  //use regex matching to get the STA__ station number from the alias
+  for (var i = 0; i < aliasArr.length; i++){
+    if(aliasArr[i].match(/^([STA]{3}[0-9]{1,})$/g)){
+      var stationNumber = parseStationStr(aliasArr[i]);
+      //console.log("station num = "+ stationNumber);
+      rtnArr.push(stationNumber);
+      rtnArr.push(mapStationToArea(stationNumber));
+    }
   }
   return rtnArr;
 }
 
+// getting an array of the hosts in the area that has been recently clicked on
 function processHostsInFocus(all, aName){
   var areasMapped = getAreasMapped();
   var stationList = areasMapped[aName];
@@ -739,39 +691,44 @@ function getAreaStatus(){
 
 
   //Here we combine the two json objects - one made from Status.dat and one made from all the Host .config files
-//console.log("DATA OBJECT = " + dataObject[0]);
-  //var hostInfoJsonObject = JSON.parse(dataObject[0]);
+  var hostInfoJsonObject = JSON.parse(dataObject[0]);
 
   //console.log(Object.keys(hostInfoJsonObject).length);
-  //console.log(jsonObject.length);
-  //console.log(hostInfoJsonObject.length);
+  console.log("status.dat json length = " + jsonObject.length);
+  console.log("host config json length = " + hostInfoJsonObject.length);
 
-  //var UNPARSED_hosts = [];
-  var UNPARSED_hosts = [host1,host2,host3,host4,host5,host6, host7,host8,host9,host10,host11,host12,host13,host14,host15,host16,host17,host18,host19,host20,host21];
+  var UNPARSED_hosts = [];
 
-  //   for (var i = 0; i < jsonObject.length; i++){
-  //   for (var j = 0; j < hostInfoJsonObject.length; j++){
-  //   if (jsonObject[i].host_name == hostInfoJsonObject[j].host_name){
-  //   jsonObject[i]['alias'] = hostInfoJsonObject[j].alias;
-  //   jsonObject[i]['address'] = hostInfoJsonObject[j].address;
-  //   jsonObject[i]['contact_groups'] = hostInfoJsonObject[j].contact_groups;
-  //   jsonObject[i]['hostgroups'] = hostInfoJsonObject[j].hostgroups;
-  //   UNPARSED_hosts.push(jsonObject[i]);
-  //   //console.log(jsonObject[i].host_name);
-  // }
-  // }
-  // }
+// --------------------------------------------------------------------------------
+  //COMMENT OUT IF YOU ONLY WANT TO POPULATE THE MAP WITH REAL HOSTS
+  var FAKE_hosts = [host1,host2,host3,host4,host5,host6, host7,host8,host9,host10,host11,host12,host13,host14,host15,host16,host17,host18,host19,host20,host21];
+  for (var i = 0; i < FAKE_hosts.length; i++){
+    UNPARSED_hosts.push(FAKE_hosts[i]);
+  }
+// --------------------------------------------------------------------------------
 
-  //console.log(jsonObject[7]);
+  //combine info from status.dat json and host.cfg files json
+  // jsonObject -> status.dat
+  // hostInfoJsonObject -> host config files
+  for (var i = 0; i < jsonObject.length; i++){
+    for (var j = 0; j < hostInfoJsonObject.length; j++){
+      if (jsonObject[i].host_name == hostInfoJsonObject[j].host_name){
+        jsonObject[i]['alias'] = hostInfoJsonObject[j].alias;
+        jsonObject[i]['address'] = hostInfoJsonObject[j].address;
+        jsonObject[i]['contact_groups'] = hostInfoJsonObject[j].contact_groups;
+        jsonObject[i]['hostgroups'] = hostInfoJsonObject[j].hostgroups;
+        UNPARSED_hosts.push(jsonObject[i]);
+      }
+    }
+  }
 
   for (var i = 0; i < UNPARSED_hosts.length; i++){
     var current_host = UNPARSED_hosts[i];
     parsed_host = parseHost(current_host);
 
-    //add info on device type, station_number, and area_name
-    current_host["device_type"] = parsed_host[0];
-    current_host["station_number"] = parsed_host[1];
-    current_host["area_name"] = parsed_host[2];
+    //add new info on device station_number and area_name parsed from host alias
+    current_host["station_number"] = parsed_host[0]; //station num
+    current_host["area_name"] = parsed_host[1]; //area
 
     if (current_host.plugin_output.includes('OK')){ //OK
       current_host["my_state"] = "green";

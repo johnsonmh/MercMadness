@@ -7,8 +7,9 @@
   <link rel="stylesheet" type="text/css" href="w3_edited.css">
 
   <script>
-  var jsonObject = <?php include('../back_end/hostTest.php'); echo $myJsonObject; ?>;
-  var dataObject = <?php exec('python ../back_end/parseCFGTest.py', $output, $code); echo json_encode($output);?>;
+  var jsonObject = <?php include('../back_end/hostTest.php'); echo $myJsonObject;?>;
+  var dataObject = <?php exec('python ../back_end/parseCFGTest.py', $output, $code); $obj = json_encode($output); echo $obj;?>;
+
   [
     'jquery-3.1.1.min.js',
     'geoxml3.js',
@@ -21,6 +22,7 @@
     script.async = false;
     document.head.appendChild(script);
   });
+  
   </script>
 
 </head>
