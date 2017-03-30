@@ -38,11 +38,13 @@ function parseSubKMLs(subKmlSources){
 
 //Initialize the map and call the function that loads the KML layer -> geoxml3.js
 function initMap() {
+  //load the maplabel library
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.src = 'maplabel.js';
   document.head.appendChild(script);
 
+  //Define map
   map = new google.maps.Map(document.getElementById('map'), {
     center: new google.maps.LatLng(-19.257753, 146.823688),
     zoom:2,
@@ -103,12 +105,15 @@ function initMap() {
 }
 
 function addLabel(polygon, map) {
+
   var mapLabel = new MapLabel({
     text: polygon.title,
     position: polygon.bounds.getCenter(),
     fontSize: 20,
     map: map,
-    zIndex: 99
+    zIndex: 1000,
+    fontFamily: 'Comic Sans MS'
+
   });
   return mapLabel;
 }
