@@ -108,7 +108,7 @@ function addLabel(polygon, map) {
     map: map,
     zIndex: 1000,
     fontFamily: 'Verdana',
-    minZoom: 16,
+    minZoom: 17,
     strokeWeight: 0
   });
   return mapLabel;
@@ -167,7 +167,7 @@ function MapLabel(opt_options) {
   this.set('fontFamily', 'sans-serif');
   this.set('fontSize', 12);
   this.set('fontColor', '#000000');
-  this.set('strokeWeight', 0);
+  this.set('strokeWeight', 4);
   this.set('strokeColor', '#ffffff');
   this.set('align', 'center');
 
