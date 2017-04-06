@@ -1,5 +1,4 @@
-var script = document.currentScript;
-//console.log(script);
+
 window.onload = function(){
   titles = getAreaTitles();
   //console.log("titles = "+titles);
@@ -170,7 +169,7 @@ function createButtons(type, currentJsonObject, parentId) {
 
   //set class attribute and display the host's name - maybe change to ALIAS later?
   element.setAttribute("class", "accordion");
-  element.innerHTML = currentJsonObject.host_name;
+  element.innerHTML = currentJsonObject.alias;
 
   //create the panel to slide out from under the button
   var pan = document.createElement("div");
@@ -188,7 +187,8 @@ function createButtons(type, currentJsonObject, parentId) {
   pan.appendChild(plugOut);
 
   //find right image for device
-  var hostString = currentJsonObject.host_name.toLowerCase();
+  //var hostString = currentJsonObject.host_name.toLowerCase();
+  //var hostString = currentJsonObject.alias;
   var pic = document.createElement("img");
 
 
@@ -197,9 +197,23 @@ function createButtons(type, currentJsonObject, parentId) {
 
 
   //NEED TO SET UP IMAGES - NEED A 1-1 HOST MATCH FOR DEVICE IMAGES AND HOST NAMES *******************
-  pic.setAttribute("src", config.PATH_TO_IMAGES+'/not_found.jpeg'); //right now, set to image not found pic
+  //pic.setAttribute("src", config.PATH_TO_IMAGES+'/not_found.jpeg'); //right now, set to image not found pic
+  var pathToImageJpeg = config.PATH_TO_IMAGES + "/" + currentJsonObject.alias + '.jpeg';
 
+  $.get(pathToImageJpeg)
+    .done(function() {
+        pic.setAttribute("src", pathToImageJpeg); //all images must be jpeg
+    }).fail(function() {
+        pic.setAttribute("src", config.PATH_TO_IMAGES+'/not_found.jpeg');
+    })
 
+  var pathToImagePng = config.PATH_TO_IMAGES + "/" + currentJsonObject.alias + '.png';
+  $.get(pathToImagePng)
+    .done(function() {
+        pic.setAttribute("src", pathToImagePng); //all images must be jpeg
+    }).fail(function() {
+        pic.setAttribute("src", config.PATH_TO_IMAGES+'/not_found.jpeg');
+    })
 
 
 
@@ -435,7 +449,7 @@ function getAreaStatus(){
 // --------------------------------------------------------------------------------
   //COMMENT OUT IF YOU ONLY WANT TO POPULATE THE MAP WITH REAL HOSTS
   //DELETE FOR FINAL SUBMISSION
-  var FAKE_hosts = [host1,host2,host3,host4,host5,host6, host7,host8,host9,host10,host11,host12,host13,host14,host15,host16,host17,host18,host19,host20,host21,host22,host23,host24,host25,host26,host27,host28,host29, host30,host31,host32,host33,host34,host35, host36, host37];
+  var FAKE_hosts = [host1,host2,host3,host4,host5,host6, host7,host8,host9,host10,host11,host12,host13,host14,host15,host16,host17,host18,host19,host20,host21,host22,host23,host24,host25,host26,host27,host28,host29, host30,host31,host32,host33,host34,host35, host36, host37, host38, host39, host40, host41, host42];
   for (var i = 0; i < FAKE_hosts.length; i++){
     UNPARSED_hosts.push(FAKE_hosts[i]);
   }

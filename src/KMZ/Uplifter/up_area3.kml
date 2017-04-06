@@ -37,7 +37,7 @@
 		</Pair>
 	</StyleMap>
 	<Placemark>
-		<name>Uplifter Area 3</name>
+		<name>U. Area 3</name>
 		<styleUrl>#msn_ylw-pushpin</styleUrl>
 		<Polygon>
 			<tessellate>1</tessellate>
@@ -48,7 +48,7 @@
 					-80.110787,32.961767,20
 					-80.110862,32.961551,20
 					-80.109301,32.961151,20
-					-80.109231,32.961367,20 
+					-80.109231,32.961367,20
 					</coordinates>
 				</LinearRing>
 			</outerBoundaryIs>

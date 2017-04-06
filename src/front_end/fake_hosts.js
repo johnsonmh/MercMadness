@@ -3,7 +3,7 @@
 //FAKE HOST data - needs to be combined with the STATUS.DAT info for live information
 var host1 = {
   "host_name": "QSYS_PC_STA3_PEDALP",
-  "alias": "Pedal Push Controller STA3",
+  "alias": "PC CONTROLLER STA3",
   "address": "53.234.79.188",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -29,7 +29,7 @@ var host2 = {
 }
 var host3 = {
   "host_name": "QSYS_PC_STA9_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA9",
+  "alias": "QSYS PC STA9",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -68,7 +68,7 @@ var host5 = {
 }
 var host6 = {
   "host_name": "QSYS_PC_STA8_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA8",
+  "alias": "WHEEL ALIGNMENT STA8",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -100,14 +100,14 @@ var host8 = {
   "max_check_attempts": "10",
   "hostgroups": "SWITCHES",
   "----------BAD INFO STARTS HERE--": "------------",
-  "plugin_output": "OK !! :( ",
-  "current_problem_id": "3",
-  "check_execution_time": "4.00",
-  "current_state": "3"
+  "plugin_output": "OK !! :) ",
+  "current_problem_id": "0",
+  "check_execution_time": "1.00",
+  "current_state": "0"
 }
 var host9 = {
-  "host_name": "PRINTER_STA1_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA8",
+  "host_name": "PRINTER_STA8_XLIGHT",
+  "alias": "PRINTER XLIGHT STA8",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -218,7 +218,7 @@ var host17 = {
   "hostgroups": "PRINTERS",
   "----------BAD INFO STARTS HERE--": "------------",
   "plugin_output": "OK yes its okay",
-  "current_problem_id": "12",
+  "current_problem_id": "1",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -236,7 +236,7 @@ var host18 = {
   "current_state": "1"
 }
 var host19 = {
-  "host_name": "HP_STA1_XLIGHT",
+  "host_name": "HP_STA6_XLIGHT",
   "alias": "WHEEL ALIGNMENT XLIGHT STA6",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
@@ -301,8 +301,8 @@ var host23 = {
   "current_state": "0"
 }
 var host24 = {
-  "host_name": "PRINTER_STA18_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA18",
+  "host_name": "PRINTER_STA1_XLIGHT",
+  "alias": "WHEEL ALIGNMENT XLIGHT STA1",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -327,7 +327,7 @@ var host25 = {
   "current_state": "0"
 }
 var host26 = {
-  "host_name": "PRINTER_STA18_XLIGHT",
+  "host_name": "PRINTER_STA19_XLIGHT",
   "alias": "WHEEL ALIGNMENT XLIGHT STA19",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
@@ -481,5 +481,70 @@ var host37 = {
   "plugin_output": "OK -> PINGING LIKE CRAZY",
   "current_problem_id": "2",
   "check_execution_time": "5.00",
+  "current_state": "0"
+}
+var host38 = {
+  "host_name": "QSYS_PC_STA18_PEDALP",
+  "alias": "Pedal Push Controller STA18",
+  "address": "53.234.79.188",
+  "contact_groups": "+luhd,shopfloor,admins",
+  "max_check_attempts": "10",
+  "hostgroups": "QSYS_PC_WIN_CTRL",
+  "----------BAD INFO STARTS HERE--": "------------",
+  "plugin_output": "CRITICAL battery almost dead",
+  "current_problem_id": "33",
+  "check_execution_time": "5.00",
+  "current_state": "3"
+}
+var host39 = {
+  "host_name": "QSYS_PC_STA19_XWHEEL",
+  "alias": "WHEEL ALIGNMENT XWHEEL STA19",
+  "address": "53.234.83.20",
+  "contact_groups": "+luhd,shopfloor,admins",
+  "max_check_attempts": "10",
+  "hostgroups": "QSYS_PC_WIN_CTRL",
+  "----------BAD INFO STARTS HERE--": "------------",
+  "plugin_output": "OK -> PINGING LIKE CRAZY",
+  "current_problem_id": "2",
+  "check_execution_time": "5.00",
+  "current_state": "0"
+}
+var host40 = {
+  "host_name": "QSYS_PC_STA17_XLIGHT",
+  "alias": "WHEEL ALIGNMENT XLIGHT STA17",
+  "address": "53.234.83.35",
+  "contact_groups": "+luhd,shopfloor,admins",
+  "max_check_attempts": "10",
+  "hostgroups": "QSYS_PC_WIN_CTRL",
+  "----------BAD INFO STARTS HERE--": "------------",
+  "plugin_output": "CRITICAL MAYDAY MAYDAY",
+  "current_problem_id": "120",
+  "check_execution_time": "1.00",
+  "current_state": "3"
+}
+var host41 = {
+  "host_name": "QSYS_PC_STA24_XLIGHT",
+  "alias": "WHEEL ALIGNMENT XLIGHT STA24",
+  "address": "53.234.83.35",
+  "contact_groups": "+luhd,shopfloor,admins",
+  "max_check_attempts": "10",
+  "hostgroups": "QSYS_PC_WIN_CTRL",
+  "----------BAD INFO STARTS HERE--": "------------",
+  "plugin_output": "OK :) ",
+  "current_problem_id": "0",
+  "check_execution_time": "14.00",
+  "current_state": "0"
+}
+var host42 = {
+  "host_name": "QSYS_PC_STA22_XLIGHT",
+  "alias": "WHEEL ALIGNMENT XLIGHT STA22",
+  "address": "53.234.83.35",
+  "contact_groups": "+luhd,shopfloor,admins",
+  "max_check_attempts": "10",
+  "hostgroups": "QSYS_PC_WIN_CTRL",
+  "----------BAD INFO STARTS HERE--": "------------",
+  "plugin_output": "OK !! :) ",
+  "current_problem_id": "4",
+  "check_execution_time": "4.00",
   "current_state": "0"
 }

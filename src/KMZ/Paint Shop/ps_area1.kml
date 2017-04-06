@@ -37,7 +37,7 @@
 		</Pair>
 	</StyleMap>
 	<Placemark>
-		<name>Paint Shop Area 1</name>
+		<name>P.S. Area 1</name>
 		<styleUrl>#msn_ylw-pushpin</styleUrl>
 		<Polygon>
 			<tessellate>1</tessellate>
