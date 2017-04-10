@@ -2,173 +2,160 @@
 
 //FAKE HOST data - needs to be combined with the STATUS.DAT info for live information
 var host1 = {
-  "host_name": "QSYS_PC_STA3_PEDALP",
-  "alias": "PC CONTROLLER STA3",
-  "address": "53.234.79.188",
+  "host_name": "PRINTER_CANON_STA11",
+  "alias": "Canon Pixma STA11",
+  "address": "53.230.12.111",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+  "hostgroups": "printers",
   "plugin_output": "CRITICAL battery almost dead",
   "current_problem_id": "33",
   "check_execution_time": "5.00",
-  "current_state": "3"
+  "current_state": "15"
 }
 var host2 = {
-  "host_name": "QSYS_PC_STA9_XWHEEL",
-  "alias": "WHEEL ALIGNMENT XWHEEL STA9",
-  "address": "53.234.83.20",
+  "host_name": "PRINTER_DELL_MULTI",
+  "alias": "Dell Multifunction Printer STA1",
+  "address": "18.180.44.111",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+  "hostgroups": "PRINTERS",
   "plugin_output": "OK -> PINGING LIKE CRAZY",
-  "current_problem_id": "2",
-  "check_execution_time": "5.00",
+  "current_problem_id": "0",
+  "check_execution_time": "2.00",
   "current_state": "0"
 }
 var host3 = {
-  "host_name": "QSYS_PC_STA9_XLIGHT",
-  "alias": "QSYS PC STA9",
-  "address": "53.234.83.35",
+  "host_name": "ROBOT ARM STA2",
+  "alias": "WidowX Robot Arm STA2",
+  "address": "53.234.201.195",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+  "hostgroups": "WIN_CTRL",
   "plugin_output": "CRITICAL MAYDAY MAYDAY",
   "current_problem_id": "120",
-  "check_execution_time": "1.00",
-  "current_state": "3"
+  "check_execution_time": "14.00",
+  "current_state": "17"
 }
 var host4 = {
-  "host_name": "QSYS_PC_STA9_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA9",
+  "host_name": "NANOBA DESKTOP STA4",
+  "alias": "Nanoba Desktop STA4",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+  "hostgroups": "PC_WIN_CTRL",
   "plugin_output": "OK :) ",
   "current_problem_id": "0",
-  "check_execution_time": "14.00",
+  "check_execution_time": "2.00",
   "current_state": "0"
 }
 var host5 = {
-  "host_name": "QSYS_PC_STA8_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA8",
-  "address": "53.234.83.35",
+  "host_name": "HP DESKTOP STA5",
+  "alias": "HP Desktop STA5",
+  "address": "12.354.13.115",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+  "hostgroups": "PC_WIN_CTRL",
   "plugin_output": "OK !! :) ",
-  "current_problem_id": "4",
+  "current_problem_id": "0",
   "check_execution_time": "4.00",
   "current_state": "0"
 }
 var host6 = {
-  "host_name": "QSYS_PC_STA8_XLIGHT",
-  "alias": "WHEEL ALIGNMENT STA8",
+  "host_name": "DELL DESKTOP STA6",
+  "alias": "Dell Desktop STA6",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
   "plugin_output": "OK !! :) ",
-  "current_problem_id": "1",
+  "current_problem_id": "0",
   "check_execution_time": "4.00",
-  "current_state": "1"
+  "current_state": "0"
 }
 var host7 = {
-  "host_name": "HP_STA14_XLIGHT",
-  "alias": "PRINTER XLIGHT STA14",
-  "address": "53.234.83.35",
+  "host_name": "CYBERPOWER STA7",
+  "alias": "Cyberpower Gaming Desktop STA7",
+  "address": "12.134.0.15",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+  "hostgroups": "PC_CTRL",
   "plugin_output": "OK !! :) ",
   "current_problem_id": "0",
   "check_execution_time": "4.00",
   "current_state": "0"
 }
 var host8 = {
-  "host_name": "SWITCH_STA7_XLIGHT",
-  "alias": "SWITCH XLIGHT STA7",
-  "address": "53.234.83.35",
+  "host_name": "SUPER SWITCH STA8",
+  "alias": "Super Switch STA8",
+  "address": "13.84.893.315",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "SWITCHES",
-  "----------BAD INFO STARTS HERE--": "------------",
-  "plugin_output": "OK !! :) ",
+  "plugin_output": "OK !! Everything is great!",
   "current_problem_id": "0",
   "check_execution_time": "1.00",
   "current_state": "0"
 }
 var host9 = {
-  "host_name": "PRINTER_STA8_XLIGHT",
-  "alias": "PRINTER XLIGHT STA8",
+  "host_name": "HP GIANT PRINTER STA9",
+  "alias": "HP Giant Studio Printer STA9",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
-  "plugin_output": "OK !! :) ",
-  "current_problem_id": "112",
-  "check_execution_time": "4.00",
-  "current_state": "3"
+  "plugin_output": "WARNING !!",
+  "current_problem_id": "12",
+  "check_execution_time": "64.00",
+  "current_state": "4"
 }
 var host10 = {
-  "host_name": "PRINTER_STA2_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA2",
+  "host_name": "CANON IMAGECLASS STA10",
+  "alias": "Canon Imageclass STA10",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
   "plugin_output": "OK !! :) ",
   "current_problem_id": "0",
   "check_execution_time": "4.00",
   "current_state": "0"
 }
 var host11 = {
-  "host_name": "PRINTER_STA6_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA6",
-  "address": "53.234.83.35",
+  "host_name": "SAMSUNG COLOR STA11",
+  "alias": "Samsung Wireless Color STA11",
+  "address": "344.14.773.75",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
-  "plugin_output": "OK NO WARNING",
-  "current_problem_id": "1",
+  "plugin_output": "OK -- NO PROBLEMS AT ALL EVER",
+  "current_problem_id": "0",
   "check_execution_time": "1.00",
-  "current_state": "1"
+  "current_state": "0"
 }
 var host12 = {
-  "host_name": "PRINTER_STA4_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA4",
+  "host_name": "EPSON LASER STA12",
+  "alias": "EPSON Laser STA12",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
-  "plugin_output": "OK NO WARNING",
-  "current_problem_id": "12",
-  "check_execution_time": "14.00",
-  "current_state": "1"
+  "plugin_output": "OK NO PROBLEMS",
+  "current_problem_id": "1",
+  "check_execution_time": "1.00",
+  "current_state": "0"
 }
 var host13 = {
-  "host_name": "PRINTER_STA10",
-  "alias": "WHEEL ALIGNMENT STA10",
+  "host_name": "MAKERGEAR STA13",
+  "alias": "MakerGear 3D Printer STA13",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
-  "plugin_output": "CRITICAL ",
-  "current_problem_id": "112",
-  "check_execution_time": "14.00",
-  "current_state": "4"
+  "plugin_output": "OK",
+  "current_problem_id": "1",
+  "check_execution_time": "1.00",
+  "current_state": "0"
 }
 var host14 = {
   "host_name": "PRINTER_STA13_XLIGHT",
@@ -177,11 +164,11 @@ var host14 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
-  "plugin_output": "OK NO WARNING",
-  "current_problem_id": "12",
-  "check_execution_time": "14.00",
-  "current_state": "1"
+
+  "plugin_output": "OK",
+  "current_problem_id": "1",
+  "check_execution_time": "1.00",
+  "current_state": "0"
 }
 var host15 = {
   "host_name": "PRINTER_STA10_XLIGHT",
@@ -190,7 +177,7 @@ var host15 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK ----",
   "current_problem_id": "2",
   "check_execution_time": "14.00",
@@ -203,7 +190,7 @@ var host16 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_SVR_WIN",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -216,7 +203,7 @@ var host17 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK yes its okay",
   "current_problem_id": "1",
   "check_execution_time": "14.00",
@@ -229,7 +216,7 @@ var host18 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "WARNING WARNING",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -242,7 +229,7 @@ var host19 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "PENDING",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -255,7 +242,7 @@ var host20 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK NO WARNING",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -268,7 +255,7 @@ var host21 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK ----",
   "current_problem_id": "0",
   "check_execution_time": "14.00",
@@ -281,7 +268,7 @@ var host22 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK yes its okay",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -294,7 +281,7 @@ var host23 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK yes its okay",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -307,7 +294,7 @@ var host24 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "WARNING WARNING",
   "current_problem_id": "16",
   "check_execution_time": "14.00",
@@ -320,7 +307,7 @@ var host25 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "CRITICAL not fine!",
   "current_problem_id": "99",
   "check_execution_time": "14.00",
@@ -333,7 +320,7 @@ var host26 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "WARNING",
   "current_problem_id": "17",
   "check_execution_time": "14.00",
@@ -346,7 +333,7 @@ var host27 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK yes its okay",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -359,7 +346,7 @@ var host28 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK yes its okay",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -372,7 +359,7 @@ var host29 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK yes its okay",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -386,7 +373,7 @@ var host30 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK ----",
   "current_problem_id": "2",
   "check_execution_time": "14.00",
@@ -399,7 +386,7 @@ var host31 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_SVR_WIN",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -412,7 +399,7 @@ var host32 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK yes its okay",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -425,7 +412,7 @@ var host33 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "WARNING WARNING",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -438,7 +425,7 @@ var host34 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "PENDING",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -451,7 +438,7 @@ var host35 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "CRITICAL",
   "current_problem_id": "12",
   "check_execution_time": "14.00",
@@ -464,7 +451,7 @@ var host36 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "CRITICAL battery almost dead",
   "current_problem_id": "33",
   "check_execution_time": "5.00",
@@ -477,7 +464,7 @@ var host37 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK -> PINGING LIKE CRAZY",
   "current_problem_id": "2",
   "check_execution_time": "5.00",
@@ -490,7 +477,7 @@ var host38 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "CRITICAL battery almost dead",
   "current_problem_id": "33",
   "check_execution_time": "5.00",
@@ -503,7 +490,7 @@ var host39 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK -> PINGING LIKE CRAZY",
   "current_problem_id": "2",
   "check_execution_time": "5.00",
@@ -516,7 +503,7 @@ var host40 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "CRITICAL MAYDAY MAYDAY",
   "current_problem_id": "120",
   "check_execution_time": "1.00",
@@ -529,7 +516,7 @@ var host41 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK :) ",
   "current_problem_id": "0",
   "check_execution_time": "14.00",
@@ -542,7 +529,7 @@ var host42 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
-  "----------BAD INFO STARTS HERE--": "------------",
+
   "plugin_output": "OK !! :) ",
   "current_problem_id": "4",
   "check_execution_time": "4.00",

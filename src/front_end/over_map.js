@@ -26,11 +26,11 @@ var titles;
 var statusAreaMapping = {};
 
 
-function addHostStateToArea(my_state, host_station){
+function addHostStateToArea(color_state, host_station){
   var area = mapStationToArea(host_station);
   for (var i = 0; i < titles.length;i++){
     if (titles[i] == area){
-      statusAreaMapping[titles[i]].push(my_state);
+      statusAreaMapping[titles[i]].push(color_state);
     }
   }
 }
@@ -66,6 +66,14 @@ function colorPolygonByTitle(title, color) {
 function populateMainViewMenu(name){
 
   var parent = document.getElementById('mySidenav');
+
+  //add logo to menu
+  var logo = document.createElement("img");
+  logo.setAttribute("id", "logo");
+  logo.setAttribute("class", "stations");
+  logo.setAttribute("src", config.PATH_TO_IMAGES + "/mercedes_logo.png");
+  parent.appendChild(logo);
+
   var title = document.createElement("H1");
   title.setAttribute("class", "stations");
   title.innerHTML = name;
@@ -76,10 +84,6 @@ function populateMainViewMenu(name){
   br.setAttribute("class", "stations");
   parent.appendChild(br);
   calculateAreaStatus();
-
-  //var areas = getAreasMapped();
-  //console.log(areas);
-  //createPulseButtons(parent);
 }
 
 function createPulseButtons(title, color, parent) {
@@ -102,7 +106,7 @@ function createPulseButtons(title, color, parent) {
   }
 
   if (color == RED){
-    areaButton.setAttribute("class", "pulse-button");
+    areaButton.setAttribute("class", "pulse-button-red");
   }
   if (color == GREEN){
     areaButton.setAttribute("class", "no-pulse-button");
@@ -110,7 +114,7 @@ function createPulseButtons(title, color, parent) {
     areaButton.style.color = GREEN;
   }
   if (color == YELLOW){
-    areaButton.setAttribute("class", "no-pulse-button");
+    areaButton.setAttribute("class", "pulse-button-yellow");
     areaButton.style.backgroundColor = YELLOW;
     areaButton.style.color = YELLOW;
   }
@@ -127,28 +131,29 @@ function createPulseButtons(title, color, parent) {
   parent.appendChild(container);
 }
 
-function addFullScreenButton(){
-  var googleOptions = document.getElementsByClassName("gmnoprint");
-  //console.log(googleOptions[5]);
-  var itm = googleOptions[5].lastChild;
-  var cln = itm.cloneNode(true);
-  cln.firstChild.innerHTML = "Full Screen";
-  cln.firstChild.onclick = function (){
-    window.open('http://localhost:8080/merc/front_end/dashboard.php'); // MAYBE CONFIG - DEPENDS ON WHAT THEY ARE RUNNING THEIR NAGIOS ON
-  }
-  //console.log(cln.firstChild.innerHTML);
-  googleOptions[5].appendChild(cln);
-}
-
 //sidenav open function
 function w3_open() {
-  document.getElementById("mySidenav").style.width = "300px";
+  document.getElementById("mySidenav").style.width = "400px";
   document.getElementById("mySidenav").style.display = "block";
 }
 
 //sidenav close function
 function w3_close() {
   document.getElementById("mySidenav").style.display = "none";
+}
+
+//within the panel, display all information on the host_name
+function createTextInPanel( panel, host ){
+  var keyArr = Object.keys(host);
+  for ( var i = 0; i < keyArr.length; i++) {
+    var element = document.createElement("P");
+    element.textContent = keyArr[i].capitalize() + ": " + host[keyArr[i]];
+    panel.appendChild(element);
+  }
+}
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 //populate the station with buttons
@@ -176,33 +181,17 @@ function createButtons(type, currentJsonObject, parentId) {
   pan.setAttribute("class", "panel");
 
   //create text within the panel
-  var currProbID = document.createElement("P");
-  var plugOut = document.createElement("P");
-  var address = document.createElement("P");
-  currProbID.innerHTML = "Problem ID: " + currentJsonObject.current_problem_id;
-  plugOut.innerHTML = "Plugin Output: " + currentJsonObject.plugin_output;
-  address.innerHTML = "Address: " + currentJsonObject.address;
-  pan.appendChild(address);
-  pan.appendChild(currProbID);
-  pan.appendChild(plugOut);
+  createTextInPanel( pan, currentJsonObject );
 
-  //find right image for device
-  //var hostString = currentJsonObject.host_name.toLowerCase();
-  //var hostString = currentJsonObject.alias;
+  //find and display host image for easy locating on the floor
   var pic = document.createElement("img");
 
-
-
-
-
-
-  //NEED TO SET UP IMAGES - NEED A 1-1 HOST MATCH FOR DEVICE IMAGES AND HOST NAMES *******************
-  //pic.setAttribute("src", config.PATH_TO_IMAGES+'/not_found.jpeg'); //right now, set to image not found pic
+  //host image names in the folders must MATCH EXACTLY the alias name of the host in nagios
+  //image extensions can be either .jpeg or .png
   var pathToImageJpeg = config.PATH_TO_IMAGES + "/" + currentJsonObject.alias + '.jpeg';
-
   $.get(pathToImageJpeg)
     .done(function() {
-        pic.setAttribute("src", pathToImageJpeg); //all images must be jpeg
+        pic.setAttribute("src", pathToImageJpeg);
     }).fail(function() {
         pic.setAttribute("src", config.PATH_TO_IMAGES+'/not_found.jpeg');
     })
@@ -210,13 +199,10 @@ function createButtons(type, currentJsonObject, parentId) {
   var pathToImagePng = config.PATH_TO_IMAGES + "/" + currentJsonObject.alias + '.png';
   $.get(pathToImagePng)
     .done(function() {
-        pic.setAttribute("src", pathToImagePng); //all images must be jpeg
+        pic.setAttribute("src", pathToImagePng);
     }).fail(function() {
         pic.setAttribute("src", config.PATH_TO_IMAGES+'/not_found.jpeg');
     })
-
-
-
 
   //set id attribute for device for CSS purposes
   pic.setAttribute("id", "device");
@@ -225,6 +211,8 @@ function createButtons(type, currentJsonObject, parentId) {
   //add some space after image
   var br = document.createElement("br");
   pan.appendChild(br);
+  var br1 = document.createElement("br");
+  pan.appendChild(br1);
 
   //Append the button element and panel to the sideNav
   var parent = document.getElementById(parentId);
@@ -361,6 +349,14 @@ function loadMenu(areaName) {
   //make parent = sidenav
   var parent = document.getElementById('mySidenav');
 
+  //add logo to menu
+  var logo = document.createElement("img");
+  logo.setAttribute("id", "logo");
+  logo.setAttribute("class", "stations");
+  logo.setAttribute("src", config.PATH_TO_IMAGES + "/mercedes_logo.png");
+  parent.appendChild(logo);
+
+
   //Create heading of areaName passed in
   var menuKMLName = document.createElement("H1");
   menuKMLName.setAttribute("class", "stations");
@@ -479,21 +475,21 @@ function getAreaStatus(){
     current_host["area_name"] = parsed_host[1]; //area
 
     if (current_host.plugin_output.includes('OK')){ //OK
-      current_host["my_state"] = "green";
+      current_host["color_state"] = "green";
     }
     else if (current_host.plugin_output.includes('CRITICAL')){ //CRITICAL
-      current_host["my_state"] = "red";
+      current_host["color_state"] = "red";
     }
     else if (current_host.plugin_output.includes('WARNING')){ //WARNING
-      current_host["my_state"] = "yellow";
+      current_host["color_state"] = "yellow";
     }
     else{
-      current_host["my_state"] = "grey";
+      current_host["color_state"] = "grey";
     }
 
     //add this host to list of ALL hosts -> PARSED_hosts
     PARSED_hosts.push(current_host);
     total++;
-    addHostStateToArea(current_host.my_state, current_host.station_number);
+    addHostStateToArea(current_host.color_state, current_host.station_number);
   }
 }

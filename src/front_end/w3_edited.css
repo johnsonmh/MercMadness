@@ -457,6 +457,14 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
       padding: 0;
       margin: 0;
     }
+
+    P {
+      font-size: 13px;
+      text-indent:-10px;
+      margin-left:15px;
+      display: block;
+    }
+
     #map {
       height: 100%;
       width: 100%;
@@ -487,8 +495,17 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
       margin-left: auto;
       margin-right: auto;
       padding: 5px;
+      width:250px;
+    }
+
+    #logo {
+      display:block;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 5px;
       width:150px;
     }
+
 
 
     #buttonMain {
@@ -514,7 +531,7 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
       margin: 0 auto 0;
     }
 
-    .pulse-button {
+    .pulse-button-red {
       position: relative;
       width: 100%;
       height: 50px;
@@ -522,6 +539,23 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
       box-shadow: 0 0 0 0 rgba(232, 76, 61, 0.7);
       border-radius: 0%;
       background-color: #e84c3d;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      display:inline-block;
+      -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+      -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+      -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+      animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    }
+
+    .pulse-button-yellow {
+      position: relative;
+      width: 100%;
+      height: 50px;
+      border: none;
+      box-shadow: 0 0 0 0 rgba(255, 208, 0, 0.7);
+      border-radius: 0%;
+      background-color: #FFD000;
       background-repeat: no-repeat;
       cursor: pointer;
       display:inline-block;
@@ -544,7 +578,11 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
       display:inline-block;
     }
 
-    .pulse-button:hover{
+    .pulse-button-red:hover{
+      -webkit-animation: none;-moz-animation: none;-ms-animation: none;animation: none;
+    }
+
+    .pulse-button-yellow:hover{
       -webkit-animation: none;-moz-animation: none;-ms-animation: none;animation: none;
     }
 
