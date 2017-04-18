@@ -8,10 +8,10 @@ var host1 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "printers",
-  "plugin_output": "CRITICAL battery almost dead",
-  "current_problem_id": "33",
+  "plugin_output": "OK battery doing well",
+  "current_problem_id": "0",
   "check_execution_time": "5.00",
-  "current_state": "15"
+  "current_state": "0"
 }
 var host2 = {
   "host_name": "PRINTER_DELL_MULTI",
@@ -32,10 +32,10 @@ var host3 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "WIN_CTRL",
-  "plugin_output": "CRITICAL MAYDAY MAYDAY",
-  "current_problem_id": "120",
+  "plugin_output": "OK",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
-  "current_state": "17"
+  "current_state": "0"
 }
 var host4 = {
   "host_name": "NANOBA DESKTOP STA4",
@@ -105,9 +105,9 @@ var host9 = {
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
   "plugin_output": "WARNING !!",
-  "current_problem_id": "12",
+  "current_problem_id": "1",
   "check_execution_time": "64.00",
-  "current_state": "4"
+  "current_state": "1"
 }
 var host10 = {
   "host_name": "CANON IMAGECLASS STA10",
@@ -141,7 +141,7 @@ var host12 = {
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
   "plugin_output": "OK NO PROBLEMS",
-  "current_problem_id": "1",
+  "current_problem_id": "0",
   "check_execution_time": "1.00",
   "current_state": "0"
 }
@@ -153,7 +153,7 @@ var host13 = {
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
   "plugin_output": "OK",
-  "current_problem_id": "1",
+  "current_problem_id": "0",
   "check_execution_time": "1.00",
   "current_state": "0"
 }
@@ -166,7 +166,7 @@ var host14 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "OK",
-  "current_problem_id": "1",
+  "current_problem_id": "0",
   "check_execution_time": "1.00",
   "current_state": "0"
 }
@@ -179,9 +179,9 @@ var host15 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "OK ----",
-  "current_problem_id": "2",
-  "check_execution_time": "14.00",
-  "current_state": "4"
+  "current_problem_id": "0",
+  "check_execution_time": "1.00",
+  "current_state": "0"
 }
 var host16 = {
   "host_name": "SERVER_STA11_XLIGHT",
@@ -192,7 +192,7 @@ var host16 = {
   "hostgroups": "QSYS_SVR_WIN",
 
   "plugin_output": "OK",
-  "current_problem_id": "12",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -205,7 +205,7 @@ var host17 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "OK yes its okay",
-  "current_problem_id": "1",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -231,9 +231,9 @@ var host19 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "PENDING",
-  "current_problem_id": "12",
+  "current_problem_id": "1",
   "check_execution_time": "14.00",
-  "current_state": "4"
+  "current_state": "1"
 }
 var host20 = {
   "host_name": "PRINTER_STA4_XLIGHT",
@@ -244,9 +244,9 @@ var host20 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "OK NO WARNING",
-  "current_problem_id": "12",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
-  "current_state": "1"
+  "current_state": "0"
 }
 var host21 = {
   "host_name": "QSYS_PC_STA5_XLIGHT",
@@ -270,7 +270,7 @@ var host22 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "OK yes its okay",
-  "current_problem_id": "12",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -283,7 +283,7 @@ var host23 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "OK yes its okay",
-  "current_problem_id": "12",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -298,7 +298,7 @@ var host24 = {
   "plugin_output": "WARNING WARNING",
   "current_problem_id": "16",
   "check_execution_time": "14.00",
-  "current_state": "0"
+  "current_state": "1"
 }
 var host25 = {
   "host_name": "PRINTER_STA17_XLIGHT",
@@ -308,8 +308,8 @@ var host25 = {
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
 
-  "plugin_output": "CRITICAL not fine!",
-  "current_problem_id": "99",
+  "plugin_output": "OK not fine!",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -322,7 +322,7 @@ var host26 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "WARNING",
-  "current_problem_id": "17",
+  "current_problem_id": "1",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -335,7 +335,7 @@ var host27 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "OK yes its okay",
-  "current_problem_id": "12",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -348,7 +348,7 @@ var host28 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "OK yes its okay",
-  "current_problem_id": "12",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -361,7 +361,7 @@ var host29 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "OK yes its okay",
-  "current_problem_id": "12",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -375,9 +375,9 @@ var host30 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "OK ----",
-  "current_problem_id": "2",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
-  "current_state": "4"
+  "current_state": "0"
 }
 var host31 = {
   "host_name": "SERVER_STA21_XLIGHT",
@@ -388,7 +388,7 @@ var host31 = {
   "hostgroups": "QSYS_SVR_WIN",
 
   "plugin_output": "OK",
-  "current_problem_id": "12",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -401,7 +401,7 @@ var host32 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "OK yes its okay",
-  "current_problem_id": "12",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -414,7 +414,7 @@ var host33 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "WARNING WARNING",
-  "current_problem_id": "12",
+  "current_problem_id": "1",
   "check_execution_time": "14.00",
   "current_state": "1"
 }
@@ -427,9 +427,9 @@ var host34 = {
   "hostgroups": "PRINTERS",
 
   "plugin_output": "PENDING",
-  "current_problem_id": "12",
+  "current_problem_id": "1",
   "check_execution_time": "14.00",
-  "current_state": "4"
+  "current_state": "1"
 }
 var host35 = {
   "host_name": "HP_STA25_XLIGHT",
@@ -439,10 +439,10 @@ var host35 = {
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
 
-  "plugin_output": "CRITICAL",
-  "current_problem_id": "12",
+  "plugin_output": "OK",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
-  "current_state": "4"
+  "current_state": "0"
 }
 var host36 = {
   "host_name": "QSYS_PC_STA26_PEDALP",
@@ -452,10 +452,10 @@ var host36 = {
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
 
-  "plugin_output": "CRITICAL battery almost dead",
-  "current_problem_id": "33",
+  "plugin_output": "OK battery not dead",
+  "current_problem_id": "0",
   "check_execution_time": "5.00",
-  "current_state": "3"
+  "current_state": "0"
 }
 var host37 = {
   "host_name": "QSYS_PC_STA27_XWHEEL",
@@ -466,7 +466,7 @@ var host37 = {
   "hostgroups": "QSYS_PC_WIN_CTRL",
 
   "plugin_output": "OK -> PINGING LIKE CRAZY",
-  "current_problem_id": "2",
+  "current_problem_id": "0",
   "check_execution_time": "5.00",
   "current_state": "0"
 }
@@ -478,10 +478,10 @@ var host38 = {
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
 
-  "plugin_output": "CRITICAL battery almost dead",
-  "current_problem_id": "33",
+  "plugin_output": "OK functioning as usual",
+  "current_problem_id": "0",
   "check_execution_time": "5.00",
-  "current_state": "3"
+  "current_state": "0"
 }
 var host39 = {
   "host_name": "QSYS_PC_STA19_XWHEEL",
@@ -492,7 +492,7 @@ var host39 = {
   "hostgroups": "QSYS_PC_WIN_CTRL",
 
   "plugin_output": "OK -> PINGING LIKE CRAZY",
-  "current_problem_id": "2",
+  "current_problem_id": "0",
   "check_execution_time": "5.00",
   "current_state": "0"
 }
@@ -504,10 +504,10 @@ var host40 = {
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
 
-  "plugin_output": "CRITICAL MAYDAY MAYDAY",
-  "current_problem_id": "120",
+  "plugin_output": "OK YAY",
+  "current_problem_id": "0",
   "check_execution_time": "1.00",
-  "current_state": "3"
+  "current_state": "0"
 }
 var host41 = {
   "host_name": "QSYS_PC_STA24_XLIGHT",
@@ -519,7 +519,7 @@ var host41 = {
 
   "plugin_output": "OK :) ",
   "current_problem_id": "0",
-  "check_execution_time": "14.00",
+  "check_execution_time": "1.00",
   "current_state": "0"
 }
 var host42 = {
@@ -531,7 +531,7 @@ var host42 = {
   "hostgroups": "QSYS_PC_WIN_CTRL",
 
   "plugin_output": "OK !! :) ",
-  "current_problem_id": "4",
+  "current_problem_id": "0",
   "check_execution_time": "4.00",
   "current_state": "0"
 }
