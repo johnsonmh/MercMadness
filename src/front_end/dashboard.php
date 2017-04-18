@@ -7,9 +7,14 @@
   <link rel="stylesheet" type="text/css" href="w3_edited.css">
 
   <script>
-  var jsonObject = <?php include('../back_end/hostTest.php'); echo $myJsonObject;?>;
-  var dataObject = <?php exec('python ../back_end/parseCFGTest.py', $output, $code); $obj = json_encode($output); echo $obj;?>;
-
+  var dataObject;
+  var jsonObject;
+  function reloadJson() {
+  jsonObject = <?php include('../back_end/hostTest.php'); echo $myJsonObject;?>;
+  dataObject = <?php exec('python ../back_end/parseCFGTest.py', $output, $code); $obj = json_encode($output); echo $obj;?>;
+  }
+  reloadJson();
+  setInterval(reloadJson, 3000);
   [
     'jquery-3.1.1.min.js',
     'geoxml3.js',

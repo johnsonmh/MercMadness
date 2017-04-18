@@ -43,7 +43,7 @@ function initMap() {
   //Define map
   map = new google.maps.Map(document.getElementById('map'), {
     center: new google.maps.LatLng(-19.257753, 146.823688),
-    zoom:3,
+    zoom:16,
     mapTypeId: 'terrain',
     styles: [
       {

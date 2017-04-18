@@ -10,7 +10,8 @@ window.onload = function(){
   //begin over_map.js functions
   //get the two json objects (-> status.dat and all host.cfg files) and combine the information
   getAreaStatus();
-  setInterval(getAreaStatus, 3000);
+  setInterval(getAreaStatus, 6000);
+  setInterval(calculateAreaStatus, 6000);
   //display general area statuses in main menu on load
   populateMainViewMenu("General Areas");
 };
