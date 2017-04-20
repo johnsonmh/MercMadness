@@ -10,6 +10,13 @@ var areaTitles = [];
 var kmlParser;
 var allAreaPolygons = [];
 var inFocusArea;
+var centerLatLong;
+var bounds;
+
+function centerMap(){
+  map.fitBounds(bounds);
+  map.setZoom(16);
+}
 
 //created as the kmls are loaded -> use in over_map.js to iterate allAreaPolygons array
 //and match titles/area names to polygons
@@ -70,11 +77,23 @@ function initMap() {
     parseSubKMLs(kmlSource.subKmlSources);
   }
 
-  var bounds;
   var placemark;
+  bounds = new google.maps.LatLngBounds();
+
+
   google.maps.event.addListener(kmlParser, 'parsed', function () {
     placemark = kmlParser.docs[kmlParser.docs.length - 1].placemarks[0];
-    // console.log(placemark.polygon.title);
+
+    //this finds the middle of all the polygons so you can center the map easily!
+    // console.log(placemark.polygon.bounds);
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(placemark.polygon.bounds.f.b, placemark.polygon.bounds.b.f),
+      map: map
+    });
+    marker.setVisible(false);
+    bounds.extend(marker.position);
+    centerMap();
+
     addClickListener(map, placemark);
     //add title of the kml to areaTitles
     areaTitles.push(placemark.polygon.title);
@@ -86,7 +105,6 @@ function initMap() {
       placemark.polygon.strokeColor = "#dbdbdb";
       //store boundary of main kml to fitBounds later
       if (placemark.polygon.title.includes("Paint Shop")){
-        bounds = placemark.polygon.bounds;
         inFocusArea = placemark.polygon.title;
       }
     } else {
@@ -96,10 +114,6 @@ function initMap() {
       placemark.polygon.strokeWeight = 1;
       addLabel(placemark.polygon, map);
     }
-
-    //fit intial map load to main map
-    map.fitBounds(bounds);
-    map.setZoom(10);
   });
 }
 

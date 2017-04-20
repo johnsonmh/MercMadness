@@ -12,38 +12,45 @@ var panelOpen = false;
 
 
 window.onload = function(){
+  centerMap();
+  titles = getAreaTitles();
+  //initialize statusAreaMapping to empty arrays
+  for (var i = 0; i < titles.length;i++){
+    statusAreaMapping[titles[i]] = [];
+  }
+
+  setInterval(function() {
+    refreshPage();
+  }, 4000);
 
   //begin over_map.js functions
   //get the two json objects (-> status.dat and all host.cfg files) and combine the information
-  setInterval(function() {
-    //if an accordion panel is open, do not refresh the page
-    if (panelOpen == false){
-      titles = getAreaTitles();
-      //initialize statusAreaMapping to empty arrays
-      for (var i = 0; i < titles.length;i++){
-        statusAreaMapping[titles[i]] = [];
-      }
-      //clear all variables that are built using updating information
-      PARSED_hosts = [];
-      clearAreaStatus();
-      clearMenu();
-
-      //go through all hosts, append to PARSED_hosts, gather info on their statuses and put into statusAreaMapping object
-      getAreaStatus();
-
-      //depending on what KML the user is already looking at, populate the menu with new information
-      if (inFocusArea.includes("Main")){
-        populateMainViewMenu("General Areas");
-      }
-      else{
-        loadMenu(inFocusArea);
-      }
-    }
-  }, 3000);
-  //display general area statuses in main menu on load
-  //populateMainViewMenu("General Areas");
+  refreshPage();
 };
 
+function refreshPage(){
+  //if an accordion panel is open, do not refresh the page
+  if (panelOpen == false){
+
+    //clear all variables that are built using updating information
+    PARSED_hosts = [];
+    clearAreaStatus();
+    clearMenu();
+
+    //go through all hosts, append to PARSED_hosts, gather info on their statuses and put into statusAreaMapping object
+    getAreaStatus();
+
+    //depending on what KML the user is already looking at, populate the menu with new information
+    if (inFocusArea.includes("Main")){
+      //display general area statuses in main menu on load
+      populateMainViewMenu("General Areas");
+    }
+    else{
+      //if the area that was previously in focus is not a main, stay on that area, reload that menu
+      loadMenu(inFocusArea);
+    }
+  }
+}
 
 //menu for when a main KML is in view
 function populateMainViewMenu(name){
@@ -55,6 +62,12 @@ function populateMainViewMenu(name){
   logo.setAttribute("id", "logo");
   logo.setAttribute("class", "stations");
   logo.setAttribute("src", config.PATH_TO_IMAGES + "/mercedes_logo.png");
+
+  //if logo is clicked, map zooms out
+  logo.onclick = function () {
+    centerMap();
+  }
+
   parent.appendChild(logo);
 
   var title = document.createElement("H1");
@@ -191,6 +204,9 @@ function createButtons(type, currentJsonObject, parentId) {
   else if (currentJsonObject.plugin_output.includes('WARNING')){ //WARNING
     element = document.createElement("buttonYellow");
   }
+  else if (currentJsonObject.plugin_output.includes('check timed out')){ //Checking of host failed
+    element = document.createElement("buttonRed");
+  }
   else{
     element = document.createElement("buttonGrey"); //unknown / pending
   }
@@ -252,7 +268,6 @@ function enableAccordion(){
       this.classList.toggle("active");
       var panel = this.nextElementSibling;
       if (panel.style.maxHeight){
-        panelOpen = false;
         panel.style.maxHeight = null;
       } else {
         panelOpen = true;
@@ -382,6 +397,9 @@ function loadMenu(areaName) {
   logo.setAttribute("id", "logo");
   logo.setAttribute("class", "stations");
   logo.setAttribute("src", config.PATH_TO_IMAGES + "/mercedes_logo.png");
+  logo.onclick = function () {
+    centerMap();
+  }
   parent.appendChild(logo);
 
 
@@ -505,6 +523,9 @@ function getAreaStatus(){
     }
     else if (current_host.plugin_output.includes('WARNING')){ //WARNING
       current_host["color_state"] = "yellow";
+    }
+    else if (current_host.plugin_output.includes('check timed out')){ //Checking of host failed
+      current_host["color_state"] = "red";
     }
     else{
       current_host["color_state"] = "grey";

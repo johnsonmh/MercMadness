@@ -542,10 +542,10 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
       background-repeat: no-repeat;
       cursor: pointer;
       display:inline-block;
-      -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
-      -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
-      -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
-      animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+      -webkit-animation: pulse 0.75s infinite cubic-bezier(0.56, 0, 0, 1);
+      -moz-animation: pulse 0.75s infinite cubic-bezier(0.56, 0, 0, 1);
+      -ms-animation: pulse 0.75s infinite cubic-bezier(0.56, 0, 0, 1);
+      animation: pulse 0.75s infinite cubic-bezier(0.56, 0, 0, 1);
     }
 
     .pulse-button-yellow {
@@ -559,10 +559,10 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
       background-repeat: no-repeat;
       cursor: pointer;
       display:inline-block;
-      -webkit-animation: pulse 2.25s infinite cubic-bezier(0.66, 0, 0, 1);
-      -moz-animation: pulse 2.25s infinite cubic-bezier(0.66, 0, 0, 1);
-      -ms-animation: pulse 2.25s infinite cubic-bezier(0.66, 0, 0, 1);
-      animation: pulse 2.25s infinite cubic-bezier(0.66, 0, 0, 1);
+      -webkit-animation: pulse 2.25s infinite cubic-bezier(0.56, 0, 0, 1);
+      -moz-animation: pulse 2.25s infinite cubic-bezier(0.56, 0, 0, 1);
+      -ms-animation: pulse 2.25s infinite cubic-bezier(0.56, 0, 0, 1);
+      animation: pulse 2.25s infinite cubic-bezier(0.56, 0, 0, 1);
     }
 
     .no-pulse-button {
@@ -586,7 +586,7 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
       -webkit-animation: none;-moz-animation: none;-ms-animation: none;animation: none;
     }
 
-    @-webkit-keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}}
-    @-moz-keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}}
-    @-ms-keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}}
-    @keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}}
+    @-webkit-keyframes pulse {to {box-shadow: 0 0 0 15px rgba(232, 76, 61, 0);}}
+    @-moz-keyframes pulse {to {box-shadow: 0 0 0 15px rgba(232, 76, 61, 0);}}
+    @-ms-keyframes pulse {to {box-shadow: 0 0 0 15px rgba(232, 76, 61, 0);}}
+    @keyframes pulse {to {box-shadow: 0 0 0 15px rgba(232, 76, 61, 0);}}

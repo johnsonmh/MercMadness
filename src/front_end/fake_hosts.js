@@ -104,10 +104,10 @@ var host9 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-  "plugin_output": "WARNING !!",
-  "current_problem_id": "1",
+  "plugin_output": "OK !!",
+  "current_problem_id": "0",
   "check_execution_time": "64.00",
-  "current_state": "1"
+  "current_state": "0"
 }
 var host10 = {
   "host_name": "CANON IMAGECLASS STA10",
@@ -216,11 +216,10 @@ var host18 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-
-  "plugin_output": "WARNING WARNING",
-  "current_problem_id": "12",
+  "plugin_output": "OK",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
-  "current_state": "1"
+  "current_state": "0"
 }
 var host19 = {
   "host_name": "HP_STA6_XLIGHT",
@@ -229,7 +228,6 @@ var host19 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-
   "plugin_output": "PENDING",
   "current_problem_id": "1",
   "check_execution_time": "14.00",
@@ -295,10 +293,10 @@ var host24 = {
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
 
-  "plugin_output": "WARNING WARNING",
-  "current_problem_id": "16",
+  "plugin_output": "OK",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
-  "current_state": "1"
+  "current_state": "0"
 }
 var host25 = {
   "host_name": "PRINTER_STA17_XLIGHT",
@@ -321,8 +319,8 @@ var host26 = {
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
 
-  "plugin_output": "WARNING",
-  "current_problem_id": "1",
+  "plugin_output": "OK",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
@@ -412,11 +410,10 @@ var host33 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-
-  "plugin_output": "WARNING WARNING",
-  "current_problem_id": "1",
+  "plugin_output": "OK",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
-  "current_state": "1"
+  "current_state": "0"
 }
 var host34 = {
   "host_name": "HP_STA24_XLIGHT",
@@ -425,7 +422,6 @@ var host34 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-
   "plugin_output": "PENDING",
   "current_problem_id": "1",
   "check_execution_time": "14.00",
