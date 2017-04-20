@@ -158,8 +158,8 @@ var host13 = {
   "current_state": "0"
 }
 var host14 = {
-  "host_name": "PRINTER_STA13_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA13",
+  "host_name": "3D Systems Cube Printer STA13",
+  "alias": "3D Systems Cube Printer STA13",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -171,8 +171,8 @@ var host14 = {
   "current_state": "0"
 }
 var host15 = {
-  "host_name": "PRINTER_STA10_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA10",
+  "host_name": "Epson Workforce STA10",
+  "alias": "Epson Workforce STA10",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -184,8 +184,8 @@ var host15 = {
   "current_state": "0"
 }
 var host16 = {
-  "host_name": "SERVER_STA11_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA11",
+  "host_name": "HP Model STA11",
+  "alias": "HP Model STA11",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -197,12 +197,12 @@ var host16 = {
   "current_state": "0"
 }
 var host17 = {
-  "host_name": "PRINTER_STA7_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA7",
+  "host_name": "HP Laptop Red",
+  "alias": "HP Laptop Red STA7",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "PRINTERS",
+  "hostgroups": "PC",
 
   "plugin_output": "OK yes its okay",
   "current_problem_id": "0",
@@ -210,8 +210,8 @@ var host17 = {
   "current_state": "0"
 }
 var host18 = {
-  "host_name": "HP_STA6_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA6",
+  "host_name": "Epson Expression Home Printer",
+  "alias": "Epson Expression Home Printer STA6",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -222,20 +222,20 @@ var host18 = {
   "current_state": "0"
 }
 var host19 = {
-  "host_name": "HP_STA6_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA6",
+  "host_name": "Brother Laser Printer",
+  "alias": "Brother Laser Printer STA6",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
   "plugin_output": "PENDING",
-  "current_problem_id": "1",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
-  "current_state": "1"
+  "current_state": "0"
 }
 var host20 = {
-  "host_name": "PRINTER_STA4_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA4",
+  "host_name": "Lexmark STA4",
+  "alias": "Lexmark STA4",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -247,12 +247,12 @@ var host20 = {
   "current_state": "0"
 }
 var host21 = {
-  "host_name": "QSYS_PC_STA5_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA5",
+  "host_name": "Zuta Robot Printer STA5",
+  "alias": "Zuta Robot Printer STA5",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "QSYS_PC_WIN_CTRL",
+  "hostgroups": "PRINTER",
 
   "plugin_output": "OK ----",
   "current_problem_id": "0",
@@ -260,21 +260,20 @@ var host21 = {
   "current_state": "0"
 }
 var host22 = {
-  "host_name": "PRINTER_STA19_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA19",
+  "host_name": "Fancy Server STA3",
+  "alias": "Fancy Server STA3",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "PRINTERS",
-
+  "hostgroups": "SERVERS",
   "plugin_output": "OK yes its okay",
   "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
 var host23 = {
-  "host_name": "PRINTER_STA17_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA17",
+  "host_name": "Grey Printer STA17",
+  "alias": "Grey Printer STA17",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -286,34 +285,32 @@ var host23 = {
   "current_state": "0"
 }
 var host24 = {
-  "host_name": "PRINTER_STA1_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA1",
+  "host_name": "Acer Laptop",
+  "alias": "Acer Laptop STA1",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "PRINTERS",
-
+  "hostgroups": "PC",
   "plugin_output": "OK",
   "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
 var host25 = {
-  "host_name": "PRINTER_STA17_XLIGHT",
-  "alias": "XLIGHT STA17",
+  "host_name": "Large Green Printer STA17",
+  "alias": "Large Green Printer STA17",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-
   "plugin_output": "OK not fine!",
   "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
 var host26 = {
-  "host_name": "PRINTER_STA19_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA19",
+  "host_name": "HP White STA14",
+  "alias": "HP White STA14",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -325,8 +322,8 @@ var host26 = {
   "current_state": "0"
 }
 var host27 = {
-  "host_name": "PRINTER_STA16_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA16",
+  "host_name": "Novation Zero STA16",
+  "alias": "Novation Zero STA16",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -338,26 +335,24 @@ var host27 = {
   "current_state": "0"
 }
 var host28 = {
-  "host_name": "PRINTER_STA15_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA15",
+  "host_name": "Livid Instruments STA15",
+  "alias": "Livid Instruments STA15",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-
   "plugin_output": "OK yes its okay",
   "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
 var host29 = {
-  "host_name": "PRINTER_STA15_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA15",
+  "host_name": "Dell Flip Notebook",
+  "alias": "Dell Flip Notebook STA15",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "PRINTERS",
-
+  "hostgroups": "PC",
   "plugin_output": "OK yes its okay",
   "current_problem_id": "0",
   "check_execution_time": "14.00",
@@ -365,8 +360,8 @@ var host29 = {
 }
 
 var host30 = {
-  "host_name": "PRINTER_STA20_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA20",
+  "host_name": "Airport Extreme Printing STA20",
+  "alias": "Airport Extreme Printing STA20",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -378,13 +373,12 @@ var host30 = {
   "current_state": "0"
 }
 var host31 = {
-  "host_name": "SERVER_STA21_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA21",
+  "host_name": "Pedal Controller STA21",
+  "alias": "Pedal Controller STA21",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "QSYS_SVR_WIN",
-
+  "hostgroups": "PRINTER",
   "plugin_output": "OK",
   "current_problem_id": "0",
   "check_execution_time": "14.00",
@@ -404,37 +398,36 @@ var host32 = {
   "current_state": "0"
 }
 var host33 = {
-  "host_name": "HP_STA23_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA23",
+  "host_name": "Kiddy Switch STA23",
+  "alias": "Kiddy Switch STA23",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "PRINTERS",
+  "hostgroups": "SWITCHES",
   "plugin_output": "OK",
   "current_problem_id": "0",
   "check_execution_time": "14.00",
   "current_state": "0"
 }
 var host34 = {
-  "host_name": "HP_STA24_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA24",
+  "host_name": "HP All-In-One STA24",
+  "alias": "HP All-In-One STA24",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
   "plugin_output": "PENDING",
-  "current_problem_id": "1",
+  "current_problem_id": "0",
   "check_execution_time": "14.00",
-  "current_state": "1"
+  "current_state": "0"
 }
 var host35 = {
-  "host_name": "HP_STA25_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA25",
+  "host_name": "Canon Laser Printer STA25",
+  "alias": "Canon Laser Printer STA25",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "PRINTERS",
-
   "plugin_output": "OK",
   "current_problem_id": "0",
   "check_execution_time": "14.00",
@@ -454,13 +447,12 @@ var host36 = {
   "current_state": "0"
 }
 var host37 = {
-  "host_name": "QSYS_PC_STA27_XWHEEL",
-  "alias": "WHEEL ALIGNMENT XWHEEL STA27",
+  "host_name": "Giant Epson Printer STA27",
+  "alias": "Giant Epson Printer STA27",
   "address": "53.234.83.20",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "QSYS_PC_WIN_CTRL",
-
+  "hostgroups": "PRINTER",
   "plugin_output": "OK -> PINGING LIKE CRAZY",
   "current_problem_id": "0",
   "check_execution_time": "5.00",
@@ -480,8 +472,8 @@ var host38 = {
   "current_state": "0"
 }
 var host39 = {
-  "host_name": "QSYS_PC_STA19_XWHEEL",
-  "alias": "WHEEL ALIGNMENT XWHEEL STA19",
+  "host_name": "Monochrome Printer STA19",
+  "alias": "Monochrome Printer STA19",
   "address": "53.234.83.20",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -493,8 +485,8 @@ var host39 = {
   "current_state": "0"
 }
 var host40 = {
-  "host_name": "QSYS_PC_STA17_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA17",
+  "host_name": "Heavy Duty Printer STA17",
+  "alias": "Heavy Duty Printer STA17",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -506,24 +498,24 @@ var host40 = {
   "current_state": "0"
 }
 var host41 = {
-  "host_name": "QSYS_PC_STA24_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA24",
+  "host_name": "Deskjet Printer STA24",
+  "alias": "Deskjet Printer STA24",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "QSYS_PC_WIN_CTRL",
+  "hostgroups": "PRINTERS",
   "plugin_output": "WARNING WARNING",
   "current_problem_id": "1",
   "check_execution_time": "1.00",
   "current_state": "1"
 }
 var host42 = {
-  "host_name": "QSYS_PC_STA22_XLIGHT",
-  "alias": "WHEEL ALIGNMENT XLIGHT STA22",
+  "host_name": "Ableton Push Software STA22",
+  "alias": "Ableton Push Software STA22",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
-  "hostgroups": "QSYS_PC_WIN_CTRL",
+  "hostgroups": "PUSH CONTROLLER",
 
   "plugin_output": "OK !! :) ",
   "current_problem_id": "0",

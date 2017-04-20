@@ -426,7 +426,7 @@ function loadMenu(areaName) {
     var station_hosts_array = arrayOfObjects[keyArr[i]];
 
     //sort elements so that red buttons are on top, grey are on bottom
-    station_hosts_array = sortByKey(station_hosts_array, 'check_execution_time');
+    //station_hosts_array = sortByKey(station_hosts_array, 'check_execution_time');
     station_hosts_array = sortByKey(station_hosts_array, 'current_state');
 
     //Create subheading of "Station 1" - change later to reflect real station number
