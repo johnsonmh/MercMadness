@@ -5,18 +5,27 @@
   <title>MBV Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="w3_edited.css">
-
+  <script type='text/javascript' src = 'jquery-3.1.1.min.js'></script>
   <script>
   var dataObject;
   var jsonObject;
   function reloadJson() {
-  jsonObject = <?php include('../back_end/hostTest.php'); echo $myJsonObject;?>;
-  dataObject = <?php exec('python ../back_end/parseCFGTest.py', $output, $code); $obj = json_encode($output); echo $obj;?>;
+    $.ajax(
+        {
+            url: '../back_end/hostTest.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response)
+            {
+                jsonObject = response;
+            }
+        });
+
+    dataObject = <?php exec('python ../back_end/parseCFGTest.py', $output, $code); $obj = json_encode($output); echo $obj;?>;
   }
   reloadJson();
   setInterval(reloadJson, 3000);
   [
-    'jquery-3.1.1.min.js',
     'geoxml3.js',
     'config.js',
     'dashboard_map.js',

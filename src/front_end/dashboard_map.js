@@ -9,6 +9,7 @@ var map;
 var areaTitles = [];
 var kmlParser;
 var allAreaPolygons = [];
+var inFocusArea;
 
 //created as the kmls are loaded -> use in over_map.js to iterate allAreaPolygons array
 //and match titles/area names to polygons
@@ -84,8 +85,9 @@ function initMap() {
       placemark.polygon.strokeWeight = 1;
       placemark.polygon.strokeColor = "#dbdbdb";
       //store boundary of main kml to fitBounds later
-      if (placemark.polygon.title.includes("MBV")){
+      if (placemark.polygon.title.includes("Paint Shop")){
         bounds = placemark.polygon.bounds;
+        inFocusArea = placemark.polygon.title;
       }
     } else {
       placemark.polygon.fillColor = 'grey';
@@ -97,6 +99,7 @@ function initMap() {
 
     //fit intial map load to main map
     map.fitBounds(bounds);
+    map.setZoom(10);
   });
 }
 
@@ -118,13 +121,13 @@ function addLabel(polygon, map) {
 function addClickListener(map, place) {
   google.maps.event.addListener(place.polygon, 'click', function(event) {
     map.fitBounds(place.polygon.bounds);
+    inFocusArea = place.polygon.title;
     if(place.polygon.title.includes("Main")) {
-    //if(place.polygon.title == 'Harbor Walk') {
-      console.log("main kml: "+place.polygon.title);
+      //console.log("main kml: "+place.polygon.title);
       clearMenu();
       populateMainViewMenu("General Areas");
     } else {
-      console.log(place.polygon.title);
+      //console.log(place.polygon.title);
       clearMenu();
       loadMenu(place.polygon.title);
     }

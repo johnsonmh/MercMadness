@@ -1,70 +1,51 @@
-
-window.onload = function(){
-  titles = getAreaTitles();
-  //console.log("titles = "+titles);
-
-  //initialize statusAreaMapping to empty arrays
-  for (var i = 0; i < titles.length;i++){
-    statusAreaMapping[titles[i]] = [];
-  }
-  //begin over_map.js functions
-  //get the two json objects (-> status.dat and all host.cfg files) and combine the information
-  getAreaStatus();
-  setInterval(getAreaStatus, 6000);
-  setInterval(calculateAreaStatus, 6000);
-  //display general area statuses in main menu on load
-  populateMainViewMenu("General Areas");
-};
-
 var GREEN = "#57bc5b";
 var RED = "#e84c3d";
 var YELLOW = "#FFD000";
 var GREY = "#D3D3D3";
 
-var PARSED_hosts = []; //ALL parsed hosts
+var PARSED_hosts; //ALL parsed hosts
 var total = 0;
 var polygons = [];
 var titles;
 var statusAreaMapping = {};
+var panelOpen = false;
 
 
-function addHostStateToArea(color_state, host_station){
-  var area = mapStationToArea(host_station);
-  for (var i = 0; i < titles.length;i++){
-    if (titles[i] == area){
-      statusAreaMapping[titles[i]].push(color_state);
-    }
-  }
-}
+window.onload = function(){
 
-function calculateAreaStatus() {
-  polygons = gatherPolygons();
-  //console.log("polys" +polygons);
-  for (var i = 0; i < titles.length; i++){
-    if (statusAreaMapping[titles[i]].includes("red")){
-      colorPolygonByTitle(titles[i], RED);
-    }
-    else if (statusAreaMapping[titles[i]].includes("yellow")){
-      colorPolygonByTitle(titles[i], YELLOW);
-    }
-    else if (statusAreaMapping[titles[i]].includes("green")){
-      colorPolygonByTitle(titles[i], GREEN);
-    }
-  }
-}
+  //begin over_map.js functions
+  //get the two json objects (-> status.dat and all host.cfg files) and combine the information
+  setInterval(function() {
+    //if an accordion panel is open, do not refresh the page
+    if (panelOpen == false){
+      titles = getAreaTitles();
+      //initialize statusAreaMapping to empty arrays
+      for (var i = 0; i < titles.length;i++){
+        statusAreaMapping[titles[i]] = [];
+      }
+      //clear all variables that are built using updating information
+      PARSED_hosts = [];
+      clearAreaStatus();
+      clearMenu();
 
-function colorPolygonByTitle(title, color) {
-  for (var i = 0; i < titles.length; i++){
-    if (title == polygons[i].name){
-      polygons[i].polygon.setOptions({fillColor: color});
-      //change main menu too!
-      var parent = document.getElementById("mySidenav");
-      createPulseButtons(title, color, parent);
-    }
-  }
-}
+      //go through all hosts, append to PARSED_hosts, gather info on their statuses and put into statusAreaMapping object
+      getAreaStatus();
 
-//menu for when main KML is in view
+      //depending on what KML the user is already looking at, populate the menu with new information
+      if (inFocusArea.includes("Main")){
+        populateMainViewMenu("General Areas");
+      }
+      else{
+        loadMenu(inFocusArea);
+      }
+    }
+  }, 3000);
+  //display general area statuses in main menu on load
+  //populateMainViewMenu("General Areas");
+};
+
+
+//menu for when a main KML is in view
 function populateMainViewMenu(name){
 
   var parent = document.getElementById('mySidenav');
@@ -85,9 +66,46 @@ function populateMainViewMenu(name){
   var br = document.createElement("br");
   br.setAttribute("class", "stations");
   parent.appendChild(br);
+
   calculateAreaStatus();
 }
 
+//color the polygons based off of the information gathered from getAreaStatus()
+function calculateAreaStatus() {
+  polygons = gatherPolygons();
+  for (var i = 0; i < titles.length; i++){
+    if (statusAreaMapping[titles[i]].includes("red")){
+      colorPolygonByTitle(titles[i], RED);
+    }
+    else if (statusAreaMapping[titles[i]].includes("yellow")){
+      colorPolygonByTitle(titles[i], YELLOW);
+    }
+    else if (statusAreaMapping[titles[i]].includes("green")){
+      colorPolygonByTitle(titles[i], GREEN);
+    }
+  }
+}
+
+//when page refreshes, it needs to clear the area status list - otherwise it is not fresh information
+function clearAreaStatus() {
+  for (var i = 0; i < titles.length; i++){
+    statusAreaMapping[titles[i]] = [];
+  }
+}
+
+//color each polygon, given the title of the polygon and what color it should be
+function colorPolygonByTitle(title, color) {
+  for (var i = 0; i < titles.length; i++){
+    if (title == polygons[i].name){
+      polygons[i].polygon.setOptions({fillColor: color});
+      //change main menu too!
+      var parent = document.getElementById("mySidenav");
+      createPulseButtons(title, color, parent);
+    }
+  }
+}
+
+//for the main menu, pulse buttons represent the areas - red blinks fast, yellow medium fast, green not at all
 function createPulseButtons(title, color, parent) {
 
   var container = document.createElement("div");
@@ -101,6 +119,7 @@ function createPulseButtons(title, color, parent) {
     for (var i = 0; i < titles.length; i++){
       if (title == polygons[i].name){
         map.fitBounds(polygons[i].polygon.bounds);
+        inFocusArea = titles[i];
         clearMenu();
         loadMenu(titles[i]);
       }
@@ -139,9 +158,10 @@ function w3_open() {
   document.getElementById("mySidenav").style.display = "block";
 }
 
-//sidenav close function
+//sidenav close function and collapse all open accordions
 function w3_close() {
   document.getElementById("mySidenav").style.display = "none";
+  closeAllAccordions();
 }
 
 //within the panel, display all information on the host_name
@@ -154,11 +174,12 @@ function createTextInPanel( panel, host ){
   }
 }
 
+//capitalize first letter of a string -> use "STRING".capitalize()
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
-//populate the station with buttons
+//populate the station with buttons -> buttons represent each device
 function createButtons(type, currentJsonObject, parentId) {
   var element;
   if (currentJsonObject.plugin_output.includes('OK')){ //OK
@@ -231,10 +252,25 @@ function enableAccordion(){
       this.classList.toggle("active");
       var panel = this.nextElementSibling;
       if (panel.style.maxHeight){
+        panelOpen = false;
         panel.style.maxHeight = null;
       } else {
+        panelOpen = true;
         panel.style.maxHeight = panel.scrollHeight + "px";
       }
+    }
+  }
+}
+
+//when the sidenav is closed, close all accordion panels
+function closeAllAccordions(){
+  panelOpen = false;
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+  for (i = 0; i < acc.length; i++) {
+    var panel = acc[i].nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
     }
   }
 }
@@ -260,13 +296,6 @@ function parseStationStr(stationNum){
 
 //use area-station mapping from config.js -> need for mapStationToArea()
 function getAreasMapped(buildingTitle){
-  // function getAreasMapped(buildingTitle){
-  // for (var i = 0; i < mainKmlArray; i++){
-  //   if (buildingTitle == mainKmlArray[i].title){
-  //     // console.log(mainKmlArray[i].areasMapped);
-  //     return mainKmlArray[i].areasMapped;
-  //   }
-  // }
   return areasMapped;
 }
 
@@ -319,9 +348,6 @@ function processHostsInFocus(all, areaName){
   for (var i = 0; i < all.length; i++){
     for (var j = 0; j < stationList.length; j++){
       if (all[i]['station_number'] == stationList[j]){
-        //var stationObj = {};
-        //stationObj[stationList[j]] = all[i];
-        //hosts_in_station.push(stationObj);
         hosts_in_station[stationList[j]].push(all[i]);
       }
     }
@@ -434,14 +460,8 @@ function clearMenu(){
 }
 
 function getAreaStatus(){
-
   //Here we combine the two json objects - one made from Status.dat and one made from all the Host .config files
   var hostInfoJsonObject = JSON.parse(dataObject[0]);
-
-  //console.log(Object.keys(hostInfoJsonObject).length);
-  //console.log("status.dat json length = " + jsonObject.length);
-  //console.log("host config json length = " + hostInfoJsonObject.length);
-
   var UNPARSED_hosts = [];
 
 // --------------------------------------------------------------------------------
@@ -453,7 +473,7 @@ function getAreaStatus(){
   }
 // --------------------------------------------------------------------------------
 
-  //combine info from status.dat json and host.cfg files json
+  // combine info from status.dat json and host.cfg files json
   // jsonObject -> status.dat
   // hostInfoJsonObject -> host config files
   for (var i = 0; i < jsonObject.length; i++){
@@ -476,6 +496,7 @@ function getAreaStatus(){
     current_host["station_number"] = parsed_host[0]; //station num
     current_host["area_name"] = parsed_host[1]; //area
 
+    // change host colors based on the plugin output
     if (current_host.plugin_output.includes('OK')){ //OK
       current_host["color_state"] = "green";
     }
@@ -493,5 +514,14 @@ function getAreaStatus(){
     PARSED_hosts.push(current_host);
     total++;
     addHostStateToArea(current_host.color_state, current_host.station_number);
+  }
+}
+
+function addHostStateToArea(color_state, host_station){
+  var area = mapStationToArea(host_station);
+  for (var i = 0; i < titles.length;i++){
+    if (titles[i] == area){
+      statusAreaMapping[titles[i]].push(color_state);
+    }
   }
 }

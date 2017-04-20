@@ -22,6 +22,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 // Change this accordingly
+
 $statusFile = "/opt/nagios/var/status.dat"; //ours is /opt/nagios/var/status.dat
 $nag_version = getFileVersion($statusFile);
 $created_ts = 0;
@@ -45,7 +46,7 @@ if (array_key_exists("program", $data)) {
 
 //make a json object out of status.dat info
 $myJsonObject = makeJson($hosts, $services, $program1);
-//echo $myJsonObject;
+echo $myJsonObject;
 
 
 $confFile = "/opt/nagios/etc/conf.d";
@@ -371,4 +372,5 @@ function getData2($statusFile)
       $age .= $seconds . " seconds ";
       return $age;
     }
+
     ?>
