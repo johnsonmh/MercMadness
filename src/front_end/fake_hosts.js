@@ -92,10 +92,10 @@ var host8 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "SWITCHES",
-  "plugin_output": "OK !! Everything is great!",
-  "current_problem_id": "0",
+  "plugin_output": "WARNING !! Not sure what's going on!",
+  "current_problem_id": "1",
   "check_execution_time": "1.00",
-  "current_state": "0"
+  "current_state": "1"
 }
 var host9 = {
   "host_name": "HP GIANT PRINTER STA9",
@@ -512,11 +512,10 @@ var host41 = {
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_PC_WIN_CTRL",
-
-  "plugin_output": "OK :) ",
-  "current_problem_id": "0",
+  "plugin_output": "WARNING WARNING",
+  "current_problem_id": "1",
   "check_execution_time": "1.00",
-  "current_state": "0"
+  "current_state": "1"
 }
 var host42 = {
   "host_name": "QSYS_PC_STA22_XLIGHT",

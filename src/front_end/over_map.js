@@ -180,6 +180,8 @@ function w3_close() {
 //within the panel, display all information on the host_name
 function createTextInPanel( panel, host ){
   var keyArr = Object.keys(host);
+  keyArr.sort();
+
   for ( var i = 0; i < keyArr.length; i++) {
     var element = document.createElement("P");
     element.textContent = keyArr[i].capitalize() + ": " + host[keyArr[i]];
@@ -225,23 +227,32 @@ function createButtons(type, currentJsonObject, parentId) {
   //find and display host image for easy locating on the floor
   var pic = document.createElement("img");
 
-  //host image names in the folders must MATCH EXACTLY the alias name of the host in nagios
-  //image extensions can be either .jpeg or .png
-  var pathToImageJpeg = config.PATH_TO_IMAGES + "/" + currentJsonObject.alias + '.jpeg';
-  $.get(pathToImageJpeg)
-    .done(function() {
-        pic.setAttribute("src", pathToImageJpeg);
-    }).fail(function() {
-        pic.setAttribute("src", config.PATH_TO_IMAGES+'/not_found.jpeg');
-    })
 
-  var pathToImagePng = config.PATH_TO_IMAGES + "/" + currentJsonObject.alias + '.png';
-  $.get(pathToImagePng)
-    .done(function() {
-        pic.setAttribute("src", pathToImagePng);
-    }).fail(function() {
-        pic.setAttribute("src", config.PATH_TO_IMAGES+'/not_found.jpeg');
-    })
+
+  //host image names in the folders must MATCH EXACTLY the alias name of the host in nagios
+  //IMAGE EXTENSIONS CAN ONLY BE .JPEG at this time!
+  var found = false;
+  if (found == false){
+    var pathToImageJpeg = config.PATH_TO_IMAGES + "/" + currentJsonObject.alias + '.jpeg';
+    $.get(pathToImageJpeg)
+      .done(function() {
+          pic.setAttribute("src", pathToImageJpeg);
+          found = true;
+      }).fail(function() {
+          pic.setAttribute("src", config.PATH_TO_IMAGES+'/not_found.jpeg');
+      });
+  }
+
+  // if (found == false){
+  //   var pathToImagePng = config.PATH_TO_IMAGES + "/" + currentJsonObject.alias + '.png';
+  //   $.get(pathToImagePng)
+  //     .done(function() {
+  //         pic.setAttribute("src", pathToImagePng);
+  //         found = true;
+  //     }).fail(function() {
+  //         pic.setAttribute("src", config.PATH_TO_IMAGES+'/not_found.jpeg');
+  //     });
+  // }
 
   //set id attribute for device for CSS purposes
   pic.setAttribute("id", "device");

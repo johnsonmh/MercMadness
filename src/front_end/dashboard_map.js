@@ -16,6 +16,7 @@ var bounds;
 function centerMap(){
   map.fitBounds(bounds);
   map.setZoom(16);
+  inFocusArea = "Main";
 }
 
 //created as the kmls are loaded -> use in over_map.js to iterate allAreaPolygons array
@@ -98,12 +99,12 @@ function initMap() {
     //add title of the kml to areaTitles
     areaTitles.push(placemark.polygon.title);
     if(placemark.polygon.title.includes("Main")) {
-    //if(placemark.polygon.title == 'Harbor Walk') {
+
       placemark.polygon.fillColor = '#9c9086'; // Grey
       placemark.polygon.fillOpacity = 0.4;
       placemark.polygon.strokeWeight = 1;
       placemark.polygon.strokeColor = "#dbdbdb";
-      //store boundary of main kml to fitBounds later
+
       if (placemark.polygon.title.includes("Paint Shop")){
         inFocusArea = placemark.polygon.title;
       }
@@ -137,11 +138,9 @@ function addClickListener(map, place) {
     map.fitBounds(place.polygon.bounds);
     inFocusArea = place.polygon.title;
     if(place.polygon.title.includes("Main")) {
-      //console.log("main kml: "+place.polygon.title);
       clearMenu();
       populateMainViewMenu("General Areas");
     } else {
-      //console.log(place.polygon.title);
       clearMenu();
       loadMenu(place.polygon.title);
     }
