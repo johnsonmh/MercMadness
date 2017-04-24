@@ -122,8 +122,8 @@ var host10 = {
   "current_state": "0"
 }
 var host11 = {
-  "host_name": "SAMSUNG COLOR STA11",
-  "alias": "Samsung Wireless Color STA11",
+  "host_name": "SAMSUNG COLOR STA12",
+  "alias": "Samsung Wireless Color STA12",
   "address": "344.14.773.75",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
@@ -184,17 +184,17 @@ var host15 = {
   "current_state": "0"
 }
 var host16 = {
-  "host_name": "HP Model STA11",
-  "alias": "HP Model STA11",
+  "host_name": "HP Model STA14",
+  "alias": "HP Model STA14",
   "address": "53.234.83.35",
   "contact_groups": "+luhd,shopfloor,admins",
   "max_check_attempts": "10",
   "hostgroups": "QSYS_SVR_WIN",
 
-  "plugin_output": "OK",
-  "current_problem_id": "0",
+  "plugin_output": "WARNING",
+  "current_problem_id": "1",
   "check_execution_time": "14.00",
-  "current_state": "0"
+  "current_state": "1"
 }
 var host17 = {
   "host_name": "HP Laptop Red",

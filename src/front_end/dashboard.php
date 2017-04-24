@@ -24,7 +24,7 @@
     dataObject = <?php exec('python ../back_end/parseCFGTest.py', $output, $code); $obj = json_encode($output); echo $obj;?>;
   }
   reloadJson();
-  setInterval(reloadJson, 2900);
+  setInterval(reloadJson, 3000);
   [
     'geoxml3.js',
     'config.js',
