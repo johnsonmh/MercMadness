@@ -1,7 +1,7 @@
 # MercMadness
 ## Nagios Visualization Tool
-The MercMadness Nagios Visualization Tool is an addon for the Nagios platform. 
-It was originally designed to fit the needs of the Mercedes Benz manufacturing plant in Charleston, SC.
+The MercMadness Nagios Visualization Tool is an addon for the Nagios platform.
+It was originally designed to fit the needs of the Mercedes-Benz Vans manufacturing plant in Charleston, SC.
 
 This project was created by the MercMadness team in a Software Engineering Practicum course.
 ## Installation
