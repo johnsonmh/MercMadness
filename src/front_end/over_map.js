@@ -493,15 +493,6 @@ function getAreaStatus(){
   var hostInfoJsonObject = JSON.parse(dataObject[0]);
   var UNPARSED_hosts = [];
 
-// --------------------------------------------------------------------------------
-  //COMMENT OUT IF YOU ONLY WANT TO POPULATE THE MAP WITH REAL HOSTS
-  //DELETE FOR FINAL SUBMISSION
-  var FAKE_hosts = [host1,host2,host3,host4,host5,host6, host7,host8,host9,host10,host11,host12,host13,host14,host15,host16,host17,host18,host19,host20,host21,host22,host23,host24,host25,host26,host27,host28,host29, host30,host31,host32,host33,host34,host35, host36, host37, host38, host39, host40, host41, host42];
-  for (var i = 0; i < FAKE_hosts.length; i++){
-    UNPARSED_hosts.push(FAKE_hosts[i]);
-  }
-// --------------------------------------------------------------------------------
-
   // combine info from status.dat json and host.cfg files json
   // jsonObject -> status.dat
   // hostInfoJsonObject -> host config files

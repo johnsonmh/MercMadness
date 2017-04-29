@@ -1,5 +1,5 @@
 var config = {
-    GOOGLE_MAPS_API_KEY : 'YOUR GOOGLE MAPS API KEY HERE',
+    GOOGLE_MAPS_API_KEY : '---------YOUR API KEY HERE---------',
     PATH_TO_IMAGES: '/merc/front_end/images', //for example: /nagios/opt/share/images/device_images....
     PATH_TO_KMLS: '/merc/KMZ'
 }
@@ -73,5 +73,5 @@ var marshallingYardMainKML = {
                     ]
                   }
 
-//make an array of all the main KMLs
+//make an array of all the KMLs
 var mainKmlArray = [mbvMainKML, uplifterMainKML, paintShopMainKML, bodyShopMainKML, marshallingYardMainKML];
