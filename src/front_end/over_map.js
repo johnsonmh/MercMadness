@@ -312,8 +312,8 @@ function sortByKey(array, key) {
 //strip "STA from station name, for example ""STA11" -> 11
 function parseStationStr(stationNum){
   if (stationNum.includes("STA")){
-    stationNum = stationNum.replace(/\D/g,''); //remove "STA"
-    var isnum = /^\d+$/.test(stationNum); //boolean
+    stationNum = stationNum.replace(/(STA)+/g,''); //remove "STA"
+    var isnum = /^([0-9]{1,})?(([A-Z]{1,})?([.,\/#!$%\^&\*;:{}=\-_`~()])?([A-Z]{1,})?)$/.test(stationNum); //boolean
     if(isnum){
       return stationNum;
     }
@@ -348,12 +348,10 @@ function parseHost(host){
   var rtnArr = [];
   aliasStr = host.alias.toUpperCase();
   aliasArr = host.alias.split(' ');
-
   //use regex matching to get the STA__ station number from the alias
   for (var i = 0; i < aliasArr.length; i++){
-    if(aliasArr[i].match(/^([STA]{3}[0-9]{1,})$/g)){
+    if(aliasArr[i].match(/^([STA]{3}([0-9]{1,})?(([A-Z]{1,})?([.,\/#!$%\^&\*;:{}=\-_`~()])?([A-Z]{1,})?)?)$/g)){
       var stationNumber = parseStationStr(aliasArr[i]);
-      //console.log("station num = "+ stationNumber);
       rtnArr.push(stationNumber);
       rtnArr.push(mapStationToArea(stationNumber));
     }
@@ -429,22 +427,23 @@ function loadMenu(areaName) {
     //station_hosts_array = sortByKey(station_hosts_array, 'check_execution_time');
     station_hosts_array = sortByKey(station_hosts_array, 'current_state');
 
-    //Create subheading of "Station 1" - change later to reflect real station number
-    var menuStationName = document.createElement("H2");
-    menuStationName.setAttribute("class", "stations");
-    menuStationName.innerHTML = "Station " + keyArr[i];
-    menuStationName.setAttribute("style", "text-align:Left;font-size: 18px; padding: 0 15px;");
-    parent.appendChild(menuStationName);
+    if (station_hosts_array.length != 0){
+      var menuStationName = document.createElement("H2");
+      menuStationName.setAttribute("class", "stations");
+      menuStationName.innerHTML = "Station " + keyArr[i];
+      menuStationName.setAttribute("style", "text-align:Left;font-size: 18px; padding: 0 15px;");
+      parent.appendChild(menuStationName);
 
-    //populate stations with buttons
-    for (var j = 0; j < station_hosts_array.length; j++) {
-      var temp = 'mybutton' + j;
-      createButtons('button', station_hosts_array[j], 'mySidenav');
+      //populate stations with buttons
+      for (var j = 0; j < station_hosts_array.length; j++) {
+        var temp = 'mybutton' + j;
+        createButtons('button', station_hosts_array[j], 'mySidenav');
+      }
+      //add a little break for spacing
+      var br = document.createElement("br");
+      br.setAttribute("class", "stations");
+      parent.appendChild(br);
     }
-    //add a little break for spacing
-    var br = document.createElement("br");
-    br.setAttribute("class", "stations");
-    parent.appendChild(br);
   }
 
   //enable panel drop downs for buttons
